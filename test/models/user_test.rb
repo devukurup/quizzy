@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
@@ -16,42 +18,42 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_not_be_valid_and_saved_without_first_name
-    @user.first_name = ''
+    @user.first_name = ""
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "First name can't be blank"
   end
 
   def test_user_should_not_be_valid_and_saved_without_last_name
-    @user.last_name = ''
+    @user.last_name = ""
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "Last name can't be blank"
   end
 
   def test_user_should_not_be_valid_and_saved_without_email
-    @user.email = ''
+    @user.email = ""
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "Email can't be blank"
   end
 
   def test_first_name_should_be_of_valid_length
-    @user.first_name = 'a' * 51
+    @user.first_name = "a" * 51
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "First name is too long (maximum is 50 characters)"
   end
 
   def test_first_name_valid_with_valid_length
-    @user.first_name = 'a' * 49
+    @user.first_name = "a" * 49
     assert @user.valid?
   end
 
   def test_last_name_should_be_of_valid_length
-    @user.last_name = 'a' * 51
+    @user.last_name = "a" * 51
     assert_not @user.valid?
     assert_includes @user.errors.full_messages, "Last name is too long (maximum is 50 characters)"
   end
 
   def test_last_name_valid_with_valid_length
-    @user.last_name = 'a' * 49
+    @user.last_name = "a" * 49
     assert @user.valid?
   end
 
@@ -78,7 +80,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_validation_should_reject_invalid_addresses
-    invalid_emails = %w[user@example,com user_at_example.org user.name@example. @sam-sam.com sam@sam+exam.com fishy+#.com]
+    invalid_emails = %w[user@example,com user_at_example.org user.name@example. @sam-sam.com sam@sam+exam.com
+fishy+#.com]
 
     invalid_emails.each do |email|
       @user.email = email
@@ -86,6 +89,4 @@ class UserTest < ActiveSupport::TestCase
       assert_includes @user.errors.full_messages, "Email is invalid"
     end
   end
-
-
 end
