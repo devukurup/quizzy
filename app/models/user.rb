@@ -1,7 +1,10 @@
 class User < ApplicationRecord
-    validates :email, presence: true
-    validates :first_name, presence: true, length: { maximum: 50}
-    validates :last_name, presence: true, length: { maximum: 50 }
+    MAX_LENGTH = 50
+    VALID_EMAIL = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
+
+    validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL}
+    validates :first_name, presence: true, length: { maximum: MAX_LENGTH}
+    validates :last_name, presence: true, length: { maximum: MAX_LENGTH }
     before_save :to_lowercase
 
     private
