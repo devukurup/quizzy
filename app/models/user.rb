@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL }
   validates :first_name, presence: true, length: { maximum: MAX_LENGTH }
   validates :last_name, presence: true, length: { maximum: MAX_LENGTH }
-  validates :password, length: { minimum: 8 }, if: -> { password.present? }
+  validates :password, length: { minimum: 5 }, if: -> { password.present? }
   validates :password_confirmation, presence: true, on: :create
 
   before_save :to_lowercase
