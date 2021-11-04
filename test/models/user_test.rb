@@ -4,7 +4,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(first_name: "Oliver", last_name: "Twist", email: "oliver@example.com")
+    @user = User.new(first_name: "Oliver", last_name: "Twist", email: "oliver@example.com", role: "standard")
   end
 
   def test_user_should_be_valid
@@ -88,5 +88,17 @@ fishy+#.com]
       assert @user.invalid?
       assert_includes @user.errors.full_messages, "Email is invalid"
     end
+  end
+
+  def test_validation_should_reject_invalid_role
+    error = assert_raises ArgumentError do
+      @user.role = "manager"
+    end
+    assert_equal error.message, "'manager' is not a valid role"
+  end
+
+  def test_validation_should_accept_valid_role
+    @user.role = "standard"
+    assert @user.valid?
   end
 end
