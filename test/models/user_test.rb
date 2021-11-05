@@ -9,14 +9,9 @@ class UserTest < ActiveSupport::TestCase
       password: "welcome", password_confirmation: "welcome")
   end
 
+  # test for user model validity
   def test_user_should_be_valid
     assert @user.valid?
-  end
-
-  def test_invalid_user
-    @user.first_name = ""
-    assert_not @user.valid?
-    assert_includes @user.errors.full_messages, "First name can't be blank"
   end
 
   def test_user_should_not_be_valid_and_saved_without_first_name
