@@ -111,9 +111,9 @@ fishy+#.com]
   end
 
   def test_password_confirmation_should_not_be_blank
-    @user.password = nil
+    @user.password_confirmation = nil
     assert @user.invalid?
-    assert_includes @user.errors.full_messages, "Password can't be blank", "Password confirmation can't be blank"
+    assert_includes @user.errors.full_messages, "Password confirmation can't be blank"
   end
 
   def test_password_should_have_minimum_length
