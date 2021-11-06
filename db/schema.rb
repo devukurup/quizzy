@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_11_04_191245) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "role", default: "standard", null: false
     t.string "password_digest", null: false
-    t.index ["email"], name: "email_index", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
