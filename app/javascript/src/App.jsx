@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div>
       <Router>
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} />
         <ToastContainer />
         <Switch>
           <Route exact path="/login" component={Login} />
