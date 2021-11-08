@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { either, isEmpty, isNil } from "ramda";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import { setAuthHeaders } from "./apis/axios";
+import { registerIntercepts, setAuthHeaders } from "./apis/axios";
 import Login from "./components/Authentication/Login";
 import PrivateRoute from "./components/Common/PrivateRoute";
 import Dashboard from "./components/Dashboard";
@@ -15,6 +16,7 @@ const App = () => {
   const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken !== "null";
 
   useEffect(() => {
+    registerIntercepts();
     setAuthHeaders(setLoading);
   }, []);
 
@@ -25,6 +27,7 @@ const App = () => {
   return (
     <div>
       <Router>
+        <ToastContainer />
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/login" component={Login} />
