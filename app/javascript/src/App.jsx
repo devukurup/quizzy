@@ -8,6 +8,7 @@ import { registerIntercepts, setAuthHeaders } from "./apis/axios";
 import Login from "./components/Authentication/Login";
 import PrivateRoute from "./components/Common/PrivateRoute";
 import Dashboard from "./components/Dashboard";
+import Navbar from "./components/Navbar";
 import { getFromLocalStorage } from "./helpers/storage";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
   return (
     <div>
       <Router>
+        <Navbar />
         <ToastContainer />
         <Switch>
           <Route exact path="/" component={Dashboard} />
