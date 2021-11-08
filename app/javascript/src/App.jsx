@@ -31,7 +31,6 @@ const App = () => {
         <Navbar />
         <ToastContainer />
         <Switch>
-          <Route exact path="/" component={Dashboard} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute
             path="/"
