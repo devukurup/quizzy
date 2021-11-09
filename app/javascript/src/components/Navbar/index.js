@@ -5,9 +5,13 @@ import { Header } from "@bigbinary/neetoui/v2/layouts";
 
 import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
-import { setToLocalStorage } from "../../helpers/storage";
+import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
 
 const Navbar = ({ isLoggedIn }) => {
+  const userName =
+    getFromLocalStorage("authUserFirstName") +
+    " " +
+    getFromLocalStorage("authUserLastName");
   const handleLogout = async () => {
     try {
       await authApi.logout();
@@ -42,16 +46,14 @@ const Navbar = ({ isLoggedIn }) => {
                   </Typography>
                 }
                 style="text"
-                onClick={handleLogout}
               />
               <Button
                 label={
                   <Typography style="body1" component="ins" weight="bold">
-                    UserName
+                    {userName}
                   </Typography>
                 }
                 style="text"
-                onClick={handleLogout}
               />
               <Button
                 label={
