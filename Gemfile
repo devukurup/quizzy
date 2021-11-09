@@ -11,7 +11,9 @@ gem "bcrypt", "~> 3.1.13"
 gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 
 # Database for Active Record
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 1.4", group: [:development, :test]
+
+gem "pg", group: [:production]
 
 # Application server
 gem "puma", "~> 5.0"
