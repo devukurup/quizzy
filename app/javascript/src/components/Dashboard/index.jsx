@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { Typography } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
 
 import quizzesApi from "../../apis/quizzes";
@@ -29,8 +30,10 @@ function Dashboard() {
 
   if (either(isNil, isEmpty)(quizList)) {
     return (
-      <div>
-        <h1>No quizzes</h1>
+      <div className="align-middle text-center pt-40">
+        <Typography style="h3" weight="extralight">
+          You have not created any quiz.
+        </Typography>
       </div>
     );
   }
