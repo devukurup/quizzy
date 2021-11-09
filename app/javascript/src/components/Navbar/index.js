@@ -25,7 +25,7 @@ const Navbar = ({ isLoggedIn }) => {
     }
   };
   return (
-    <div className="neeto-ui-shadow-s">
+    <div className="border-b-2 border-black">
       <Header
         title={
           <Typography style="h1" weight="extrabold">
@@ -33,7 +33,37 @@ const Navbar = ({ isLoggedIn }) => {
           </Typography>
         }
         actionBlock={
-          isLoggedIn && <Button label="Logout" onClick={handleLogout} />
+          isLoggedIn && (
+            <div className="pr-2 space-x-3">
+              <Button
+                label={
+                  <Typography style="body1" component="ins" weight="bold">
+                    Reports
+                  </Typography>
+                }
+                style="text"
+                onClick={handleLogout}
+              />
+              <Button
+                label={
+                  <Typography style="body1" component="ins" weight="bold">
+                    UserName
+                  </Typography>
+                }
+                style="text"
+                onClick={handleLogout}
+              />
+              <Button
+                label={
+                  <Typography style="body1" component="ins" weight="bold">
+                    Logout
+                  </Typography>
+                }
+                style="text"
+                onClick={handleLogout}
+              />
+            </div>
+          )
         }
       />
     </div>
