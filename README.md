@@ -1,3 +1,4 @@
 # README
 
-Application deployed on Heroku : https://quizzy-devukurup-production.herokuapp.com/login
+Application deployed on Heroku : https://quizzy-devukurup-production.herokuapp.com
+
