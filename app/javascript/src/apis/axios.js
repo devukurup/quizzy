@@ -36,16 +36,18 @@ const handleSuccessResponse = response => {
 
 const handleErrorResponse = axiosErrorObject => {
   if (axiosErrorObject.response?.status === 401) {
-    setToLocalStorage({ authToken: null, email: null, userId: null });
+    setToLocalStorage({
+      authToken: null,
+      email: null,
+      userId: null,
+      first_name: null,
+      last_name: null,
+    });
     setTimeout(() => (window.location.href = "/"), 2000);
   }
   Toastr.error(
     axiosErrorObject.response?.data?.error || DEFAULT_ERROR_NOTIFICATION
   );
-  if (axiosErrorObject.response?.status === 423) {
-    window.location.href = "/";
-  }
-
   return Promise.reject(axiosErrorObject);
 };
 

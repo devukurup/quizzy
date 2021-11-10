@@ -19,11 +19,13 @@ const Login = () => {
         authToken: response.data.authentication_token,
         email,
         userId: response.data.id,
+        first_name: response.data.first_name,
+        last_name: response.data.last_name,
       });
       setAuthHeaders();
       window.location.href = "/";
     } catch (error) {
-      // logger.error(error);
+      logger.error(error);
     }
   };
   return (
