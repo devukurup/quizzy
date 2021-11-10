@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class UserTest < ActiveSupport::TestCase
+class QuizTest < ActiveSupport::TestCase
   def setup
     @quiz = Quiz.new(quiz_name: "Science Quiz")
   end
