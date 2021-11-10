@@ -5,6 +5,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { registerIntercepts, setAuthHeaders } from "./apis/axios";
+import { initializeLogger } from "./common/logger";
 import Login from "./components/Authentication/Login";
 import PrivateRoute from "./components/Common/PrivateRoute";
 import Dashboard from "./components/Dashboard";
@@ -17,6 +18,7 @@ const App = () => {
   const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken !== "null";
 
   useEffect(() => {
+    initializeLogger();
     registerIntercepts();
     setAuthHeaders(setLoading);
   }, []);

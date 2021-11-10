@@ -15,7 +15,7 @@ function Dashboard() {
       setQuizList(response.data.quizzes);
       setLoading(false);
     } catch (error) {
-      //  logger.error(error);
+      logger.error(error);
       setLoading(false);
     }
   };

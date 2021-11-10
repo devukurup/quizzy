@@ -25,7 +25,7 @@ const Login = () => {
       setAuthHeaders();
       window.location.href = "/";
     } catch (error) {
-      // logger.error(error);
+      logger.error(error);
     }
   };
   return (

@@ -26,7 +26,7 @@ const Navbar = ({ isLoggedIn }) => {
       resetAuthTokens();
       window.location.href = "/";
     } catch (error) {
-      // logger.error(error);
+      logger.error(error);
     }
   };
   return (
