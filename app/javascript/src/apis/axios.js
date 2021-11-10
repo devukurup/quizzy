@@ -35,7 +35,7 @@ const handleSuccessResponse = response => {
 };
 
 const handleErrorResponse = axiosErrorObject => {
-  if (axiosErrorObject.response?.status) {
+  if (axiosErrorObject.response?.status === 401) {
     setToLocalStorage({
       authToken: null,
       email: null,
