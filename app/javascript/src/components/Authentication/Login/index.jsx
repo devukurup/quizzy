@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { Typography, Label } from "@bigbinary/neetoui/v2";
-import { Input, Button } from "@bigbinary/neetoui/v2";
+import { Typography, Label, Input, Button } from "@bigbinary/neetoui/v2";
 
 import authApi from "../../../apis/auth";
 import { setAuthHeaders } from "../../../apis/axios";
