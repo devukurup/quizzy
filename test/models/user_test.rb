@@ -5,7 +5,7 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(
-      first_name: "Oliver", last_name: "Twist", email: "oliver@example.com", role: "standard",
+      first_name: "Oliver", last_name: "Twist", email: "oliver@example.com",
       password: "welcome", password_confirmation: "welcome")
   end
 
@@ -106,8 +106,8 @@ fishy+#.com]
   end
 
   # test to accpet valid roles
-  def test_validation_should_accept_valid_role
-    @user.role = "standard"
+  def test_role_should_be_saved_with_default_value
+    @user.save!
     assert @user.valid?
   end
 
