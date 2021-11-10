@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  enum role: { standard: "standard", administrator: "administrator" }
-
   MAX_LENGTH = 50
   VALID_EMAIL = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
 
-  has_secure_password
-  has_secure_token :authentication_token
+  enum role: { standard: "standard", administrator: "administrator" }
 
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL }
   validates :first_name, presence: true, length: { maximum: MAX_LENGTH }
@@ -17,6 +14,9 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   before_validation :to_email_lowercase
+
+  has_secure_password
+  has_secure_token :authentication_token
 
   private
 
