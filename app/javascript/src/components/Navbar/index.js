@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -7,12 +7,14 @@ import { Header, SubHeader } from "@bigbinary/neetoui/v2/layouts";
 import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
 import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
+import AddQuizModal from "../Dashboard/AddQuizModal";
 
 const Navbar = ({ isLoggedIn }) => {
   const userName =
     getFromLocalStorage("authUserFirstName") +
     " " +
     getFromLocalStorage("authUserLastName");
+  const [modal, setModal] = useState(false);
   const handleLogout = async () => {
     try {
       await authApi.logout();
@@ -75,9 +77,15 @@ const Navbar = ({ isLoggedIn }) => {
         <div className="p-16">
           <SubHeader
             actionBlock={
-              <Button icon={Plus} iconPosition="left" label=" Add new quiz" />
+              <Button
+                icon={Plus}
+                onClick={() => setModal(true)}
+                iconPosition="left"
+                label=" Add new quiz"
+              />
             }
           />
+          {modal && <AddQuizModal modal={modal} setModal={setModal} />}
         </div>
       )}
     </div>

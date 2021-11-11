@@ -4,9 +4,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(
-      first_name: "Oliver", last_name: "Twist", email: "oliver@example.com",
-      password: "welcome", password_confirmation: "welcome")
+    @user = build(:user)
   end
 
   # test for user model validity
@@ -65,8 +63,15 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_not_be_valid_and_saved_if_email_not_unique
     @user.save!
     test_user = @user.dup
-    assert_not test_user.valid?
+    assert test_user.invalid?
     assert_includes test_user.errors.full_messages, "Email has already been taken"
+  end
+
+  # test to check uniqueness of authentication token
+  def test_users_should_have_unique_auth_token
+    @user.save!
+    test_user = create(:user)
+    assert_not_same @user.authentication_token, test_user.authentication_token
   end
 
   # test to check if email is saved in lowercase
