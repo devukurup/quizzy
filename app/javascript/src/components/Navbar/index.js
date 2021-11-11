@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -7,16 +7,18 @@ import { Header, SubHeader } from "@bigbinary/neetoui/v2/layouts";
 import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
 import { useAuth } from "../../contexts/auth";
+import { useQuiz } from "../../contexts/quiz";
 import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
-import AddQuizModal from "../Dashboard/AddQuizModal";
+import CreateNewQuiz from "../Dashboard/CreateNewQuiz";
 
 const Navbar = () => {
   const { isLoggedIn } = useAuth();
+  const { newQuiz, setNewQuiz } = useQuiz();
   const userName =
     getFromLocalStorage("authUserFirstName") +
     " " +
     getFromLocalStorage("authUserLastName");
-  const [modal, setModal] = useState(false);
+
   const handleLogout = async () => {
     try {
       await authApi.logout();
@@ -75,21 +77,21 @@ const Navbar = () => {
           }
         />
       </div>
-      {isLoggedIn && (
+      {isLoggedIn && !newQuiz && (
         <div className="p-16">
           <SubHeader
             actionBlock={
               <Button
                 icon={Plus}
-                onClick={() => setModal(true)}
+                onClick={() => setNewQuiz(true)}
                 iconPosition="left"
                 label=" Add new quiz"
               />
             }
           />
-          {modal && <AddQuizModal modal={modal} setModal={setModal} />}
         </div>
       )}
+      {newQuiz && <CreateNewQuiz />}
     </div>
   );
 };
