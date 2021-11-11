@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography, Label, Input, Button } from "@bigbinary/neetoui/v2";
+import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
@@ -11,8 +11,10 @@ import { setToLocalStorage } from "../../../helpers/storage";
 const Login = () => {
   const validationSchema = () => {
     return Yup.object().shape({
-      email: Yup.string().required("Required").email("Email is invalid"),
-      password: Yup.string().required("Required"),
+      email: Yup.string()
+        .required("Email is required")
+        .email("Email is invalid"),
+      password: Yup.string().required("Password is required"),
     });
   };
 
@@ -45,8 +47,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-8 pt-40">
-      <Typography style="h1" weight="extrabold">
+    <div className="flex flex-col justify-center items-center mx-auto my-48 space-y-3 w-6/12 p-12 hover:neeto-ui-shadow-m">
+      <Typography className="text-center p-3" style="h1" weight="bold">
         Login
       </Typography>
       <Formik
@@ -55,29 +57,32 @@ const Login = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <div className="space-y-5 ">
-            <div className="grid grid-cols-2">
-              <Label className="mr-5 justify-end">Email :</Label>
+          <div className="space-y-2 flex flex-col">
+            <div className="w-full">
               <Field name="email" type="email">
                 {({ field, meta }) => (
-                  <Input {...field} error={meta.touched && meta.error} />
+                  <Input
+                    {...field}
+                    error={meta.touched && meta.error}
+                    placeholder="email"
+                  />
                 )}
               </Field>
             </div>
-            <div className="grid grid-cols-2">
-              <Label className="mr-5 justify-end">Password :</Label>
+            <div>
               <Field name="password" type="password">
                 {({ field, meta }) => (
                   <Input
                     {...field}
                     type="password"
                     error={meta.touched && meta.error}
+                    placeholder="password"
                   />
                 )}
               </Field>
             </div>
 
-            <div>
+            <div className="mx-auto p-3">
               <Button type="submit" label="submit" />
             </div>
           </div>
