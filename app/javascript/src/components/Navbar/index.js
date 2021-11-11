@@ -6,10 +6,12 @@ import { Header, SubHeader } from "@bigbinary/neetoui/v2/layouts";
 
 import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
+import { useAuth } from "../../contexts/auth";
 import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
 import AddQuizModal from "../Dashboard/AddQuizModal";
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = () => {
+  const { isLoggedIn } = useAuth();
   const userName =
     getFromLocalStorage("authUserFirstName") +
     " " +

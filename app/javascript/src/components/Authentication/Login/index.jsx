@@ -6,9 +6,11 @@ import * as Yup from "yup";
 
 import authApi from "../../../apis/auth";
 import { setAuthHeaders } from "../../../apis/axios";
+import { useAuth } from "../../../contexts/auth";
 import { setToLocalStorage } from "../../../helpers/storage";
 
 const Login = () => {
+  const { isLoggedIn } = useAuth();
   const validationSchema = () => {
     return Yup.object().shape({
       email: Yup.string()
@@ -45,6 +47,16 @@ const Login = () => {
       logger.error(error);
     }
   };
+  if (isLoggedIn) {
+    setToLocalStorage({
+      authToken: null,
+      email: null,
+      userId: null,
+      first_name: null,
+      last_name: null,
+    });
+    window.location.href = "/";
+  }
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto my-48 space-y-3 w-6/12 p-12 hover:neeto-ui-shadow-m">

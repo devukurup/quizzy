@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { either, isEmpty, isNil } from "ramda";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -11,12 +10,11 @@ import Navbar from "./Navbar";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
 import { initializeLogger } from "../common/logger";
-import { getFromLocalStorage } from "../helpers/storage";
+import { useAuth } from "../contexts/auth";
 
 const Main = () => {
+  const { isLoggedIn } = useAuth();
   const [loading, setLoading] = useState(true);
-  const authToken = getFromLocalStorage("authToken");
-  const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken !== "null";
 
   useEffect(() => {
     initializeLogger();
@@ -31,7 +29,7 @@ const Main = () => {
   return (
     <div>
       <Router>
-        <Navbar isLoggedIn={isLoggedIn} />
+        <Navbar />
         <ToastContainer />
         <Switch>
           <Route exact path="/login" component={Login} />
