@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useMemo } from "react";
 
-import { Typography } from "@bigbinary/neetoui/v2";
+import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
+import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
 import quizzesApi from "../../apis/quizzes";
 
 const FetchQuiz = () => {
+  const history = useHistory();
   const [quizList, setQuizList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -89,7 +91,21 @@ const FetchQuiz = () => {
                       className="border px-8 py-4"
                       {...cell.getCellProps()}
                     >
-                      {cell.render("Cell")}
+                      <div className="flex justify-between">
+                        {cell.render("Cell")}
+                        <div className="flex space-x-2">
+                          <Button
+                            label="Edit"
+                            onClick={() => {
+                              history.push({
+                                pathname: `/EditQuiz/${row?.original?.id}`,
+                                state: row?.original,
+                              });
+                            }}
+                          />
+                          <Button label="Delete" />
+                        </div>
+                      </div>
                     </td>
                   );
                 })}

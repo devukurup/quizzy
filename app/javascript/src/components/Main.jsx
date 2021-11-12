@@ -7,6 +7,7 @@ import Login from "./Authentication/Login";
 import PrivateRoute from "./Common/PrivateRoute";
 import Dashboard from "./Dashboard";
 import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
+import EditQuiz from "./Dashboard/EditQuiz";
 import Navbar from "./Navbar";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
@@ -35,6 +36,7 @@ const Main = () => {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/createNewQuiz" component={CreateNewQuiz} />
+          <Route exact path="/editQuiz/:id" component={EditQuiz} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"

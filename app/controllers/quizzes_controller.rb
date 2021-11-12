@@ -8,6 +8,15 @@ class QuizzesController < ApplicationController
     render status: :ok, json: { quizzes: quizzes }
   end
 
+  def update
+    quiz = Quiz.find_by(id: params[:id])
+    if quiz && quiz.update(quiz_params)
+      render status: :ok, json: { notice: "Successfullly updated task." }
+    else
+      render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
+    end
+  end
+
   def create
     @quiz = Quiz.new(quiz_params.merge(quiz_creator_id: current_user.id))
     if @quiz.save
