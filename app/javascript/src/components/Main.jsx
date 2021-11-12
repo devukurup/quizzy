@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import Login from "./Authentication/Login";
 import PrivateRoute from "./Common/PrivateRoute";
 import Dashboard from "./Dashboard";
+import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
 import Navbar from "./Navbar";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
@@ -33,6 +34,7 @@ const Main = () => {
         <ToastContainer />
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/createNewQuiz" component={CreateNewQuiz} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"
