@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token
 
   def index
-    quizzes = Quiz.where(quiz_creator_id: current_user.id)
+    quizzes = Quiz.where(quiz_creator_id: current_user.id).order("created_at DESC")
     render status: :ok, json: { quizzes: quizzes }
   end
 

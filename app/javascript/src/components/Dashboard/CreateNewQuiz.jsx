@@ -38,32 +38,36 @@ const CreateNewQuiz = () => {
   };
 
   return (
-    <div className="text-center mx-auto pb-3 space-y-3 w-9/12">
-      <Typography style="h2">Add new quiz</Typography>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <div className="flex flex-row">
-            <Label className="mr-5 justify-end">Quiz Name</Label>
-            <Field name="quizName" type="text">
-              {({ field, meta }) => (
-                <Input {...field} error={meta.touched && meta.error} />
-              )}
-            </Field>
-          </div>
-          <Button label="Submit" type="submit" />
-          <Button
-            label="Cancel"
-            onClick={() => {
-              history.push("/");
-              setNewQuiz(false);
-            }}
-          />
-        </Form>
-      </Formik>
+    <div>
+      <div className="flex flex-col justify-center items-center space-y-5 mx-auto w-6/12 bg-gray-300 p-24 mt-24">
+        <Typography style="h2">Add new quiz</Typography>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form className="flex flex-col items-center space-y-5">
+            <div className="flex flex-row">
+              <Label className="mr-5 justify-end">Quiz Name</Label>
+              <Field name="quizName" type="text">
+                {({ field, meta }) => (
+                  <Input {...field} error={meta.touched && meta.error} />
+                )}
+              </Field>
+            </div>
+            <div className="flex space-x-5 ">
+              <Button label="Submit" type="submit" />
+              <Button
+                label="Cancel"
+                onClick={() => {
+                  history.push("/");
+                  setNewQuiz(false);
+                }}
+              />
+            </div>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };
