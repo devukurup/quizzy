@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -6,9 +6,13 @@ import { useHistory } from "react-router-dom";
 
 import FetchQuiz from "./FetchQuiz";
 
+import { setAuthHeaders } from "../../apis/axios";
 import { useQuiz } from "../../contexts/quiz";
 
 const Dashboard = () => {
+  useEffect(() => {
+    setAuthHeaders();
+  }, []);
   const { setNewQuiz } = useQuiz();
   const history = useHistory();
   return (

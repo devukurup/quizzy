@@ -2,6 +2,7 @@ import React from "react";
 
 import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
 import { Formik, Field, Form } from "formik";
+import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import authApi from "../../../apis/auth";
@@ -10,6 +11,7 @@ import { useAuth } from "../../../contexts/auth";
 import { setToLocalStorage } from "../../../helpers/storage";
 
 const Login = () => {
+  const history = useHistory();
   const { isLoggedIn } = useAuth();
   const validationSchema = () => {
     return Yup.object().shape({
@@ -42,7 +44,7 @@ const Login = () => {
         last_name: response.data.last_name,
       });
       setAuthHeaders();
-      window.location.href = "/";
+      history.push("/");
     } catch (error) {
       logger.error(error);
     }

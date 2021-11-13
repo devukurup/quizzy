@@ -21,7 +21,7 @@ class QuizzesController < ApplicationController
   def update
     quiz = Quiz.find_by(id: params[:id])
     if quiz && quiz.update(quiz_params)
-      render status: :ok, json: { notice: "Successfullly updated task." }
+      render status: :ok, json: { notice: "Successfullly updated quiz." }
     else
       render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end
@@ -30,7 +30,7 @@ class QuizzesController < ApplicationController
   def destroy
     quiz = Quiz.find_by(id: params[:id])
     if quiz.destroy
-      render status: :ok, json: { notice: "Successfully deleted task." }
+      render status: :ok, json: { notice: "Successfully deleted quiz." }
     else
       render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end

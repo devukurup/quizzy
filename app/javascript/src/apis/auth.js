@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const login = payload => axios.post("/sessions", payload);
+const login = payload => axios.post("/session", payload);
 
-const logout = () => axios.delete(`/sessions`);
+const logout = () => axios.delete(`/session`);
 
 const authApi = {
   login,

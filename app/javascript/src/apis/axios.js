@@ -23,6 +23,7 @@ const setAuthHeaders = (setLoading = () => null) => {
   }
   setLoading(false);
 };
+
 const handleSuccessResponse = response => {
   if (response) {
     response.success = response.status === 200;
