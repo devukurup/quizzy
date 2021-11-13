@@ -30,7 +30,7 @@ const Navbar = () => {
         last_name: null,
       });
       resetAuthTokens();
-      history.push("/");
+      history.push("/login");
     } catch (error) {
       logger.error(error);
     }

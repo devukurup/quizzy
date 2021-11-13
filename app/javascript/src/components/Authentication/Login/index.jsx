@@ -44,7 +44,7 @@ const Login = () => {
         last_name: response.data.last_name,
       });
       setAuthHeaders();
-      history.push("/");
+      window.location.href = "/";
     } catch (error) {
       logger.error(error);
     }
@@ -57,7 +57,7 @@ const Login = () => {
       first_name: null,
       last_name: null,
     });
-    window.location.href = "/";
+    history.push("/");
   }
 
   return (

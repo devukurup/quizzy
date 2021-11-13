@@ -19,7 +19,7 @@ const EditQuiz = () => {
         id,
         payload: { quiz: { quiz_name } },
       });
-      history.push("/dashboard");
+      history.push("/");
     } catch (error) {
       Logger.error(error);
     }
