@@ -4,12 +4,8 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: login_params[:email].downcase)
     unless @user.present? && @user.authenticate(login_params[:password])
-      render status: :unauthorized, json: { error: "Incorrect credentials, try again." }
+      render status: :unauthorized, json: { error: t("session.incorrect_credentials") }
     end
-  end
-
-  def destroy
-    @current_user = nil
   end
 
   private

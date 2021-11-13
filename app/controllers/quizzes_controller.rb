@@ -11,7 +11,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params.merge(quiz_creator_id: current_user.id))
     if @quiz.save
-      render status: :ok, json: { notice: "Successfully created new Quiz" }
+      render status: :ok, json: { notice: t("quiz.successfully_created") }
     else
       errors = @quiz.errors.full_messages.to_sentence
       render status: :unprocessable_entity, json: { error: errors }
@@ -21,7 +21,7 @@ class QuizzesController < ApplicationController
   def update
     quiz = Quiz.find_by(id: params[:id])
     if quiz && quiz.update(quiz_params)
-      render status: :ok, json: { notice: "Successfullly updated quiz." }
+      render status: :ok, json: { notice: t("quiz.successfully_updated") }
     else
       render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end
@@ -30,7 +30,7 @@ class QuizzesController < ApplicationController
   def destroy
     quiz = Quiz.find_by(id: params[:id])
     if quiz.destroy
-      render status: :ok, json: { notice: "Successfully deleted quiz." }
+      render status: :ok, json: { notice: t("quiz.successfully_deleted") }
     else
       render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end

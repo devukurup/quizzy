@@ -9,7 +9,7 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const authToken = getFromLocalStorage("authToken");
-  const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken !== "null";
+  const isLoggedIn = !either(isNil, isEmpty)(authToken);
   const initialValues = {
     isLoggedIn,
   };
