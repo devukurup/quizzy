@@ -89,17 +89,29 @@ const FetchQuiz = () => {
           {rows.map((row, i) => {
             prepareRow(row);
             return (
-              <tr key={i} {...row.getRowProps()}>
+              <tr
+                key={i}
+                className="cursor-pointer border px-8 py-4 "
+                {...row.getRowProps()}
+              >
                 {row.cells.map((cell, index) => {
                   return (
-                    <td
-                      key={index}
-                      className="border px-8 py-4"
-                      {...cell.getCellProps()}
-                    >
-                      <div className="flex justify-between">
-                        {cell.render("Cell")}
-                        <div className="flex space-x-2">
+                    <div key={index} className="grid grid-cols-2 px-8 py-4 ">
+                      <div
+                        onClick={e => {
+                          e.stopPropagation();
+                          history.push({
+                            pathname: `/showQuiz/${row?.original?.id}`,
+                            state: row?.original,
+                          });
+                        }}
+                      >
+                        <td key={index} {...cell.getCellProps()}>
+                          {cell.render("Cell")}
+                        </td>
+                      </div>
+                      <div className="space-x-5 flex justify-end ">
+                        <td key={index}>
                           <Button
                             label="Edit"
                             onClick={() => {
@@ -109,6 +121,8 @@ const FetchQuiz = () => {
                               });
                             }}
                           />
+                        </td>
+                        <td key={index}>
                           <Button
                             label="Delete"
                             onClick={() => {
@@ -117,9 +131,9 @@ const FetchQuiz = () => {
                               setDeleteQuiz(true);
                             }}
                           />
-                        </div>
+                        </td>
                       </div>
-                    </td>
+                    </div>
                   );
                 })}
               </tr>

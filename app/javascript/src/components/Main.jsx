@@ -9,6 +9,7 @@ import PrivateRoute from "./Common/PrivateRoute";
 import Dashboard from "./Dashboard";
 import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
 import EditQuiz from "./Dashboard/EditQuiz";
+import ShowQuiz from "./Dashboard/ShowQuiz";
 import Navbar from "./Navbar";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
@@ -39,6 +40,7 @@ const Main = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/createNewQuiz" component={CreateNewQuiz} />
           <Route exact path="/editQuiz/:id" component={EditQuiz} />
+          <Route exact path="/showQuiz/:id" component={ShowQuiz} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"
