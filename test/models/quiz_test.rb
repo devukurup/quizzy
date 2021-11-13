@@ -4,7 +4,8 @@ require "test_helper"
 
 class QuizTest < ActiveSupport::TestCase
   def setup
-    @quiz = Quiz.new(quiz_name: "Science Quiz")
+    @user = create(:user)
+    @quiz = create(:quiz, quiz_creator: @user)
   end
 
   # Add more tests on quiz_creator_id attribute
