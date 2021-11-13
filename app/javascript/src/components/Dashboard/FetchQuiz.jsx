@@ -96,7 +96,7 @@ const FetchQuiz = () => {
               >
                 {row.cells.map((cell, index) => {
                   return (
-                    <div className="grid grid-cols-2 px-8 py-4 " key={index}>
+                    <div key={index} className="grid grid-cols-2 px-8 py-4 ">
                       <div
                         onClick={e => {
                           e.stopPropagation();
