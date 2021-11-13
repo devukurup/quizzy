@@ -6,16 +6,21 @@ import { either, isNil, isEmpty } from "ramda";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
+import DeleteQuiz from "./DeleteQuiz";
+
 import quizzesApi from "../../apis/quizzes";
+import { useQuiz } from "../../contexts/quiz";
 
 const FetchQuiz = () => {
   const history = useHistory();
+  const [quizName, setQuizName] = useState("");
   const [quizList, setQuizList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { setDeleteQuiz, setDeleteId, deleteQuiz } = useQuiz();
 
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [deleteQuiz]);
 
   const fetchQuizzes = async () => {
     try {
@@ -103,7 +108,14 @@ const FetchQuiz = () => {
                               });
                             }}
                           />
-                          <Button label="Delete" />
+                          <Button
+                            label="Delete"
+                            onClick={() => {
+                              setDeleteId(row?.original?.id);
+                              setQuizName(row?.original?.quiz_name);
+                              setDeleteQuiz(true);
+                            }}
+                          />
                         </div>
                       </div>
                     </td>
@@ -114,6 +126,7 @@ const FetchQuiz = () => {
           })}
         </tbody>
       </table>
+      {deleteQuiz && <DeleteQuiz quizName={quizName} />}
     </div>
   );
 };

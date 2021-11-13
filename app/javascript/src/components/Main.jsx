@@ -32,6 +32,7 @@ const Main = () => {
     <div>
       <Router>
         <Navbar />
+
         <ToastContainer />
         <Switch>
           <Route exact path="/login" component={Login} />

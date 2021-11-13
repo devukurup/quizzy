@@ -8,6 +8,16 @@ class QuizzesController < ApplicationController
     render status: :ok, json: { quizzes: quizzes }
   end
 
+  def create
+    @quiz = Quiz.new(quiz_params.merge(quiz_creator_id: current_user.id))
+    if @quiz.save
+      render status: :ok, json: { notice: "Successfully created new Quiz" }
+    else
+      errors = @quiz.errors.full_messages.to_sentence
+      render status: :unprocessable_entity, json: { error: errors }
+    end
+  end
+
   def update
     quiz = Quiz.find_by(id: params[:id])
     if quiz && quiz.update(quiz_params)
@@ -17,13 +27,12 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def create
-    @quiz = Quiz.new(quiz_params.merge(quiz_creator_id: current_user.id))
-    if @quiz.save
-      render status: :ok, json: { notice: "Successfully created new Quiz" }
+  def destroy
+    quiz = Quiz.find_by(id: params[:id])
+    if quiz.destroy
+      render status: :ok, json: { notice: "Successfully deleted task." }
     else
-      errors = @quiz.errors.full_messages.to_sentence
-      render status: :unprocessable_entity, json: { error: errors }
+      render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end
   end
 

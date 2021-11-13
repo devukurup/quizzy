@@ -5,10 +5,16 @@ import PropTypes from "prop-types";
 const QuizContext = React.createContext();
 
 const QuizProvider = ({ children }) => {
+  const [deleteQuiz, setDeleteQuiz] = useState(false);
   const [newQuiz, setNewQuiz] = useState(false);
+  const [deleteId, setDeleteId] = useState(0);
   const initialValues = {
     newQuiz,
     setNewQuiz,
+    deleteQuiz,
+    setDeleteQuiz,
+    deleteId,
+    setDeleteId,
   };
   return (
     <QuizContext.Provider value={initialValues}>
