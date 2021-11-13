@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { Header, SubHeader } from "@bigbinary/neetoui/v2/layouts";
+import { Header } from "@bigbinary/neetoui/v2/layouts";
+import { useHistory } from "react-router-dom";
 
 import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
+import { useAuth } from "../../contexts/auth";
+import { useQuiz } from "../../contexts/quiz";
 import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
-import AddQuizModal from "../Dashboard/AddQuizModal";
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = () => {
+  const history = useHistory();
+  const { isLoggedIn } = useAuth();
+  const { setNewQuiz } = useQuiz();
   const userName =
     getFromLocalStorage("authUserFirstName") +
     " " +
     getFromLocalStorage("authUserLastName");
-  const [modal, setModal] = useState(false);
+
   const handleLogout = async () => {
     try {
       await authApi.logout();
@@ -26,7 +30,7 @@ const Navbar = ({ isLoggedIn }) => {
         last_name: null,
       });
       resetAuthTokens();
-      window.location.href = "/";
+      history.push("/login");
     } catch (error) {
       logger.error(error);
     }
@@ -36,7 +40,15 @@ const Navbar = ({ isLoggedIn }) => {
       <div className="border-b-2 border-black p-1">
         <Header
           title={
-            <Typography style="h1" weight="extrabold">
+            <Typography
+              style="h1"
+              weight="extrabold"
+              className="cursor-pointer"
+              onClick={() => {
+                setNewQuiz(false);
+                history.push("/");
+              }}
+            >
               Quizzy
             </Typography>
           }
@@ -73,21 +85,6 @@ const Navbar = ({ isLoggedIn }) => {
           }
         />
       </div>
-      {isLoggedIn && (
-        <div className="p-16">
-          <SubHeader
-            actionBlock={
-              <Button
-                icon={Plus}
-                onClick={() => setModal(true)}
-                iconPosition="left"
-                label=" Add new quiz"
-              />
-            }
-          />
-          {modal && <AddQuizModal modal={modal} setModal={setModal} />}
-        </div>
-      )}
     </div>
   );
 };

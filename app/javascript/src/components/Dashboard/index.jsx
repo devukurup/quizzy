@@ -1,50 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-import { Typography } from "@bigbinary/neetoui/v2";
-import { either, isNil, isEmpty } from "ramda";
+import { Plus } from "@bigbinary/neeto-icons";
+import { Typography, Button } from "@bigbinary/neetoui/v2";
+import { useHistory } from "react-router-dom";
 
-import quizzesApi from "../../apis/quizzes";
+import FetchQuiz from "./FetchQuiz";
 
-function Dashboard() {
-  const [quizList, setQuizList] = useState([]);
-  const [loading, setLoading] = useState(true);
+import { setAuthHeaders } from "../../apis/axios";
+import { useQuiz } from "../../contexts/quiz";
 
-  const fetchQuizzes = async () => {
-    try {
-      const response = await quizzesApi.list();
-      setQuizList(response.data.quizzes);
-      setLoading(false);
-    } catch (error) {
-      logger.error(error);
-      setLoading(false);
-    }
-  };
-
+const Dashboard = () => {
   useEffect(() => {
-    fetchQuizzes();
+    setAuthHeaders();
   }, []);
-
-  if (loading) {
-    return <h1>Loading..</h1>;
-  }
-
-  if (either(isNil, isEmpty)(quizList)) {
-    return (
-      <div className="align-middle text-center pt-40">
-        <Typography style="h3" weight="extralight">
-          You have not created any quiz.
-        </Typography>
-      </div>
-    );
-  }
-
+  const { setNewQuiz } = useQuiz();
+  const history = useHistory();
   return (
     <div>
-      {quizList.map((q, index) => (
-        <h1 key={index}>{q.quiz_name}</h1>
-      ))}
+      <div className="flex justify-between p-16">
+        <Typography style="h1" weight="extrabold">
+          List of quizzes
+        </Typography>
+        <Button
+          icon={Plus}
+          onClick={() => {
+            history.push("/createNewQuiz");
+            setNewQuiz(true);
+          }}
+          iconPosition="left"
+          label=" Add new quiz"
+        />
+      </div>
+      <div>
+        <FetchQuiz />
+      </div>
     </div>
   );
-}
+};
 
 export default Dashboard;
