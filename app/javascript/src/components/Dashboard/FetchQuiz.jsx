@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMemo } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui/v2";
+import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
@@ -50,7 +51,7 @@ const FetchQuiz = () => {
     });
 
   if (loading) {
-    return <h1>Loading..</h1>;
+    return <PageLoader />;
   }
 
   if (either(isNil, isEmpty)(quizList)) {

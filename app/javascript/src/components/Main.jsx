@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { PageLoader } from "@bigbinary/neetoui/v2";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -25,7 +26,7 @@ const Main = () => {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <PageLoader />;
   }
 
   return (
