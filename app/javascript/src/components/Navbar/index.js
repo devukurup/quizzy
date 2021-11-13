@@ -4,7 +4,6 @@ import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { useHistory } from "react-router-dom";
 
-import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
 import { useAuth } from "../../contexts/auth";
 import { useQuiz } from "../../contexts/quiz";
@@ -21,7 +20,6 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await authApi.logout();
       setToLocalStorage({
         authToken: null,
         email: null,
