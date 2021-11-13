@@ -9,7 +9,7 @@ class QuizTest < ActiveSupport::TestCase
 
   # Add more tests on quiz_creator_id attribute
   # test for quiz model validity
-  # def test_quiz_should_be_valid
-  #   assert @quiz.valid?
-  # end
+  def test_quiz_should_be_valid
+    assert @quiz.valid?
+  end
 end
