@@ -15,10 +15,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   #   assert_equal response.parsed_body["authentication_token"], @user.authentication_token
   # end
 
-  def test_shouldnt_login_user_with_invalid_credentials
-    email = "user_does_not_exist@example.com"
-    post sessions_path, params: { login: { email: email, password: "welcome" } }, as: :json
-    assert_response :unauthorized
-    assert_equal response.parsed_body["error"], "Incorrect credentials, try again."
-  end
+  # def test_shouldnt_login_user_with_invalid_credentials
+  #   email = "user_does_not_exist@example.com"
+  #   post sessions_path, params: { login: { email: email, password: "welcome" } }, as: :json
+  #   assert_response :unauthorized
+  #   assert_equal response.parsed_body["error"], "Incorrect credentials, try again."
+  # end
 end
