@@ -40,8 +40,7 @@ const Login = () => {
         authToken: response.data.authentication_token,
         email,
         userId: response.data.id,
-        first_name: response.data.first_name,
-        last_name: response.data.last_name,
+        user_name: `${response.data.first_name} ${response.data.last_name}`,
       });
       setAuthHeaders();
       window.location.href = "/";
@@ -54,8 +53,7 @@ const Login = () => {
       authToken: null,
       email: null,
       userId: null,
-      first_name: null,
-      last_name: null,
+      user_name: null,
     });
     history.push("/");
   }

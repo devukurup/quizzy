@@ -41,8 +41,7 @@ const handleErrorResponse = axiosErrorObject => {
       authToken: null,
       email: null,
       userId: null,
-      first_name: null,
-      last_name: null,
+      user_name: null,
     });
     setTimeout(() => (window.location.href = "/"), 2000);
   }

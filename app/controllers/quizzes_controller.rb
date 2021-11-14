@@ -4,12 +4,12 @@ class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token
 
   def index
-    quizzes = Quiz.where(quiz_creator_id: current_user.id).order("created_at DESC")
+    quizzes = Quiz.where(user_id: current_user.id).order("created_at DESC")
     render status: :ok, json: { quizzes: quizzes }
   end
 
   def create
-    @quiz = Quiz.new(quiz_params.merge(quiz_creator_id: current_user.id))
+    @quiz = Quiz.new(quiz_params.merge(user_id: current_user.id))
     if @quiz.save
       render status: :ok, json: { notice: t("quiz.successfully_created") }
     else
