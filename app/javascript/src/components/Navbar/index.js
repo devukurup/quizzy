@@ -13,10 +13,7 @@ const Navbar = () => {
   const history = useHistory();
   const { isLoggedIn } = useAuth();
   const { setNewQuiz } = useQuiz();
-  const userName =
-    getFromLocalStorage("authUserFirstName") +
-    " " +
-    getFromLocalStorage("authUserLastName");
+  const userName = getFromLocalStorage("authUserName");
 
   const handleLogout = async () => {
     try {
@@ -24,8 +21,7 @@ const Navbar = () => {
         authToken: null,
         email: null,
         userId: null,
-        first_name: null,
-        last_name: null,
+        user_name: null,
       });
       resetAuthTokens();
       window.location.href = "/";
