@@ -6,3 +6,5 @@ en:
     successfully_created: "Successfully created new Quiz."
     successfully_updated: "Successfully updated Quiz."
     successfully_deleted: "Successfully deleted Quiz."
+  questions:
+    successfully_created: "Successfully created new Question."

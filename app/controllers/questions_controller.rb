@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
     question = Question.new(question_params)
     puts question
     if question.save
-      render status: :ok, json: { notice: "Success" }
+      render status: :ok, json: { notice: t("questions.Successfully_created") }
     else
       errors = question.errors.full_messages.to_sentence
       render status: :unprocessable_entity, json: { error: errors }
