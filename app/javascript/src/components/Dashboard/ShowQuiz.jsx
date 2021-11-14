@@ -2,9 +2,10 @@ import React from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const ShowQuiz = () => {
+  const history = useHistory();
   const { state } = useLocation();
   return (
     <div>
@@ -12,7 +13,17 @@ const ShowQuiz = () => {
         <Typography style="h1" weight="extrabold" className="text-gray-600">
           {state.quiz_name}
         </Typography>
-        <Button icon={Plus} iconPosition="left" label=" Add questions" />
+        <Button
+          icon={Plus}
+          iconPosition="left"
+          label=" Add questions"
+          onClick={() => {
+            history.push({
+              pathname: `/Question/add`,
+              state: state.quiz_name,
+            });
+          }}
+        />
       </div>
       <div className="align-middle text-center pt-40">
         <Typography style="h3" weight="extralight">

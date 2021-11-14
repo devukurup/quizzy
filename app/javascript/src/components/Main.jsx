@@ -11,6 +11,7 @@ import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
 import EditQuiz from "./Dashboard/EditQuiz";
 import ShowQuiz from "./Dashboard/ShowQuiz";
 import Navbar from "./Navbar";
+import AddQuestion from "./Questions";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
 import { initializeLogger } from "../common/logger";
@@ -41,6 +42,8 @@ const Main = () => {
           <Route exact path="/createNewQuiz" component={CreateNewQuiz} />
           <Route exact path="/editQuiz/:id" component={EditQuiz} />
           <Route exact path="/showQuiz/:id" component={ShowQuiz} />
+          <Route exact path="/Question/add" component={AddQuestion} />
+          <Route exact path="/Question/edit" component={AddQuestion} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"
