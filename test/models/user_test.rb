@@ -116,6 +116,11 @@ fishy+#.com]
     assert @user.valid?
   end
 
+  def test_user_role_should_be_equal_to_default_role
+    @user.save!
+    assert_equal @user.role, "standard"
+  end
+
   # test to check if blank password field is valid
   def test_password_should_not_be_blank
     @user.password = nil

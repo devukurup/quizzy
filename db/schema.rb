@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_122453) do
+ActiveRecord::Schema.define(version: 2021_11_14_145954) do
 
   create_table "questions", force: :cascade do |t|
     t.text "questn", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_122453) do
     t.string "quiz_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "quiz_creator_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,5 +47,5 @@ ActiveRecord::Schema.define(version: 2021_11_14_122453) do
   end
 
   add_foreign_key "questions", "quizzes"
-  add_foreign_key "quizzes", "users", column: "quiz_creator_id"
+  add_foreign_key "quizzes", "users"
 end
