@@ -30,6 +30,8 @@ const AddQuestion = () => {
     const newOptionsList = [...optionsList];
     newOptionsList.splice(index, 1);
     setOptionsList(newOptionsList);
+    setDisableAddOption(false);
+    setCount(prevState => prevState - 1);
   };
 
   return (
@@ -79,9 +81,9 @@ const AddQuestion = () => {
             // onClose={function noRefCheck(){}}
             position="bottom-end"
           >
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
+            {optionsList.map((item, index) => (
+              <li key={index}>{`Options ${index + 1}`}</li>
+            ))}
           </Dropdown>
         </div>
         <div className="grid grid-cols-2">
