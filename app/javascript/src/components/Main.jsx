@@ -42,8 +42,8 @@ const Main = () => {
           <Route exact path="/createNewQuiz" component={CreateNewQuiz} />
           <Route exact path="/editQuiz/:id" component={EditQuiz} />
           <Route exact path="/showQuiz/:id" component={ShowQuiz} />
-          <Route exact path="/Question/add" component={AddQuestion} />
-          <Route exact path="/Question/edit" component={AddQuestion} />
+          <Route exact path="/Question/add/:id" component={AddQuestion} />
+          <Route exact path="/Question/edit/:id" component={AddQuestion} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"

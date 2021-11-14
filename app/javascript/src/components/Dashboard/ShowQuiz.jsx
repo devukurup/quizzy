@@ -19,7 +19,7 @@ const ShowQuiz = () => {
           label=" Add questions"
           onClick={() => {
             history.push({
-              pathname: `/Question/add`,
+              pathname: `/Question/add/${state.id}`,
               state: state.quiz_name,
             });
           }}
