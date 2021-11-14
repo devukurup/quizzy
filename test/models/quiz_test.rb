@@ -13,4 +13,14 @@ class QuizTest < ActiveSupport::TestCase
   def test_quiz_should_be_valid
     assert @quiz.valid?
   end
+
+  def test_quiz_should_be_invalid_without_quiz_name
+    @quiz.quiz_name = ""
+    assert @quiz.invalid?
+  end
+
+  def test_quiz_should_be_invalid_without_user
+    @quiz.quiz_creator_id = nil
+    assert @quiz.invalid?
+  end
 end
