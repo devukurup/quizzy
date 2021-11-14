@@ -9,10 +9,14 @@ import {
   Dropdown,
 } from "@bigbinary/neetoui/v2";
 import { Formik, Field, Form } from "formik";
-import { useLocation } from "react-router-dom";
+import Logger from "js-logger";
+import { useLocation, useParams } from "react-router-dom";
 import * as Yup from "yup";
 
+import questionsApi from "../../apis/questions";
+
 const AddQuestion = () => {
+  const { id } = useParams();
   const { state } = useLocation();
   const [count, setCount] = useState(1);
   const [defaultAnswer, setDefaultAnswer] = useState(1);
@@ -29,9 +33,33 @@ const AddQuestion = () => {
     });
   };
 
-  const handleSubmit = () => {
-    // handleSubmitRequest(data);
-    // use data here
+  const handleSubmit = data => {
+    handleSubmitRequest(data);
+  };
+
+  const handleSubmitRequest = async data => {
+    const questn = data.question;
+    const option1 = data.option1;
+    const option2 = data.option2;
+    const option3 = data.option3;
+    const option4 = data.option4;
+    const answer = defaultAnswer;
+    const quiz_id = id;
+    try {
+      await questionsApi.create({
+        question: {
+          questn,
+          option1,
+          option2,
+          option3,
+          option4,
+          answer,
+          quiz_id,
+        },
+      });
+    } catch (error) {
+      Logger.error(error);
+    }
   };
 
   const initialValues = {
