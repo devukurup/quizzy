@@ -28,7 +28,7 @@ const FetchQuestions = ({ id }) => {
     try {
       const response = await questionsApi.list({ id });
       setQuestionList(response.data.question);
-      questionList.length > 0 ? setPublish(true) : setPublish(false);
+      response.data.question.length > 0 ? setPublish(true) : setPublish(false);
       setLoading(false);
     } catch (error) {
       logger.error(error);

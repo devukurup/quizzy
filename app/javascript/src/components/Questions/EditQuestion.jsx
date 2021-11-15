@@ -7,7 +7,6 @@ import CreateQuestion from "./CreateQuestion";
 const EditQuestion = () => {
   const { id } = useParams();
   const { state, quiz_id } = useLocation();
-  const [count, setCount] = useState(0);
   const [defaultAnswer, setDefaultAnswer] = useState(state.answer);
   const [optionsList, setOptionsList] = useState([]);
   const [disableAddOption, setDisableAddOption] = useState(false);
@@ -15,13 +14,6 @@ const EditQuestion = () => {
   const type = "Update";
 
   useEffect(() => {
-    if (state.option4) {
-      setCount(2);
-      setDisableAddOption(true);
-    } else if (state.option3) {
-      setCount(2);
-    }
-
     const availableOptions = options.filter(item => state[item] != "");
     options = [];
     availableOptions.map((item, index) => {
@@ -39,22 +31,19 @@ const EditQuestion = () => {
     option4: state.option4,
   };
 
-  return (
-    <CreateQuestion
-      defaultAnswer={defaultAnswer}
-      setDefaultAnswer={setDefaultAnswer}
-      count={count}
-      setCount={setCount}
-      disableAddOption={disableAddOption}
-      setDisableAddOption={setDisableAddOption}
-      optionsList={optionsList}
-      setOptionsList={setOptionsList}
-      id={id}
-      initialValues={initialValues}
-      type={type}
-      quiz_id={quiz_id}
-    />
-  );
+  const props = {
+    defaultAnswer,
+    setDefaultAnswer,
+    disableAddOption,
+    setDisableAddOption,
+    optionsList,
+    setOptionsList,
+    id,
+    initialValues,
+    type,
+    quiz_id,
+  };
+  return <CreateQuestion props={props} />;
 };
 
 export default EditQuestion;

@@ -11,20 +11,19 @@ import * as Yup from "yup";
 import questionsApi from "../../apis/questions";
 import { useQuestion } from "../../contexts/question";
 
-const CreateQuestion = ({
-  defaultAnswer,
-  setDefaultAnswer,
-  count,
-  setCount,
-  disableAddOption,
-  setDisableAddOption,
-  optionsList,
-  setOptionsList,
-  id,
-  initialValues,
-  type,
-  quiz_id,
-}) => {
+const CreateQuestion = ({ props }) => {
+  const {
+    defaultAnswer,
+    setDefaultAnswer,
+    disableAddOption,
+    setDisableAddOption,
+    optionsList,
+    setOptionsList,
+    id,
+    initialValues,
+    type,
+    quiz_id,
+  } = props;
   const history = useHistory();
   const { quizRecord } = useQuestion();
 
@@ -37,10 +36,12 @@ const CreateQuestion = ({
   };
 
   const handleOptions = () => {
-    setCount(prevState => prevState + 1);
-    const newOptionList = [...optionsList, { id: count + 2, value: "Options" }];
+    const newOptionList = [
+      ...optionsList,
+      { id: optionsList.length + 1, value: "Options" },
+    ];
     setOptionsList(newOptionList);
-    if (count == 2) {
+    if (optionsList.length === 3) {
       setDisableAddOption(true);
     }
   };
@@ -56,7 +57,6 @@ const CreateQuestion = ({
     }
     setOptionsList(newOptionsList);
     setDisableAddOption(false);
-    setCount(prevState => prevState - 1);
   };
 
   const handleSubmit = async data => {
