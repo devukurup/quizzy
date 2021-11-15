@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Checkmark } from "@bigbinary/neeto-icons";
+import { CheckCircle } from "@bigbinary/neeto-icons";
 import {
   Typography,
   Button,
@@ -129,7 +129,7 @@ const AddQuestion = () => {
                       )}
                     </Field>
                     {defaultAnswer === index + 1 && (
-                      <Checkmark color="#00ba88" size={30} />
+                      <CheckCircle color="#00ba88" size={30} />
                     )}
                   </div>
                 )}
@@ -156,7 +156,7 @@ const AddQuestion = () => {
                     </Field>
 
                     {defaultAnswer === index + 1 && (
-                      <Checkmark color="#00ba88" size={30} />
+                      <CheckCircle color="#00ba88" size={30} />
                     )}
                   </div>
                 )}
