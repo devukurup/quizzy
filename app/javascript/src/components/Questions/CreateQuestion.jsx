@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Plus } from "@bigbinary/neeto-icons";
 import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Typography, Button, Label, Dropdown } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
@@ -115,28 +116,36 @@ const CreateQuestion = ({ props }) => {
         onSubmit={handleSubmit}
       >
         {({ values, setFieldValue }) => (
-          <Form className="w-4/12 space-y-5 p-10">
-            <div className="grid grid-cols-3">
+          <Form className="w-6/12 space-y-5 p-24 mx-auto bg-blue-100 ">
+            <div className="flex flex-row space-x-10">
               <Label>Question</Label>
               <Input name="question" type="text" />
             </div>
             {optionsList.map((item, index) => (
-              <div key={index} className="grid grid-cols-3">
+              <div key={index} className="flex space-x-10">
                 <Label>{`Options ${index + 1}`}</Label>
                 {index < 2 && (
                   <div className="flex col-span-2 space-x-2">
-                    <Input name={`option${item.id}`} type="text" />
+                    <Input
+                      className="w-64"
+                      name={`option${item.id}`}
+                      type="text"
+                    />
                     {defaultAnswer === index + 1 && (
                       <CheckCircle color="#00ba88" size={30} />
                     )}
                   </div>
                 )}
                 {index >= 2 && (
-                  <div className="flex col-span-2 space-x-2 ">
+                  <div className="flex  space-x-10 ">
                     <Field name={`option${item.id}`} type="text">
                       {({ field }) => (
-                        <div>
-                          <Input {...field} placeholder={item.value} />
+                        <div className="flex space-x-10">
+                          <Input
+                            className="w-64"
+                            {...field}
+                            placeholder={item.value}
+                          />
                           <Button
                             label="Delete"
                             onClick={() => {
@@ -160,32 +169,36 @@ const CreateQuestion = ({ props }) => {
                 )}
               </div>
             ))}
-            <div className="grid grid-cols-3">
+            <div>
               {!disableAddOption && (
                 <Button
-                  className="col-end-3"
-                  label="+ Add Option"
+                  icon={Plus}
+                  iconPosition="left"
+                  label="Add Option"
                   onClick={handleOptions}
                 />
               )}
             </div>
-            <div className="grid grid-cols-3">
+            <div className="flex space-x-2">
               <Label>Correct answer</Label>
-              <Dropdown
-                buttonStyle="primary"
-                label={`Option ${defaultAnswer}`}
-                position="bottom-end"
-              >
-                {optionsList.map((item, index) => (
-                  <li
-                    key={index}
-                    onClick={() => setDefaultAnswer(index + 1)}
-                  >{`Options ${index + 1}`}</li>
-                ))}
-              </Dropdown>
+              <div className="text-center">
+                <Dropdown
+                  className=""
+                  buttonStyle="primary"
+                  label={`Option ${defaultAnswer}`}
+                  position="bottom-end"
+                >
+                  {optionsList.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => setDefaultAnswer(index + 1)}
+                    >{`Options ${index + 1}`}</li>
+                  ))}
+                </Dropdown>
+              </div>
             </div>
-            <div className="grid grid-cols-3">
-              <Button className="col-end-3 " label={type} type="submit" />
+            <div className="">
+              <Button className="text-center " label={type} type="submit" />
             </div>
           </Form>
         )}
