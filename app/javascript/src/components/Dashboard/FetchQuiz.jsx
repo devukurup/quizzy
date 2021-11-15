@@ -15,10 +15,15 @@ import { useQuiz } from "../../contexts/quiz";
 const FetchQuiz = () => {
   const history = useHistory();
   const [quizName, setQuizName] = useState("");
-  const [quizList, setQuizList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { setDeleteQuiz, setDeleteId, deleteQuiz, setDashboardHeader } =
-    useQuiz();
+  const {
+    setDeleteQuiz,
+    setDeleteId,
+    deleteQuiz,
+    setDashboardHeader,
+    quizList,
+    setQuizList,
+  } = useQuiz();
 
   const fetchQuizzes = async () => {
     try {
@@ -74,7 +79,7 @@ const FetchQuiz = () => {
       >
         <thead>
           {headerGroups.map((headerGroup, index) => (
-            <tr key={index} {...headerGroup.getHeaderGroupProps()}>
+            <tr key={index + 1} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, index) => (
                 <th
                   key={index}
@@ -108,12 +113,15 @@ const FetchQuiz = () => {
                           });
                         }}
                       >
-                        <td key={index} {...cell.getCellProps()}>
+                        <td key={row?.original?.id} {...cell.getCellProps()}>
                           {cell.render("Cell")}
                         </td>
                       </div>
-                      <div className="space-x-5 flex justify-end ">
-                        <td key={index}>
+                      <div
+                        key={row?.original?.id}
+                        className="space-x-5 flex justify-end "
+                      >
+                        <td key={row?.original?.id}>
                           <Button
                             label="Edit"
                             onClick={() => {

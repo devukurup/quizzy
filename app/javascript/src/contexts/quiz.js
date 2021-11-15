@@ -6,16 +6,16 @@ const QuizContext = React.createContext();
 
 const QuizProvider = ({ children }) => {
   const [deleteQuiz, setDeleteQuiz] = useState(false);
-  const [currentState, setCurrentState] = useState({});
   const [dashboardHeader, setDashboardHeader] = useState(false);
   const [deleteId, setDeleteId] = useState(0);
+  const [quizList, setQuizList] = useState([]);
   const initialValues = {
+    quizList,
+    setQuizList,
     deleteQuiz,
     setDeleteQuiz,
     deleteId,
     setDeleteId,
-    currentState,
-    setCurrentState,
     dashboardHeader,
     setDashboardHeader,
   };
