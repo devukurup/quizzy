@@ -16,6 +16,7 @@ const FetchQuiz = () => {
   const history = useHistory();
   const [quizName, setQuizName] = useState("");
   const [loading, setLoading] = useState(true);
+
   const {
     setDeleteQuiz,
     setDeleteId,
@@ -24,6 +25,10 @@ const FetchQuiz = () => {
     quizList,
     setQuizList,
   } = useQuiz();
+
+  useEffect(() => {
+    fetchQuizzes();
+  });
 
   const fetchQuizzes = async () => {
     try {
@@ -38,9 +43,6 @@ const FetchQuiz = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    fetchQuizzes();
-  }, [deleteQuiz]);
 
   const data = useMemo(() => quizList, [quizList]);
   const columns = useMemo(
