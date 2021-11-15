@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import questionsApi from "../../apis/questions";
+import { useQuestion } from "../../contexts/question";
 
 const CreateQuestion = ({
   defaultAnswer,
@@ -20,12 +21,12 @@ const CreateQuestion = ({
   optionsList,
   setOptionsList,
   id,
-  state,
   initialValues,
   type,
   quiz_id,
 }) => {
   const history = useHistory();
+  const { quizRecord } = useQuestion();
 
   const validationSchema = () => {
     return Yup.object().shape({
@@ -38,7 +39,6 @@ const CreateQuestion = ({
   const handleOptions = () => {
     setCount(prevState => prevState + 1);
     const newOptionList = [...optionsList, { id: count + 2, value: "Options" }];
-    // console.log(newOptionList)
     setOptionsList(newOptionList);
     if (count == 2) {
       setDisableAddOption(true);
@@ -66,8 +66,6 @@ const CreateQuestion = ({
     const option3 = data.option3;
     const option4 = data.option4;
     const answer = defaultAnswer;
-    // const quiz_id = id;
-    // console.log(data)
     try {
       if (type === "Submit") {
         await questionsApi.create({
@@ -81,10 +79,7 @@ const CreateQuestion = ({
             quiz_id: id,
           },
         });
-        history.push({
-          pathname: `/showQuiz/${id}`,
-          state: state,
-        });
+        history.push(`/showQuiz/${id}`);
       } else {
         await questionsApi.update({
           id,
@@ -100,10 +95,7 @@ const CreateQuestion = ({
             },
           },
         });
-        history.push({
-          pathname: `/showQuiz/${quiz_id}`,
-          state: state,
-        });
+        history.push(`/showQuiz/${quiz_id}`);
       }
     } catch (error) {
       Logger.error(error);
@@ -114,7 +106,7 @@ const CreateQuestion = ({
     <div>
       <div className="p-10">
         <Typography style="h1" weight="extrabold" className="text-gray-600">
-          {state.quiz_name}
+          {quizRecord.quiz_name}
         </Typography>
       </div>
       <Formik

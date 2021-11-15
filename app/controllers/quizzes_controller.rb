@@ -18,6 +18,11 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def show
+    quiz = Quiz.where(id: params[:id])
+    render status: :ok, json: { quiz: quiz }
+  end
+
   def update
     quiz = Quiz.find_by(id: params[:id])
     if quiz && quiz.update(quiz_params)

@@ -31,8 +31,6 @@ const EditQuestion = () => {
     if (availableOptions.length == 4) setDisableAddOption(true);
   }, []);
 
-  // console.log(id, state, "in edit question", quiz_id)
-
   const initialValues = {
     question: state.questn,
     option1: state.option1,
@@ -51,7 +49,6 @@ const EditQuestion = () => {
       setDisableAddOption={setDisableAddOption}
       optionsList={optionsList}
       setOptionsList={setOptionsList}
-      state={state}
       id={id}
       initialValues={initialValues}
       type={type}

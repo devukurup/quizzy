@@ -13,7 +13,6 @@ import { useQuestion } from "../../contexts/question";
 
 const FetchQuestions = ({ id }) => {
   const history = useHistory();
-  const [questionList, setQuestionList] = useState([]);
   const [loading, setLoading] = useState(true);
   const {
     setDeleteId,
@@ -21,23 +20,25 @@ const FetchQuestions = ({ id }) => {
     setDeleteQuestion,
     deleteQuestion,
     setPublish,
+    questionList,
+    setQuestionList,
   } = useQuestion();
-
-  useEffect(() => {
-    fetchQuestions();
-  }, [deleteQuestion]);
 
   const fetchQuestions = async () => {
     try {
       const response = await questionsApi.list({ id });
-      // console.log(response)
       setQuestionList(response.data.question);
+      questionList.length > 0 ? setPublish(true) : setPublish(false);
       setLoading(false);
     } catch (error) {
       logger.error(error);
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [deleteQuestion]);
 
   if (loading) {
     return <PageLoader />;
@@ -46,9 +47,8 @@ const FetchQuestions = ({ id }) => {
   if (either(isNil, isEmpty)(questionList)) {
     return (
       <div className="align-middle text-center pt-40">
-        {setPublish(false)}
         <Typography style="h3" weight="extralight">
-          You have not created any quiz.
+          You have not added any questions.
         </Typography>
       </div>
     );
@@ -56,7 +56,6 @@ const FetchQuestions = ({ id }) => {
 
   return (
     <div>
-      {setPublish(true)}
       {questionList.map((item, index) => (
         <div
           key={index}

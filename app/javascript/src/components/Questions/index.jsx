@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import CreateQuestion from "./CreateQuestion";
 
 const AddQuestion = () => {
   const { id } = useParams();
-  const { state } = useLocation();
   const [count, setCount] = useState(1);
   const [defaultAnswer, setDefaultAnswer] = useState(1);
   const [optionsList, setOptionsList] = useState([
@@ -33,7 +32,6 @@ const AddQuestion = () => {
       setDisableAddOption={setDisableAddOption}
       optionsList={optionsList}
       setOptionsList={setOptionsList}
-      state={state}
       id={id}
       initialValues={initialValues}
       type={type}

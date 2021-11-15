@@ -18,10 +18,6 @@ class QuestionsController < ApplicationController
 
   def update
     question = Question.find_by(id: params[:id])
-    puts "IM hererrrrr"
-    puts question_params
-    puts params[:id]
-    puts "koiiii"
     if question && question.update(question_params)
       render status: :ok, json: { notice: t("questions.successfully_updated") }
     else
