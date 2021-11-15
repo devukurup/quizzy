@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Typography, Button, Input, Label } from "@bigbinary/neetoui/v2";
-import { Formik, Field, Form } from "formik";
+import { Typography, Button, Label } from "@bigbinary/neetoui/v2";
+import { Input } from "@bigbinary/neetoui/v2/formik";
+import { Formik, Form } from "formik";
 import Logger from "js-logger";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
@@ -42,11 +43,7 @@ const CreateNewQuiz = () => {
           <Form className="flex flex-col items-center space-y-5">
             <div className="flex flex-row">
               <Label className="mr-5 justify-end">Quiz Name</Label>
-              <Field name="quizName" type="text">
-                {({ field, meta }) => (
-                  <Input {...field} error={meta.touched && meta.error} />
-                )}
-              </Field>
+              <Input name="quizName" type="text" />
             </div>
             <div className="flex space-x-5 ">
               <Button label="Submit" type="submit" />
