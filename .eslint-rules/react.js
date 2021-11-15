@@ -25,8 +25,8 @@ module.exports = {
     // not-auto-fixable: Prevent variables used in JSX to be marked as unused.
     "react/jsx-uses-vars": "error",
     // not-auto-fixable: Ensures https://reactjs.org/docs/hooks-rules.html.
-    // "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "error",
     // not-auto-fixable: Ensures https://reactjs.org/docs/hooks-rules.html - Checks effect dependencies.
-    // "react-hooks/exhaustive-deps": "error",
+    "react-hooks/exhaustive-deps": "error",
   },
 };

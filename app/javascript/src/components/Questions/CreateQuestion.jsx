@@ -1,13 +1,7 @@
 import React from "react";
 
 import { CheckCircle } from "@bigbinary/neeto-icons";
-import {
-  Typography,
-  Button,
-  Label,
-  // Input,
-  Dropdown,
-} from "@bigbinary/neetoui/v2";
+import { Typography, Button, Label, Dropdown } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Field, Form } from "formik";
 import Logger from "js-logger";

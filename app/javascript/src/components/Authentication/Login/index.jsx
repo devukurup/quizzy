@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
-import { Formik, Field, Form } from "formik";
+import { Typography, Button } from "@bigbinary/neetoui/v2";
+import { Input } from "@bigbinary/neetoui/v2/formik";
+import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -67,27 +68,10 @@ const Login = () => {
         <Form>
           <div className="space-y-2 flex flex-col">
             <div className="w-full">
-              <Field name="email" type="email">
-                {({ field, meta }) => (
-                  <Input
-                    {...field}
-                    error={meta.touched && meta.error}
-                    placeholder="email"
-                  />
-                )}
-              </Field>
+              <Input name="email" type="email" placeholder="email" />
             </div>
             <div>
-              <Field name="password" type="password">
-                {({ field, meta }) => (
-                  <Input
-                    {...field}
-                    type="password"
-                    error={meta.touched && meta.error}
-                    placeholder="password"
-                  />
-                )}
-              </Field>
+              <Input name="password" type="password" placeholder="password" />
             </div>
 
             <div className="mx-auto p-3">
