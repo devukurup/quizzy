@@ -15,7 +15,7 @@ const ShowQuiz = () => {
 
   useEffect(() => {
     fetchQuiz();
-  }, [id]);
+  });
 
   const fetchQuiz = async () => {
     try {

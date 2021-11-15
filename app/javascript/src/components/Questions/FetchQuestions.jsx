@@ -38,7 +38,7 @@ const FetchQuestions = ({ id }) => {
 
   useEffect(() => {
     fetchQuestions();
-  }, [deleteQuestion]);
+  });
 
   if (loading) {
     return <PageLoader />;

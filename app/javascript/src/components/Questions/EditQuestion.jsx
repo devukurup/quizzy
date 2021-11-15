@@ -14,6 +14,10 @@ const EditQuestion = () => {
   const type = "Update";
 
   useEffect(() => {
+    initializing();
+  });
+
+  const initializing = () => {
     const availableOptions = options.filter(item => state[item] != "");
     options = [];
     availableOptions.map((item, index) => {
@@ -21,7 +25,7 @@ const EditQuestion = () => {
     });
     setOptionsList(options);
     if (availableOptions.length == 4) setDisableAddOption(true);
-  }, []);
+  };
 
   const initialValues = {
     question: state.questn,
