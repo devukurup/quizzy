@@ -38,7 +38,8 @@ const FetchQuestions = ({ id }) => {
 
   useEffect(() => {
     fetchQuestions();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deleteQuestion]);
 
   if (loading) {
     return <PageLoader />;
