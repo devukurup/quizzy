@@ -7,6 +7,7 @@ const QuizContext = React.createContext();
 const QuizProvider = ({ children }) => {
   const [deleteQuiz, setDeleteQuiz] = useState(false);
   const [newQuiz, setNewQuiz] = useState(false);
+  const [currentState, setCurrentState] = useState({});
   const [deleteId, setDeleteId] = useState(0);
   const initialValues = {
     newQuiz,
@@ -15,6 +16,8 @@ const QuizProvider = ({ children }) => {
     setDeleteQuiz,
     deleteId,
     setDeleteId,
+    currentState,
+    setCurrentState,
   };
   return (
     <QuizContext.Provider value={initialValues}>

@@ -8,11 +8,14 @@ const QuestionProvider = ({ children }) => {
   const [deleteQuestion, setDeleteQuestion] = useState(false);
   const [questionName, setQuestionName] = useState("");
   const [deleteId, setDeleteId] = useState(0);
+  const [publish, setPublish] = useState(false);
   const initialValues = {
     questionName,
     setQuestionName,
     deleteQuestion,
     setDeleteQuestion,
+    publish,
+    setPublish,
     deleteId,
     setDeleteId,
   };

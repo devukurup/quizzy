@@ -9,3 +9,4 @@ en:
   questions:
     successfully_created: "Successfully created new Question."
     successfully_deleted: "Successfully deleted the question."
+    successfully_updated: "Successfully updated the Question."

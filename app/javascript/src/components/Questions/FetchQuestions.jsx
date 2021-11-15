@@ -4,18 +4,24 @@ import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
+import { useHistory } from "react-router-dom";
 
 import DeleteQuestion from "./DeleteQuestion";
 
 import questionsApi from "../../apis/questions";
 import { useQuestion } from "../../contexts/question";
 
-const FetchQuestions = ({ state }) => {
-  const { id } = state;
+const FetchQuestions = ({ id }) => {
+  const history = useHistory();
   const [questionList, setQuestionList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { setDeleteId, setQuestionName, setDeleteQuestion, deleteQuestion } =
-    useQuestion();
+  const {
+    setDeleteId,
+    setQuestionName,
+    setDeleteQuestion,
+    deleteQuestion,
+    setPublish,
+  } = useQuestion();
 
   useEffect(() => {
     fetchQuestions();
@@ -24,6 +30,7 @@ const FetchQuestions = ({ state }) => {
   const fetchQuestions = async () => {
     try {
       const response = await questionsApi.list({ id });
+      // console.log(response)
       setQuestionList(response.data.question);
       setLoading(false);
     } catch (error) {
@@ -39,6 +46,7 @@ const FetchQuestions = ({ state }) => {
   if (either(isNil, isEmpty)(questionList)) {
     return (
       <div className="align-middle text-center pt-40">
+        {setPublish(false)}
         <Typography style="h3" weight="extralight">
           You have not created any quiz.
         </Typography>
@@ -48,6 +56,7 @@ const FetchQuestions = ({ state }) => {
 
   return (
     <div>
+      {setPublish(true)}
       {questionList.map((item, index) => (
         <div
           key={index}
@@ -59,7 +68,16 @@ const FetchQuestions = ({ state }) => {
               {item.questn}
             </Typography>
             <div className="flex space-x-3">
-              <Button label="Edit" />
+              <Button
+                label="Edit"
+                onClick={() =>
+                  history.push({
+                    pathname: `Question/edit/${item.id}`,
+                    state: item,
+                    quiz_id: id,
+                  })
+                }
+              />
               <Button
                 label="Delete"
                 onClick={() => {
@@ -95,7 +113,7 @@ const FetchQuestions = ({ state }) => {
           )}
           {item.option4 && (
             <div className="flex space-x-10">
-              <Typography>Option 2</Typography>
+              <Typography>Option 4</Typography>
               <Typography style="body1" weight="bold">
                 {item.option4}
               </Typography>
