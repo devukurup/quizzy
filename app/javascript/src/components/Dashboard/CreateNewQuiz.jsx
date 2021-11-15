@@ -1,36 +1,30 @@
 import React from "react";
 
-import { Typography, Button, Input, Label } from "@bigbinary/neetoui/v2";
-import { Formik, Field, Form } from "formik";
+import { Typography, Button, Label } from "@bigbinary/neetoui/v2";
+import { Input } from "@bigbinary/neetoui/v2/formik";
+import { Formik, Form } from "formik";
 import Logger from "js-logger";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import quizzesApi from "../../apis/quizzes";
-import { useQuiz } from "../../contexts/quiz";
 
 const CreateNewQuiz = () => {
   const history = useHistory();
-  const { setNewQuiz } = useQuiz();
   const validationSchema = () => {
     return Yup.object().shape({
       quizName: Yup.string().trim().required("Quiz Name is required"),
     });
   };
 
-  const handleSubmit = data => {
-    handleSubmitRequest(data);
-  };
-
   const initialValues = {
     quizName: "",
   };
 
-  const handleSubmitRequest = async data => {
+  const handleSubmit = async data => {
     const quiz_name = data.quizName;
     try {
       await quizzesApi.create({ quiz: { quiz_name } });
-      setNewQuiz(false);
       history.push("/");
     } catch (error) {
       Logger.error(error);
@@ -49,11 +43,7 @@ const CreateNewQuiz = () => {
           <Form className="flex flex-col items-center space-y-5">
             <div className="flex flex-row">
               <Label className="mr-5 justify-end">Quiz Name</Label>
-              <Field name="quizName" type="text">
-                {({ field, meta }) => (
-                  <Input {...field} error={meta.touched && meta.error} />
-                )}
-              </Field>
+              <Input name="quizName" type="text" />
             </div>
             <div className="flex space-x-5 ">
               <Button label="Submit" type="submit" />
@@ -61,7 +51,6 @@ const CreateNewQuiz = () => {
                 label="Cancel"
                 onClick={() => {
                   history.push("/");
-                  setNewQuiz(false);
                 }}
               />
             </div>
