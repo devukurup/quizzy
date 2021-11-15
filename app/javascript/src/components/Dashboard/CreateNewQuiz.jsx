@@ -7,11 +7,9 @@ import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import quizzesApi from "../../apis/quizzes";
-import { useQuiz } from "../../contexts/quiz";
 
 const CreateNewQuiz = () => {
   const history = useHistory();
-  const { setNewQuiz } = useQuiz();
   const validationSchema = () => {
     return Yup.object().shape({
       quizName: Yup.string().trim().required("Quiz Name is required"),
@@ -26,7 +24,6 @@ const CreateNewQuiz = () => {
     const quiz_name = data.quizName;
     try {
       await quizzesApi.create({ quiz: { quiz_name } });
-      setNewQuiz(false);
       history.push("/");
     } catch (error) {
       Logger.error(error);
@@ -57,7 +54,6 @@ const CreateNewQuiz = () => {
                 label="Cancel"
                 onClick={() => {
                   history.push("/");
-                  setNewQuiz(false);
                 }}
               />
             </div>

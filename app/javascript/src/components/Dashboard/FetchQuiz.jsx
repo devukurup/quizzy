@@ -17,7 +17,8 @@ const FetchQuiz = () => {
   const [quizName, setQuizName] = useState("");
   const [quizList, setQuizList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { setDeleteQuiz, setDeleteId, deleteQuiz } = useQuiz();
+  const { setDeleteQuiz, setDeleteId, deleteQuiz, setDashboardHeader } =
+    useQuiz();
 
   const fetchQuizzes = async () => {
     try {
@@ -56,6 +57,7 @@ const FetchQuiz = () => {
   if (either(isNil, isEmpty)(quizList)) {
     return (
       <div className="align-middle text-center pt-40">
+        {setDashboardHeader(false)}
         <Typography style="h3" weight="extralight">
           You have not created any quiz.
         </Typography>
@@ -65,6 +67,7 @@ const FetchQuiz = () => {
 
   return (
     <div className="w-full">
+      {setDashboardHeader(true)}
       <table
         className="shadow-lg border-4 bg-white w-9/12 mx-auto"
         {...getTableProps()}

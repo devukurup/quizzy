@@ -10,22 +10,26 @@ import { setAuthHeaders } from "../../apis/axios";
 import { useQuiz } from "../../contexts/quiz";
 
 const Dashboard = () => {
+  const { dashboardHeader } = useQuiz();
+  const history = useHistory();
   useEffect(() => {
     setAuthHeaders();
   }, []);
-  const { setNewQuiz } = useQuiz();
-  const history = useHistory();
+
   return (
     <div>
       <div className="flex justify-between p-16">
-        <Typography style="h1" weight="extrabold">
-          List of quizzes
-        </Typography>
+        <div>
+          {dashboardHeader && (
+            <Typography style="h1" weight="extrabold">
+              List of quizzes
+            </Typography>
+          )}
+        </div>
         <Button
           icon={Plus}
           onClick={() => {
             history.push("/createNewQuiz");
-            setNewQuiz(true);
           }}
           iconPosition="left"
           label=" Add new quiz"
