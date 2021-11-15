@@ -22,16 +22,12 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = data => {
-    handleSubmitRequest(data);
-  };
-
   const initialValues = {
     email: "",
     password: "",
   };
 
-  const handleSubmitRequest = async data => {
+  const handleSubmit = async data => {
     try {
       const email = data.email;
       const password = data.password;

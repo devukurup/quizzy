@@ -33,11 +33,7 @@ const AddQuestion = () => {
     });
   };
 
-  const handleSubmit = data => {
-    handleSubmitRequest(data);
-  };
-
-  const handleSubmitRequest = async data => {
+  const handleSubmit = async data => {
     const questn = data.question;
     const option1 = data.option1;
     const option2 = data.option2;
