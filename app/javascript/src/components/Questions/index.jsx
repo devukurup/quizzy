@@ -10,12 +10,13 @@ import {
 } from "@bigbinary/neetoui/v2";
 import { Formik, Field, Form } from "formik";
 import Logger from "js-logger";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import * as Yup from "yup";
 
 import questionsApi from "../../apis/questions";
 
 const AddQuestion = () => {
+  const history = useHistory();
   const { id } = useParams();
   const { state } = useLocation();
   const [count, setCount] = useState(1);
@@ -52,6 +53,10 @@ const AddQuestion = () => {
           answer,
           quiz_id,
         },
+      });
+      history.push({
+        pathname: `/showQuiz/${id}`,
+        state: state,
       });
     } catch (error) {
       Logger.error(error);
@@ -92,7 +97,7 @@ const AddQuestion = () => {
     <div>
       <div className="p-10">
         <Typography style="h1" weight="extrabold" className="text-gray-600">
-          {state}
+          {state.quiz_name}
         </Typography>
       </div>
       <Formik

@@ -18,15 +18,11 @@ const CreateNewQuiz = () => {
     });
   };
 
-  const handleSubmit = data => {
-    handleSubmitRequest(data);
-  };
-
   const initialValues = {
     quizName: "",
   };
 
-  const handleSubmitRequest = async data => {
+  const handleSubmit = async data => {
     const quiz_name = data.quizName;
     try {
       await quizzesApi.create({ quiz: { quiz_name } });

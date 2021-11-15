@@ -2,11 +2,14 @@ import React from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+
+import FetchQuestions from "../Questions/FetchQuestions";
 
 const ShowQuiz = () => {
   const history = useHistory();
   const { state } = useLocation();
+  const { id } = useParams();
   return (
     <div>
       <div className="flex justify-between p-16">
@@ -20,16 +23,12 @@ const ShowQuiz = () => {
           onClick={() => {
             history.push({
               pathname: `/Question/add/${state.id}`,
-              state: state.quiz_name,
+              state: state,
             });
           }}
         />
       </div>
-      <div className="align-middle text-center pt-40">
-        <Typography style="h3" weight="extralight">
-          There are no questions in this quiz.
-        </Typography>
-      </div>
+      <FetchQuestions state={state} id={id} />
     </div>
   );
 };

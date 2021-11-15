@@ -8,3 +8,4 @@ en:
     successfully_deleted: "Successfully deleted Quiz."
   questions:
     successfully_created: "Successfully created new Question."
+    successfully_deleted: "Successfully deleted the question."
