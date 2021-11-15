@@ -67,13 +67,6 @@ class UserTest < ActiveSupport::TestCase
     assert_includes test_user.errors.full_messages, "Email has already been taken"
   end
 
-  # test to check uniqueness of authentication token
-  def test_users_should_have_unique_auth_token
-    @user.save!
-    test_user = create(:user)
-    assert_not_same @user.authentication_token, test_user.authentication_token
-  end
-
   # test to check if email is saved in lowercase
   def test_email_should_be_saved_in_lowercase
     uppercase_email = "SAM@EMAIL.COM"
