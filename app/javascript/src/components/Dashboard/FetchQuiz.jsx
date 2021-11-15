@@ -19,10 +19,6 @@ const FetchQuiz = () => {
   const [loading, setLoading] = useState(true);
   const { setDeleteQuiz, setDeleteId, deleteQuiz } = useQuiz();
 
-  useEffect(() => {
-    fetchQuizzes();
-  }, [deleteQuiz]);
-
   const fetchQuizzes = async () => {
     try {
       const response = await quizzesApi.list();
@@ -33,6 +29,9 @@ const FetchQuiz = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    fetchQuizzes();
+  }, [deleteQuiz]);
 
   const data = useMemo(() => quizList, [quizList]);
   const columns = useMemo(
