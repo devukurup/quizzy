@@ -49,6 +49,7 @@ const Main = () => {
             path="/showQuiz/Question/edit/:id"
             component={EditQuestion}
           />
+          {/* <Route exact path="/public/:slug" component={QuizDummy}/> */}
           <PrivateRoute
             path="/"
             redirectRoute="/login"
