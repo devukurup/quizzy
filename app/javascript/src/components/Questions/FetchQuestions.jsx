@@ -24,6 +24,10 @@ const FetchQuestions = ({ id }) => {
     setQuestionList,
   } = useQuestion();
 
+  useEffect(() => {
+    fetchQuestions();
+  }, [deleteQuestion]);
+
   const fetchQuestions = async () => {
     try {
       const response = await questionsApi.list({ id });
@@ -35,11 +39,6 @@ const FetchQuestions = ({ id }) => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteQuestion]);
 
   if (loading) {
     return <PageLoader />;

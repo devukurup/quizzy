@@ -12,22 +12,6 @@ const EditQuestion = () => {
   const [disableAddOption, setDisableAddOption] = useState(false);
   let options = ["option1", "option2", "option3", "option4"];
   const type = "Update";
-
-  useEffect(() => {
-    initializing();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const initializing = () => {
-    const availableOptions = options.filter(item => state[item] != "");
-    options = [];
-    availableOptions.map((item, index) => {
-      options.push({ id: index + 1, value: `Option ${index + 1}` });
-    });
-    setOptionsList(options);
-    if (availableOptions.length == 4) setDisableAddOption(true);
-  };
-
   const initialValues = {
     question: state.questn,
     option1: state.option1,
@@ -35,7 +19,6 @@ const EditQuestion = () => {
     option3: state.option3,
     option4: state.option4,
   };
-
   const props = {
     defaultAnswer,
     setDefaultAnswer,
@@ -48,6 +31,21 @@ const EditQuestion = () => {
     type,
     quiz_id,
   };
+
+  useEffect(() => {
+    initializing();
+  }, []);
+
+  const initializing = () => {
+    const availableOptions = options.filter(item => state[item] != "");
+    options = [];
+    availableOptions.map((item, index) => {
+      options.push({ id: index + 1, value: `Option ${index + 1}` });
+    });
+    setOptionsList(options);
+    if (availableOptions.length == 4) setDisableAddOption(true);
+  };
+
   return <CreateQuestion props={props} />;
 };
 

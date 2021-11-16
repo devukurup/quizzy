@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -12,25 +12,40 @@ const ShowQuiz = () => {
   const history = useHistory();
   const { quizRecord, setQuizRecord, publish } = useQuestion();
   const quiz_id = useParams();
+  const id = quiz_id?.id;
+  const [publishButton, setpublishButton] = useState(publish);
+  var host =
+    window.location.protocol + "//" + window.location.host + "/public/";
 
   useEffect(() => {
     fetchQuiz();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, publishButton]);
 
   const fetchQuiz = async () => {
     try {
       const response = await quizzesApi.show({ id });
       setQuizRecord(response.data.quiz[0]);
+      setpublishButton(!quizRecord.publish);
     } catch (error) {
       logger.error(error);
     }
   };
 
-  const id = quiz_id?.id;
+  const handlePublished = async () => {
+    setpublishButton(false);
+    try {
+      await quizzesApi.update({
+        id,
+        payload: { quiz: { publish: publishButton } },
+      });
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   return (
     <div>
-      <div className="flex justify-between p-16">
+      <div className="flex justify-between pt-16 px-16 pb-10">
         <Typography style="h1" weight="extrabold" className="text-gray-600">
           {quizRecord.quiz_name}
         </Typography>
@@ -43,9 +58,26 @@ const ShowQuiz = () => {
               history.push(`/Question/add/${id}`);
             }}
           />
-          {publish && <Button label="Publish" />}
+          {publish && (
+            <Button
+              disabled={!publishButton}
+              label={publishButton ? "Publish" : "Published"}
+              onClick={handlePublished}
+            />
+          )}
         </div>
       </div>
+      {publish && !publishButton && (
+        <div className="flex items-center  mx-16 space-x-5">
+          <Typography>Public URL</Typography>
+          <a
+            className="text-blue-800 hover:text-green-500"
+            href={host + quizRecord.slug}
+          >
+            {host + quizRecord.slug}
+          </a>
+        </div>
+      )}
       <FetchQuestions id={id} />
     </div>
   );

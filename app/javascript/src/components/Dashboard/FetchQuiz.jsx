@@ -16,7 +16,6 @@ const FetchQuiz = () => {
   const history = useHistory();
   const [quizName, setQuizName] = useState("");
   const [loading, setLoading] = useState(true);
-
   const {
     setDeleteQuiz,
     setDeleteId,
@@ -25,26 +24,6 @@ const FetchQuiz = () => {
     quizList,
     setQuizList,
   } = useQuiz();
-
-  useEffect(() => {
-    fetchQuizzes();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteQuiz]);
-
-  const fetchQuizzes = async () => {
-    try {
-      const response = await quizzesApi.list();
-      setQuizList(response.data.quizzes);
-      response.data.quizzes.length > 0
-        ? setDashboardHeader(true)
-        : setDashboardHeader(false);
-      setLoading(false);
-    } catch (error) {
-      logger.error(error);
-      setLoading(false);
-    }
-  };
-
   const data = useMemo(() => quizList, [quizList]);
   const columns = useMemo(
     () => [
@@ -60,6 +39,24 @@ const FetchQuiz = () => {
       columns,
       data,
     });
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, [deleteQuiz]);
+
+  const fetchQuizzes = async () => {
+    try {
+      const response = await quizzesApi.list();
+      setQuizList(response.data.quizzes);
+      response.data.quizzes.length > 0
+        ? setDashboardHeader(true)
+        : setDashboardHeader(false);
+      setLoading(false);
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return <PageLoader />;
