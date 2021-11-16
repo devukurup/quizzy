@@ -12,6 +12,7 @@ const ShowQuiz = () => {
   const history = useHistory();
   const { quizRecord, setQuizRecord, publish } = useQuestion();
   const quiz_id = useParams();
+  const id = quiz_id?.id;
 
   useEffect(() => {
     fetchQuiz();
@@ -27,7 +28,6 @@ const ShowQuiz = () => {
     }
   };
 
-  const id = quiz_id?.id;
   return (
     <div>
       <div className="flex justify-between p-16">

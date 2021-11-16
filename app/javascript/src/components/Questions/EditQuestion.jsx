@@ -12,6 +12,25 @@ const EditQuestion = () => {
   const [disableAddOption, setDisableAddOption] = useState(false);
   let options = ["option1", "option2", "option3", "option4"];
   const type = "Update";
+  const initialValues = {
+    question: state.questn,
+    option1: state.option1,
+    option2: state.option2,
+    option3: state.option3,
+    option4: state.option4,
+  };
+  const props = {
+    defaultAnswer,
+    setDefaultAnswer,
+    disableAddOption,
+    setDisableAddOption,
+    optionsList,
+    setOptionsList,
+    id,
+    initialValues,
+    type,
+    quiz_id,
+  };
 
   useEffect(() => {
     initializing();
@@ -28,26 +47,6 @@ const EditQuestion = () => {
     if (availableOptions.length == 4) setDisableAddOption(true);
   };
 
-  const initialValues = {
-    question: state.questn,
-    option1: state.option1,
-    option2: state.option2,
-    option3: state.option3,
-    option4: state.option4,
-  };
-
-  const props = {
-    defaultAnswer,
-    setDefaultAnswer,
-    disableAddOption,
-    setDisableAddOption,
-    optionsList,
-    setOptionsList,
-    id,
-    initialValues,
-    type,
-    quiz_id,
-  };
   return <CreateQuestion props={props} />;
 };
 
