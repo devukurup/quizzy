@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -13,15 +13,30 @@ const ShowQuiz = () => {
   const { quizRecord, setQuizRecord, publish } = useQuestion();
   const quiz_id = useParams();
   const id = quiz_id?.id;
+  const [publishButton, setpublishButton] = useState(publish);
 
   useEffect(() => {
     fetchQuiz();
-  }, [id]);
+  }, [id, publishButton]);
 
   const fetchQuiz = async () => {
     try {
       const response = await quizzesApi.show({ id });
       setQuizRecord(response.data.quiz[0]);
+      setpublishButton(!quizRecord.publish);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
+  const handlePublished = async () => {
+    setpublishButton(false);
+    try {
+      await quizzesApi.update({
+        id,
+        payload: { quiz: { publish: publishButton } },
+      });
+      // history.push("/");
     } catch (error) {
       logger.error(error);
     }
@@ -42,7 +57,13 @@ const ShowQuiz = () => {
               history.push(`/Question/add/${id}`);
             }}
           />
-          {publish && <Button label="Publish" />}
+          {publish && (
+            <Button
+              disabled={!publishButton}
+              label={publishButton ? "Publish" : "Published"}
+              onClick={handlePublished}
+            />
+          )}
         </div>
       </div>
       <FetchQuestions id={id} />

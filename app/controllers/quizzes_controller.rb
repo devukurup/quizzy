@@ -44,6 +44,6 @@ class QuizzesController < ApplicationController
   private
 
     def quiz_params
-      params.require(:quiz).permit(:quiz_name)
+      params.require(:quiz).permit(:quiz_name, :publish)
     end
 end
