@@ -26,7 +26,6 @@ const FetchQuestions = ({ id }) => {
 
   useEffect(() => {
     fetchQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteQuestion]);
 
   const fetchQuestions = async () => {

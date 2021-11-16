@@ -34,7 +34,6 @@ const EditQuestion = () => {
 
   useEffect(() => {
     initializing();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initializing = () => {
