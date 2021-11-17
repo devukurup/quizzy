@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PublicQuizController < ApplicationController
+class PublicQuizzesController < ApplicationController
   def show
     quiz = Quiz.where(slug: params[:slug])
     render status: :ok, json: { quiz: quiz }

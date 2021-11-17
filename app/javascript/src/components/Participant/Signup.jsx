@@ -8,6 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import * as Yup from "yup";
 
 import publicQuizApi from "../../apis/public";
+import usersApi from "../../apis/user";
 import { useQuestion } from "../../contexts/question";
 
 const Signup = () => {
@@ -41,7 +42,22 @@ const Signup = () => {
       logger.error(error);
     }
   };
-  const handleSubmit = () => {
+  const handleSubmit = async data => {
+    const email = data.email;
+    const first_name = data.firstName;
+    const last_name = data.lastName;
+    try {
+      await usersApi.create({
+        user: {
+          email,
+          first_name,
+          last_name,
+        },
+      });
+    } catch (error) {
+      logger.error(error);
+    }
+
     // console.log("Submitted",data)
     // try {
     //   const email = data.email;
@@ -111,7 +127,7 @@ const Signup = () => {
             </div>
 
             <div className="mx-auto p-3">
-              <Button type="submit" label="submit" />
+              <Button type="submit" label="Next" />
             </div>
           </div>
         </Form>
