@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resource :session, only: %i[create]
     resources :quizzes, only: %i[index show create update destroy], param: :id
     resources :questions, only: %i[create index update destroy], param: :id
+    resources :public_quiz, only: %i[show], param: :slug
   end
   root "home#index"
   get "*path", to: "home#index", via: :all

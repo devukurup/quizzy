@@ -72,9 +72,9 @@ const ShowQuiz = () => {
           <Typography>Public URL</Typography>
           <a
             className="text-blue-800 hover:text-green-500"
-            href={host + quizRecord.slug}
+            href={host + quizRecord.id + `/` + quizRecord.slug}
           >
-            {host + quizRecord.slug}
+            {host + quizRecord.id + `/` + quizRecord.slug}
           </a>
         </div>
       )}
