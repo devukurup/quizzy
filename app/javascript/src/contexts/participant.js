@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const ParticipantContext = React.createContext();
 
 const ParticipantProvider = ({ children }) => {
-  const [signUp, setSignUp] = useState(false);
+  const [signUp, setSignUp] = useState(true);
   const [quiz, setQuiz] = useState(false);
   const [result, setResult] = useState(false);
 

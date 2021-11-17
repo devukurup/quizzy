@@ -6,10 +6,12 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import usersApi from "../../apis/user";
+import { useParticipant } from "../../contexts/participant";
 import { useQuestion } from "../../contexts/question";
 
 const Signup = () => {
   const { quizRecord } = useQuestion();
+  const { setSignUp, setQuiz } = useParticipant();
 
   const validationSchema = () => {
     return Yup.object().shape({
@@ -36,6 +38,8 @@ const Signup = () => {
           last_name,
         },
       });
+      setSignUp(false);
+      setQuiz(true);
     } catch (error) {
       logger.error(error);
     }
