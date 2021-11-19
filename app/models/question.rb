@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   MAX_OPTION_LENGTH = 50
 
   belongs_to :quiz
+  has_many :attempt_answers, dependent: :destroy
 
   validates :questn, presence: true, length: { maximum: MAX_QUESTION_LENGTH }
   validates :option1, presence: true, length: { maximum: MAX_OPTION_LENGTH }
