@@ -10,6 +10,8 @@ const Quiz = () => {
   const { quizRecord, questionList } = useQuestion();
   const [answers, setAnswers] = useState([]);
   const { setQuiz, attemptId, setSubmitted } = useParticipant();
+  let correctAnswerCount = 0;
+  let wrongAnswerCount = 0;
 
   const handleChange = (e, item) => {
     const index = answers.findIndex(element => element.id == item.id);
@@ -28,6 +30,8 @@ const Quiz = () => {
       await participantsApi.create({
         attempt: {
           id: attemptId,
+          correct_answers_count: correctAnswerCount,
+          incorrect_answers_count: wrongAnswerCount,
           attempt_answers_attributes: answers,
         },
       });
@@ -36,6 +40,16 @@ const Quiz = () => {
     } catch (error) {
       logger.error(error);
     }
+  };
+
+  const scoreCount = async () => {
+    await questionList.map((item, index) => {
+      if (item.answer == answers?.[index]?.answer) {
+        correctAnswerCount += 1;
+      } else {
+        wrongAnswerCount += 1;
+      }
+    });
   };
 
   return (
@@ -103,7 +117,10 @@ const Quiz = () => {
         className=" mx-auto p-24 content-center mb-10 w-24 "
         label="Submit"
         type="submit"
-        onClick={handleSubmit}
+        onClick={() => {
+          scoreCount();
+          handleSubmit();
+        }}
       />
     </div>
   );
