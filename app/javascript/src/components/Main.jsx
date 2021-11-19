@@ -11,6 +11,9 @@ import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
 import EditQuiz from "./Dashboard/EditQuiz";
 import ShowQuiz from "./Dashboard/ShowQuiz";
 import Navbar from "./Navbar";
+import Home from "./Participant/Home";
+import NotFound from "./Participant/NotFound";
+import Verify from "./Participant/Verify";
 import AddQuestion from "./Questions";
 import EditQuestion from "./Questions/EditQuestion";
 
@@ -44,12 +47,14 @@ const Main = () => {
           <Route exact path="/editQuiz/:id" component={EditQuiz} />
           <Route exact path="/showQuiz/:id" component={ShowQuiz} />
           <Route exact path="/Question/add/:id" component={AddQuestion} />
+          <Route exact path="/public/notfound" component={NotFound} />
           <Route
             exact
             path="/showQuiz/Question/edit/:id"
             component={EditQuestion}
           />
-          {/* <Route exact path="/public/:slug" component={QuizDummy}/> */}
+          <Route exact path="/public/:id/:slug/attempt/new" component={Home} />
+          <Route exact path="/public/:id/:slug" component={Verify} />
           <PrivateRoute
             path="/"
             redirectRoute="/login"
