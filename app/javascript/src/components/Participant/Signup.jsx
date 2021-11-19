@@ -11,7 +11,7 @@ import { useQuestion } from "../../contexts/question";
 
 const Signup = () => {
   const { quizRecord } = useQuestion();
-  const { setSignUp, setQuiz } = useParticipant();
+  const { setSignUp, setQuiz, setSubmitted, setAttemptId } = useParticipant();
 
   const validationSchema = () => {
     return Yup.object().shape({
@@ -30,14 +30,21 @@ const Signup = () => {
     const email = data.email;
     const first_name = data.firstName;
     const last_name = data.lastName;
+    const quiz_id = quizRecord.id;
     try {
-      await usersApi.create({
+      let res = await usersApi.create({
         user: {
           email,
           first_name,
           last_name,
         },
+        quiz: {
+          quiz_id,
+        },
       });
+      setSubmitted(res.data.attempt.submitted);
+      setAttemptId(res.data.attempt.id);
+
       setSignUp(false);
       setQuiz(true);
     } catch (error) {

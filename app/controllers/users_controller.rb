@@ -4,19 +4,30 @@ class UsersController < ApplicationController
   def create
     user = User.find_by(email: user_params[:email])
     if !user
-      new_user = User.new(user_params.merge(password: "welcome", password_confirmation: "welcome"))
-      if new_user.save
-        render status: :ok, json: { notice: t("user.successfully_created") }
-      else
-        errors = new_user.errors.full_messages.to_sentence
+      user = User.new(user_params.merge(password: "welcome", password_confirmation: "welcome"))
+      unless user.save
+        errors = user.errors.full_messages.to_sentence
         render status: :unprocessable_entity, json: { error: errors }
       end
     end
+    attempt = Attempt.find_by(user_id: user.id, quiz_id: quiz_params[:quiz_id])
+    if !attempt
+      attempt = Attempt.new(user_id: user.id, quiz_id: quiz_params[:quiz_id])
+      unless attempt.save
+        errors = attempt.errors.full_messages.to_sentence
+        render status: :unprocessable_entity, json: { error: errors }
+      end
+    end
+    render status: :ok, json: { attempt: attempt }
   end
 
   private
 
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name)
+    end
+
+    def quiz_params
+      params.require(:quiz).permit(:quiz_id)
     end
 end

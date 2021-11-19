@@ -8,6 +8,8 @@ const ParticipantProvider = ({ children }) => {
   const [signUp, setSignUp] = useState(true);
   const [quiz, setQuiz] = useState(false);
   const [result, setResult] = useState(false);
+  const [isSubmitted, setSubmitted] = useState(false);
+  const [attemptId, setAttemptId] = useState(0);
 
   const initialValues = {
     signUp,
@@ -16,6 +18,10 @@ const ParticipantProvider = ({ children }) => {
     setQuiz,
     result,
     setResult,
+    isSubmitted,
+    setSubmitted,
+    attemptId,
+    setAttemptId,
   };
   return (
     <ParticipantContext.Provider value={initialValues}>

@@ -17,7 +17,10 @@ const Quiz = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    //pass the answers and attempt id and store them in attempt_answers database
+    // console.log(answers);
+  };
 
   return (
     <div className="flex flex-col ">

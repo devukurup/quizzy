@@ -9,11 +9,12 @@ import publicQuizApi from "../../apis/public";
 import questionsApi from "../../apis/questions";
 import { useParticipant } from "../../contexts/participant";
 import { useQuestion } from "../../contexts/question";
+import Result from "../Participant/Result";
 
 const Home = () => {
   const { slug, id } = useParams();
   const { setQuizRecord, setQuestionList } = useQuestion();
-  const { signUp, quiz } = useParticipant();
+  const { signUp, quiz, isSubmitted } = useParticipant();
   useEffect(() => {
     fetchQuiz();
     fetchQuestions();
@@ -37,7 +38,8 @@ const Home = () => {
   return (
     <div>
       {signUp && <Signup />}
-      {quiz && <Quiz />}
+      {quiz && !isSubmitted && <Quiz />}
+      {isSubmitted && <Result />}
     </div>
   );
 };
