@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const show = ({ slug }) => axios.get(`/public_quizzes/${slug}`);
+const create = payload => axios.post("/participants/", payload);
 
-const publicQuizApi = {
+const show = ({ id }) => axios.get(`/participants/${id}`);
+
+const participantsApi = {
+  create,
   show,
 };
 
-export default publicQuizApi;
+export default participantsApi;

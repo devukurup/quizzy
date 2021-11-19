@@ -2,24 +2,40 @@ import React, { useState } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 
+import participantsApi from "../../apis/participant";
+import { useParticipant } from "../../contexts/participant";
 import { useQuestion } from "../../contexts/question";
 
 const Quiz = () => {
   const { quizRecord, questionList } = useQuestion();
   const [answers, setAnswers] = useState([]);
+  const { setQuiz, attemptId, setSubmitted } = useParticipant();
 
   const handleChange = (e, item) => {
     const index = answers.findIndex(element => element.id == item.id);
     if (index < 0) {
-      setAnswers(prev => [...prev, { id: item.id, answer: e.target.value }]);
+      setAnswers(prev => [
+        ...prev,
+        { question_id: item.id, answer: e.target.value },
+      ]);
     } else {
       answers[index].answer = e.target.value;
     }
   };
 
-  const handleSubmit = () => {
-    //pass the answers and attempt id and store them in attempt_answers database
-    // console.log(answers);
+  const handleSubmit = async () => {
+    try {
+      await participantsApi.create({
+        attempt: {
+          id: attemptId,
+          attempt_answers_attributes: answers,
+        },
+      });
+      setQuiz(false);
+      setSubmitted(true);
+    } catch (error) {
+      logger.error(error);
+    }
   };
 
   return (

@@ -15,10 +15,12 @@ const Home = () => {
   const { slug, id } = useParams();
   const { setQuizRecord, setQuestionList } = useQuestion();
   const { signUp, quiz, isSubmitted } = useParticipant();
+
   useEffect(() => {
     fetchQuiz();
     fetchQuestions();
   }, []);
+
   const fetchQuiz = async () => {
     try {
       const response = await publicQuizApi.show({ slug });
@@ -35,6 +37,7 @@ const Home = () => {
       logger.error(error);
     }
   };
+
   return (
     <div>
       {signUp && <Signup />}
