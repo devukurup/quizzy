@@ -7,6 +7,7 @@ class User < ApplicationRecord
   enum role: { standard: "standard", administrator: "administrator" }
 
   has_many :created_quizzes, foreign_key: :user_id, class_name: "Quiz"
+  has_many :attempts, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL }
   validates :first_name, presence: true, length: { maximum: MAX_LENGTH }

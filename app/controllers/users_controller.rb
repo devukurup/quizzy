@@ -21,6 +21,14 @@ class UsersController < ApplicationController
     render status: :ok, json: { attempt: attempt }
   end
 
+  def index
+    report = Attempt.joins
+    ("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
+      .where("attempts.submitted = true").select("users.first_name, users.last_name, users.email,
+    attempts.correct_answers_count, attempts.incorrect_answers_count, quizzes.quiz_name")
+    render status: :ok, json: { Report: report }
+  end
+
   private
 
     def user_params
@@ -28,6 +36,6 @@ class UsersController < ApplicationController
     end
 
     def quiz_params
-      params.require(:quiz).permit(:quiz_id)
+      params.require(:quiz).permit(:quiz_id, :quiz_name)
     end
 end

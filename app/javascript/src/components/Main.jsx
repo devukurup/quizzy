@@ -16,6 +16,7 @@ import NotFound from "./Participant/NotFound";
 import Verify from "./Participant/Verify";
 import AddQuestion from "./Questions";
 import EditQuestion from "./Questions/EditQuestion";
+import Report from "./Report";
 
 import { registerIntercepts, setAuthHeaders } from "../apis/axios";
 import { initializeLogger } from "../common/logger";
@@ -53,6 +54,7 @@ const Main = () => {
             path="/showQuiz/Question/edit/:id"
             component={EditQuestion}
           />
+          <Route exact path="/reports" component={Report} />
           <Route exact path="/public/:id/:slug/attempt/new" component={Home} />
           <Route exact path="/public/:id/:slug" component={Verify} />
           <PrivateRoute

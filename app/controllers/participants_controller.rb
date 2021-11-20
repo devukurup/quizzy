@@ -8,12 +8,15 @@ class ParticipantsController < ApplicationController
 
   def show
     attempt = AttemptAnswer.where(attempt_id: params[:id])
-    render status: :ok, json: { attempt_answers: attempt }
+    count = Attempt.where(id: params[:id])
+    render status: :ok, json: { attempt_answers: attempt, count: count }
   end
 
   private
 
     def attempt_answer_params
-      params.require(:attempt).permit(:id, attempt_answers_attributes: [:question_id, :answer])
+      params.require(:attempt).permit(
+        :id, :correct_answers_count, :incorrect_answers_count,
+        attempt_answers_attributes: [:question_id, :answer])
     end
 end

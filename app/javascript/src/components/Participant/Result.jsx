@@ -13,38 +13,24 @@ const Result = () => {
   const { attemptId, isSubmitted } = useParticipant();
   const [answerList, setAnswerList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
-  const [wrongAnswerCount, setWrongAnswerCount] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
 
   useEffect(() => {
     fetchAnswers();
   }, [attemptId, isSubmitted]);
-
-  useEffect(() => {
-    setCorrectAnswerCount(0);
-    setWrongAnswerCount(0);
-    scoreCount();
-  }, [answerList]);
 
   const fetchAnswers = async () => {
     const id = attemptId;
     try {
       const response = await participantsApi.show({ id });
       setAnswerList(() => response.data.attempt_answers);
+      setCorrectCount(response.data.count[0].correct_answers_count);
+      setWrongCount(response.data.count[0].incorrect_answers_count);
       setLoading(false);
     } catch (error) {
       logger.error(error);
     }
-  };
-
-  const scoreCount = () => {
-    questionList.map((item, index) => {
-      if (item.answer == answerList?.[index]?.answer) {
-        setCorrectAnswerCount(prev => prev + 1);
-      } else {
-        setWrongAnswerCount(prev => prev + 1);
-      }
-    });
   };
 
   if (loading) {
@@ -63,10 +49,10 @@ const Result = () => {
         </Typography>
         <div className="flex space-x-4 w-6/12">
           <div className="bg-green-500 p-2 m-5 ">
-            <Typography>Correct: {correctAnswerCount}</Typography>
+            <Typography>Correct: {correctCount}</Typography>
           </div>
           <div className="bg-red-500 p-2 m-5">
-            <Typography>Wrong: {wrongAnswerCount}</Typography>
+            <Typography>Wrong: {wrongCount}</Typography>
           </div>
         </div>
       </div>

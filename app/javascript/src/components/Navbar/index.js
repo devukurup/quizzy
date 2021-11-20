@@ -52,6 +52,9 @@ const Navbar = () => {
                       Reports
                     </Typography>
                   }
+                  onClick={() => {
+                    history.push("/reports");
+                  }}
                   style="text"
                 />
                 <Button
