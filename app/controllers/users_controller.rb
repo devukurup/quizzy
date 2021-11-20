@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    report = Attempt.joins
-    ("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
+    report =
+    Attempt.joins("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
       .where("attempts.submitted = true").select("users.first_name, users.last_name, users.email,
     attempts.correct_answers_count, attempts.incorrect_answers_count, quizzes.quiz_name")
     render status: :ok, json: { Report: report }
