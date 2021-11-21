@@ -5,6 +5,11 @@ class ExportParticipantWorker
   include Sidekiq::Status::Worker
 
   def perform
+    report_export_files = Dir[Rails.root.join("tmp", "report_export_*.xlsx")]
+    puts report_export_files
+    report_export_files.each do |file|
+      FileUtils.rm file
+    end
     report =
     Attempt.joins("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
       .where("attempts.submitted = true").select("users.first_name, users.last_name, users.email,
