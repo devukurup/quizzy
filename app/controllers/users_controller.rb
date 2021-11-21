@@ -24,14 +24,14 @@ class UsersController < ApplicationController
 
   def index
     id = current_user.id
-    quiz = Quiz.where(user_id: id).select("quizzes.quiz_name")
+    quiz = Quiz.where(user_id: id).select("quizzes.slug")
     report =
     Attempt.joins("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
       .where("attempts.submitted = true").select("users.first_name, users.last_name, users.email,
-    attempts.correct_answers_count, attempts.incorrect_answers_count, quizzes.quiz_name")
-    quizList = quiz.map { |item| item.quiz_name }
+    attempts.correct_answers_count, attempts.incorrect_answers_count, quizzes.quiz_name, quizzes.slug")
+    quizList = quiz.map { |item| item.slug }
     report = report.select do |item|
-      item.quiz_name.in?(quizList)
+      item.slug.in?(quizList)
     end
     render status: :ok, json: { Report: report }
   end
