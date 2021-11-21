@@ -3,13 +3,16 @@ import { useMemo } from "react";
 
 import { Download } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
+import Loader from "react-loader-spinner";
 import { useTable } from "react-table";
 
 import reportsApi from "../apis/report";
 import usersApi from "../apis/user";
+import { useQuiz } from "../contexts/quiz";
 
 const Report = () => {
   const [reportList, setReportList] = useState([]);
+  const { report, setReport } = useQuiz();
   const [generateReport, setGenerateReport] = useState(false);
   const data = useMemo(() => reportList, [reportList]);
   const [jobId, setJobId] = useState(0);
@@ -39,9 +42,21 @@ const Report = () => {
     ],
     []
   );
+
   useEffect(() => {
+    setReport(false);
+    setGenerateReport(false);
+    setDownload(false);
     fetchDetails();
-  }, []);
+  }, [report]);
+
+  const handleRedirect = () => {
+    setTimeout(() => {
+      setGenerateReport(false);
+      setDownload(false);
+    }, 2000);
+  };
+
   const fetchDetails = async () => {
     try {
       const response = await usersApi.list();
@@ -97,12 +112,14 @@ const Report = () => {
           {" "}
           Reports{" "}
         </Typography>
-        <Button
-          label="Download"
-          icon={Download}
-          iconPosition="left"
-          onClick={handleReport}
-        />
+        {!generateReport && (
+          <Button
+            label="Download"
+            icon={Download}
+            iconPosition="left"
+            onClick={handleReport}
+          />
+        )}
       </div>
       {!generateReport && (
         <div>
@@ -151,15 +168,28 @@ const Report = () => {
       {generateReport && (
         <div>
           {!download && (
-            <Typography>
-              Your report is being prepared for downloading
-            </Typography>
-          )}
-          {download && jobId && (
-            <a href={`/export_download/${jobId}`} download>
-              button
-            </a>
-          )}
+            <div className="flex space-x-5 mt-24 justify-center items-center">
+              <Loader type="Oval" color="#000000" height={20} width={20} />
+              <Typography style="h2">
+                Your report is being prepared for download
+              </Typography>
+            </div>
+          )}{" "}
+        </div>
+      )}
+      {generateReport && download && (
+        <div className="flex flex-col mt-24 space-y-8 justify-center items-center">
+          <Typography style="h2">
+            Your report is now ready for download 🤗
+          </Typography>
+          <a
+            onClick={handleRedirect}
+            className="bg-blue-700 text-white px-5 py-2"
+            href={`/export_download/${jobId}`}
+            download
+          >
+            Download Report
+          </a>
         </div>
       )}
     </div>

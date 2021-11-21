@@ -9,6 +9,7 @@ const QuizProvider = ({ children }) => {
   const [dashboardHeader, setDashboardHeader] = useState(false);
   const [deleteId, setDeleteId] = useState(0);
   const [quizList, setQuizList] = useState([]);
+  const [report, setReport] = useState(false);
   const initialValues = {
     quizList,
     setQuizList,
@@ -18,6 +19,8 @@ const QuizProvider = ({ children }) => {
     setDeleteId,
     dashboardHeader,
     setDashboardHeader,
+    report,
+    setReport,
   };
   return (
     <QuizContext.Provider value={initialValues}>

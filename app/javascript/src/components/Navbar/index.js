@@ -6,12 +6,14 @@ import { useHistory } from "react-router-dom";
 
 import { resetAuthTokens } from "../../apis/axios";
 import { useAuth } from "../../contexts/auth";
+import { useQuiz } from "../../contexts/quiz";
 import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
 
 const Navbar = () => {
   const history = useHistory();
   const { isLoggedIn } = useAuth();
   const userName = getFromLocalStorage("authUserName");
+  const { setReport } = useQuiz();
 
   const handleLogout = async () => {
     try {
@@ -53,6 +55,7 @@ const Navbar = () => {
                     </Typography>
                   }
                   onClick={() => {
+                    setReport(true);
                     history.push("/reports");
                   }}
                   style="text"
