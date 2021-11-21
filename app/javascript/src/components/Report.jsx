@@ -3,6 +3,7 @@ import { useMemo } from "react";
 
 import { Download } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
+import { either, isNil, isEmpty } from "ramda";
 import Loader from "react-loader-spinner";
 import { useTable } from "react-table";
 
@@ -104,6 +105,15 @@ const Report = () => {
       columns,
       data,
     });
+  if (either(isNil, isEmpty)(reportList)) {
+    return (
+      <div className="align-middle text-center pt-40">
+        <Typography style="h3" weight="extralight">
+          No Reports available
+        </Typography>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full mt-10 mb-10">
