@@ -79,7 +79,7 @@ const Report = () => {
       var intervalName = "job_" + response.data.jid;
       window[intervalName] = setInterval(() => {
         getExportJobStatus(response.data.jid, intervalName);
-      }, 1000);
+      }, 5000);
     } catch (error) {
       logger.error(error);
     }
