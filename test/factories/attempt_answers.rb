@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :attempt_answer do
-    answer { "MyString" }
-    question { nil }
-    attempt { nil }
+    answer { Faker::Lorem.sentence[0..2] }
+    question
+    attempt
   end
 end

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 
-import participantsApi from "../../apis/participant";
-import { useParticipant } from "../../contexts/participant";
-import { useQuestion } from "../../contexts/question";
+import participantsApi from "apis/participant";
+import { useParticipant } from "contexts/participant";
+import { useQuestion } from "contexts/question";
 
 const Quiz = () => {
   const { quizRecord, questionList } = useQuestion();

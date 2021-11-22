@@ -4,9 +4,9 @@ import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { useHistory, useParams } from "react-router-dom";
 
-import quizzesApi from "../../apis/quizzes";
-import { useQuestion } from "../../contexts/question";
-import FetchQuestions from "../Questions/FetchQuestions";
+import quizzesApi from "apis/quizzes";
+import { useQuestion } from "contexts/question";
+import FetchQuestions from "Questions/Display";
 
 const ShowQuiz = () => {
   const history = useHistory();

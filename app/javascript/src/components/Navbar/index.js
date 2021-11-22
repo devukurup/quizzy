@@ -4,10 +4,10 @@ import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { useHistory } from "react-router-dom";
 
-import { resetAuthTokens } from "../../apis/axios";
-import { useAuth } from "../../contexts/auth";
-import { useQuiz } from "../../contexts/quiz";
-import { setToLocalStorage, getFromLocalStorage } from "../../helpers/storage";
+import { resetAuthTokens } from "apis/axios";
+import { useAuth } from "contexts/auth";
+import { useQuiz } from "contexts/quiz";
+import { setToLocalStorage, getFromLocalStorage } from "helpers/storage";
 
 const Navbar = () => {
   const history = useHistory();

@@ -26,4 +26,14 @@ class QuizTest < ActiveSupport::TestCase
     @quiz.quiz_name = "a" * 256
     assert @quiz.invalid?
   end
+
+  def test_slug_value_nil_on_quiz_creation
+    @quiz.save!
+    assert_nil @quiz.slug
+  end
+
+  def test_default_publish_value_false
+    @quiz.save!
+    assert_equal @quiz.publish, false
+  end
 end

@@ -7,6 +7,10 @@ class QuestionTest < ActiveSupport::TestCase
     @question = build(:question)
   end
 
+  def test_question_should_be_valid
+    assert @question.valid?
+  end
+
   def test_question_should_be_invalid_without_questn
     @question.questn = ""
     assert @question.invalid?

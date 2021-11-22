@@ -6,10 +6,10 @@ import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
-import authApi from "../../../apis/auth";
-import { setAuthHeaders } from "../../../apis/axios";
-import { useAuth } from "../../../contexts/auth";
-import { setToLocalStorage } from "../../../helpers/storage";
+import authApi from "apis/auth";
+import { setAuthHeaders } from "apis/axios";
+import { useAuth } from "contexts/auth";
+import { setToLocalStorage } from "helpers/storage";
 
 const Login = () => {
   const history = useHistory();

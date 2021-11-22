@@ -5,12 +5,11 @@ import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Typography, Button, Label, Dropdown } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Field, Form } from "formik";
-import Logger from "js-logger";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
-import questionsApi from "../../apis/questions";
-import { useQuestion } from "../../contexts/question";
+import questionsApi from "apis/questions";
+import { useQuestion } from "contexts/question";
 
 const CreateQuestion = ({ props }) => {
   const {
@@ -99,7 +98,7 @@ const CreateQuestion = ({ props }) => {
         history.push(`/showQuiz/${quiz_id}`);
       }
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
     }
   };
 

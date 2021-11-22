@@ -4,9 +4,9 @@ import { CheckCircle } from "@bigbinary/neeto-icons";
 import { Typography, Radio } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 
-import participantsApi from "../../apis/participant";
-import { useParticipant } from "../../contexts/participant";
-import { useQuestion } from "../../contexts/question";
+import participantsApi from "apis/participant";
+import { useParticipant } from "contexts/participant";
+import { useQuestion } from "contexts/question";
 
 const Result = () => {
   const { quizRecord, questionList } = useQuestion();

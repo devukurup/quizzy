@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import CreateQuestion from "./CreateQuestion";
+import CreateQuestion from "./Create";
 
 const AddQuestion = () => {
   const { id } = useParams();

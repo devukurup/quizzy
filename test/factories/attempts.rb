@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :attempt do
-    submitted { "MyText" }
-    user { nil }
-    quiz { nil }
+    correct_answers_count { rand(1..10) }
+    incorrect_answers_count { rand(1..10) }
+    user
+    quiz
   end
 end

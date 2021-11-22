@@ -4,10 +4,9 @@ import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { useHistory } from "react-router-dom";
 
-import FetchQuiz from "./FetchQuiz";
-
-import { setAuthHeaders } from "../../apis/axios";
-import { useQuiz } from "../../contexts/quiz";
+import { setAuthHeaders } from "apis/axios";
+import { useQuiz } from "contexts/quiz";
+import FetchQuiz from "Quiz/Table";
 
 const Dashboard = () => {
   const { dashboardHeader } = useQuiz();

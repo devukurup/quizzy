@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 
 import { PageLoader } from "@bigbinary/neetoui/v2";
+import AddQuestion from "Questions";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Login from "./Authentication/Login";
-import PrivateRoute from "./Common/PrivateRoute";
-import Dashboard from "./Dashboard";
-import CreateNewQuiz from "./Dashboard/CreateNewQuiz";
-import EditQuiz from "./Dashboard/EditQuiz";
-import ShowQuiz from "./Dashboard/ShowQuiz";
-import Navbar from "./Navbar";
-import Home from "./Participant/Home";
-import NotFound from "./Participant/NotFound";
-import Verify from "./Participant/Verify";
-import AddQuestion from "./Questions";
-import EditQuestion from "./Questions/EditQuestion";
-import Report from "./Report";
+import { registerIntercepts, setAuthHeaders } from "apis/axios";
+import Login from "Authentication/Login";
+import { initializeLogger } from "common/logger";
+import PrivateRoute from "Common/PrivateRoute";
+import { useAuth } from "contexts/auth";
+import Home from "Participant/Home";
+import NotFound from "Participant/NotFound";
+import Verify from "Participant/Verify";
+import EditQuestion from "Questions/Edit";
+import CreateNewQuiz from "Quiz/Create";
+import EditQuiz from "Quiz/Edit";
+import ShowQuiz from "Quiz/Show";
 
-import { registerIntercepts, setAuthHeaders } from "../apis/axios";
-import { initializeLogger } from "../common/logger";
-import { useAuth } from "../contexts/auth";
+import Dashboard from "./Dashboard";
+import Navbar from "./Navbar";
+import Report from "./Report";
 
 const Main = () => {
   const { isLoggedIn } = useAuth();

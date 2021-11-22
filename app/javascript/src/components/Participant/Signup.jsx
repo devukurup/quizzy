@@ -5,9 +5,9 @@ import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import usersApi from "../../apis/user";
-import { useParticipant } from "../../contexts/participant";
-import { useQuestion } from "../../contexts/question";
+import usersApi from "apis/user";
+import { useParticipant } from "contexts/participant";
+import { useQuestion } from "contexts/question";
 
 const Signup = () => {
   const { quizRecord } = useQuestion();
