@@ -67,7 +67,7 @@ const ShowQuiz = () => {
           )}
         </div>
       </div>
-      {publish && !publishButton && (
+      {publish && !publishButton && quizRecord.slug && (
         <div className="flex items-center  mx-16 space-x-5">
           <Typography>Public URL</Typography>
           <a
