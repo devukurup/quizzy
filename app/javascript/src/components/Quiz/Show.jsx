@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import quizzesApi from "../../apis/quizzes";
 import { useQuestion } from "../../contexts/question";
-import FetchQuestions from "../Questions/FetchQuestions";
+import FetchQuestions from "../Questions/Display";
 
 const ShowQuiz = () => {
   const history = useHistory();
