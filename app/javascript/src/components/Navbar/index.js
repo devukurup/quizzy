@@ -32,7 +32,7 @@ const Navbar = () => {
   };
   return (
     <div>
-      <div className="border-b-2 border-black p-1">
+      <div className="shadow-lg p-1 px-5">
         <Header
           title={
             <Typography
@@ -49,10 +49,26 @@ const Navbar = () => {
           actionBlock={
             isLoggedIn &&
             !host.includes("public") && (
-              <div className="pr-2 space-x-3">
+              <div className="pr-2 flex justify-center space-x-5">
                 <Button
                   label={
-                    <Typography style="body1" component="ins" weight="bold">
+                    <Typography
+                      style="body1"
+                      className="text-black"
+                      weight="bold"
+                    >
+                      {userName}
+                    </Typography>
+                  }
+                  style="link"
+                />
+                <Button
+                  label={
+                    <Typography
+                      className="hover:underline text-black"
+                      style="body1"
+                      weight="bold"
+                    >
                       Reports
                     </Typography>
                   }
@@ -60,23 +76,19 @@ const Navbar = () => {
                     setReport(true);
                     history.push("/reports");
                   }}
-                  style="text"
+                  style="link"
                 />
                 <Button
                   label={
-                    <Typography style="body1" component="ins" weight="bold">
-                      {userName}
-                    </Typography>
-                  }
-                  style="text"
-                />
-                <Button
-                  label={
-                    <Typography style="body1" component="ins" weight="bold">
+                    <Typography
+                      className="hover:underline text-black"
+                      style="body1"
+                      weight="bold"
+                    >
                       Logout
                     </Typography>
                   }
-                  style="text"
+                  style="link"
                   onClick={handleLogout}
                 />
               </div>
