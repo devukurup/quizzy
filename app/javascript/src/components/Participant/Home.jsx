@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 
+import publicQuizApi from "apis/public";
+import questionsApi from "apis/questions";
+import { useParticipant } from "contexts/participant";
+import { useQuestion } from "contexts/question";
+import Result from "Participant/Result";
+
 import Quiz from "./Quiz";
 import Signup from "./Signup";
-
-import publicQuizApi from "../../apis/public";
-import questionsApi from "../../apis/questions";
-import { useParticipant } from "../../contexts/participant";
-import { useQuestion } from "../../contexts/question";
-import Result from "../Participant/Result";
 
 const Home = () => {
   const { slug, id } = useParams();

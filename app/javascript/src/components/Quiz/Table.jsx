@@ -7,10 +7,10 @@ import { either, isNil, isEmpty } from "ramda";
 import { useHistory } from "react-router-dom";
 import { useTable } from "react-table";
 
-import DeleteQuiz from "./Delete";
+import quizzesApi from "apis/quizzes";
+import { useQuiz } from "contexts/quiz";
 
-import quizzesApi from "../../apis/quizzes";
-import { useQuiz } from "../../contexts/quiz";
+import DeleteQuiz from "./Delete";
 
 const FetchQuiz = () => {
   const history = useHistory();

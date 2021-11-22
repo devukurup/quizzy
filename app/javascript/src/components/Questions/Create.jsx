@@ -8,8 +8,8 @@ import { Formik, Field, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
-import questionsApi from "../../apis/questions";
-import { useQuestion } from "../../contexts/question";
+import questionsApi from "apis/questions";
+import { useQuestion } from "contexts/question";
 
 const CreateQuestion = ({ props }) => {
   const {

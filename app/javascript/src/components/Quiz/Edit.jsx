@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Typography, Button, Input, Label } from "@bigbinary/neetoui/v2";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
-import quizzesApi from "../../apis/quizzes";
+import quizzesApi from "apis/quizzes";
 
 const EditQuiz = () => {
   const history = useHistory();

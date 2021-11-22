@@ -4,7 +4,7 @@ import { PageLoader } from "@bigbinary/neetoui/v2";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 
-import publicQuizApi from "../../apis/public";
+import publicQuizApi from "apis/public";
 
 const Verify = () => {
   const { slug, id } = useParams();

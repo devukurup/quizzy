@@ -7,9 +7,9 @@ import { either, isNil, isEmpty } from "ramda";
 import Loader from "react-loader-spinner";
 import { useTable } from "react-table";
 
-import reportsApi from "../apis/report";
-import usersApi from "../apis/user";
-import { useQuiz } from "../contexts/quiz";
+import reportsApi from "apis/report";
+import usersApi from "apis/user";
+import { useQuiz } from "contexts/quiz";
 
 const Report = () => {
   const [reportList, setReportList] = useState([]);

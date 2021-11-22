@@ -3,8 +3,8 @@ import React from "react";
 import { Modal } from "@bigbinary/neetoui/v2";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 
-import quizzesApi from "../../apis/quizzes";
-import { useQuiz } from "../../contexts/quiz";
+import quizzesApi from "apis/quizzes";
+import { useQuiz } from "contexts/quiz";
 
 const DeleteQuiz = ({ quizName }) => {
   const { deleteQuiz, setDeleteQuiz, deleteId } = useQuiz();

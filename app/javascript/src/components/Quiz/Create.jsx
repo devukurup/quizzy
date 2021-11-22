@@ -6,7 +6,7 @@ import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
-import quizzesApi from "../../apis/quizzes";
+import quizzesApi from "apis/quizzes";
 
 const CreateNewQuiz = () => {
   const history = useHistory();

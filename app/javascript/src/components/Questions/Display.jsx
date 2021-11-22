@@ -6,10 +6,10 @@ import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
 import { useHistory } from "react-router-dom";
 
-import DeleteQuestion from "./Delete";
+import questionsApi from "apis/questions";
+import { useQuestion } from "contexts/question";
 
-import questionsApi from "../../apis/questions";
-import { useQuestion } from "../../contexts/question";
+import DeleteQuestion from "./Delete";
 
 const FetchQuestions = ({ id }) => {
   const history = useHistory();
