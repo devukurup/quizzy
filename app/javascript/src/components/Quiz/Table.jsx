@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMemo } from "react";
 
+import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
@@ -28,7 +29,7 @@ const FetchQuiz = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Quiz name",
+        Header: "Quiz Name",
         accessor: "quiz_name",
       },
     ],
@@ -74,17 +75,14 @@ const FetchQuiz = () => {
 
   return (
     <div className="w-full">
-      <table
-        className="shadow-lg border-4 bg-white w-9/12 mx-auto"
-        {...getTableProps()}
-      >
+      <table className="border-2 bg-white w-9/12 mx-auto" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr key={index + 1} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, index) => (
                 <th
                   key={index}
-                  className="bg-blue-100 border text-left px-8 py-4"
+                  className="bg-gradient-to-r from-green-300 to-blue-400  border font-semibold text-lg text-left px-8 py-4"
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
@@ -125,6 +123,9 @@ const FetchQuiz = () => {
                         <td key={row?.original?.id}>
                           <Button
                             label="Edit"
+                            icon={Edit}
+                            iconPosition="left"
+                            style="secondary"
                             onClick={() => {
                               history.push({
                                 pathname: `/EditQuiz/${row?.original?.id}`,
@@ -135,7 +136,8 @@ const FetchQuiz = () => {
                         </td>
                         <td key={index}>
                           <Button
-                            label="Delete"
+                            icon={Delete}
+                            style="danger"
                             onClick={() => {
                               setDeleteId(row?.original?.id);
                               setQuizName(row?.original?.quiz_name);

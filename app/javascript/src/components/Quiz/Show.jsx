@@ -46,14 +46,14 @@ const ShowQuiz = () => {
   return (
     <div>
       <div className="flex justify-between pt-16 px-16 pb-10">
-        <Typography style="h1" weight="extrabold" className="text-gray-600">
+        <Typography style="h1" weight="bold">
           {quizRecord.quiz_name}
         </Typography>
         <div className="flex space-x-2">
           <Button
             icon={Plus}
             iconPosition="left"
-            label=" Add questions"
+            label="Question"
             onClick={() => {
               history.push(`/Question/add/${id}`);
             }}
@@ -67,7 +67,7 @@ const ShowQuiz = () => {
           )}
         </div>
       </div>
-      {publish && !publishButton && (
+      {publish && !publishButton && quizRecord.slug && (
         <div className="flex items-center  mx-16 space-x-5">
           <Typography>Public URL</Typography>
           <a
