@@ -75,7 +75,7 @@ const Login = () => {
             </div>
 
             <div className="mx-auto p-3">
-              <Button type="submit" label="submit" />
+              <Button type="submit" label="Login" />
             </div>
           </div>
         </Form>

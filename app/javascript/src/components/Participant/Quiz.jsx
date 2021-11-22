@@ -114,7 +114,7 @@ const Quiz = () => {
         </div>
       ))}
       <Button
-        className=" mx-auto p-24 content-center mb-10 w-24 "
+        className=" mx-auto p-24 content-center mb-10 "
         label="Submit"
         type="submit"
         onClick={() => {
