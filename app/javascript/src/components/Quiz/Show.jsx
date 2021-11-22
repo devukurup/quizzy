@@ -46,7 +46,7 @@ const ShowQuiz = () => {
   return (
     <div>
       <div className="flex justify-between pt-16 px-16 pb-10">
-        <Typography style="h1" weight="extrabold" className="text-gray-600">
+        <Typography style="h1" weight="bold">
           {quizRecord.quiz_name}
         </Typography>
         <div className="flex space-x-2">

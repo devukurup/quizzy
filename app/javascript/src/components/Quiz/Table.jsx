@@ -75,17 +75,14 @@ const FetchQuiz = () => {
 
   return (
     <div className="w-full">
-      <table
-        className="shadow-lg border-4 bg-white w-9/12 mx-auto"
-        {...getTableProps()}
-      >
+      <table className="border-2 bg-white w-9/12 mx-auto" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr key={index + 1} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, index) => (
                 <th
                   key={index}
-                  className="bg-blue-100 border font-semibold text-lg text-left px-8 py-4"
+                  className="bg-gradient-to-r from-green-300 to-blue-400  border font-semibold text-lg text-left px-8 py-4"
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
@@ -141,8 +138,6 @@ const FetchQuiz = () => {
                           <Button
                             icon={Delete}
                             style="danger"
-                            iconPosition="left"
-                            label="Delete"
                             onClick={() => {
                               setDeleteId(row?.original?.id);
                               setQuizName(row?.original?.quiz_name);

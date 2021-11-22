@@ -27,7 +27,7 @@ const Dashboard = () => {
         </div>
         <Button
           icon={Plus}
-          style="text"
+          style="secondary"
           onClick={() => {
             history.push("/createNewQuiz");
           }}

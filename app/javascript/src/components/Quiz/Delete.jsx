@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Warning } from "@bigbinary/neeto-icons";
 import { Modal } from "@bigbinary/neetoui/v2";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 
@@ -22,7 +23,10 @@ const DeleteQuiz = ({ quizName }) => {
     <div>
       <Modal isOpen={deleteQuiz} onClose={() => setDeleteQuiz(false)}>
         <Modal.Header>
-          <Typography style="h4">Deletion Alert</Typography>
+          <div className="flex flex-col space-y-3">
+            <Warning color="#f56a58" size={30} />
+            <Typography style="h4">Deletion Alert</Typography>
+          </div>
         </Modal.Header>
         <Modal.Body>
           <Typography style="body2">

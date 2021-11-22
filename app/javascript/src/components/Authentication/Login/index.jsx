@@ -56,7 +56,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center mx-auto my-48 space-y-3 w-6/12 p-12 rounded-md bg-gray-200">
+    <div className="flex flex-col justify-center items-center mx-auto my-48 space-y-3 w-6/12 p-12 rounded-md bg-gradient-to-r from-green-300 to-blue-400 shadow-lg">
       <Typography className="text-center p-3" style="h1" weight="bold">
         Login
       </Typography>
