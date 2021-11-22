@@ -20,18 +20,19 @@ const Dashboard = () => {
       <div className="flex justify-between p-16">
         <div>
           {dashboardHeader && (
-            <Typography style="h1" weight="extrabold">
-              List of quizzes
+            <Typography style="h1" weight="bold">
+              Your Quizzes
             </Typography>
           )}
         </div>
         <Button
           icon={Plus}
+          style="text"
           onClick={() => {
             history.push("/createNewQuiz");
           }}
           iconPosition="left"
-          label=" Add new quiz"
+          label=" Add a new quiz"
         />
       </div>
       <div>

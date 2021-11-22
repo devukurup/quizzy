@@ -59,6 +59,12 @@ const Main = () => {
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
+            path="/showQuiz/Question/edit/:id"
+            component={EditQuestion}
+          />
+          <PrivateRoute
+            condition={isLoggedIn}
+            redirectRoute="/login"
             path="/showQuiz/:id"
             component={ShowQuiz}
           />
@@ -68,19 +74,15 @@ const Main = () => {
             path="/Question/add/:id"
             component={AddQuestion}
           />
-          <Route path="/public/notfound" component={NotFound} />
-          <PrivateRoute
-            exact
-            path="/showQuiz/Question/edit/:id"
-            component={EditQuestion}
-          />
+
           <PrivateRoute
             path="/reports"
             redirectRoute="/login"
             condition={isLoggedIn}
             component={Report}
           />
-          {/* <Route exact path="/reports" component={Report} /> */}
+          <Route path="/public/notfound" component={NotFound} />
+
           <Route exact path="/public/:id/:slug/attempt/new" component={Home} />
           <Route exact path="/public/:id/:slug" component={Verify} />
           <PrivateRoute

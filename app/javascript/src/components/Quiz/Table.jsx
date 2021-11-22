@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMemo } from "react";
 
+import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
@@ -28,7 +29,7 @@ const FetchQuiz = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "Quiz name",
+        Header: "Quiz Name",
         accessor: "quiz_name",
       },
     ],
@@ -84,7 +85,7 @@ const FetchQuiz = () => {
               {headerGroup.headers.map((column, index) => (
                 <th
                   key={index}
-                  className="bg-blue-100 border text-left px-8 py-4"
+                  className="bg-blue-100 border font-semibold text-lg text-left px-8 py-4"
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
@@ -125,6 +126,9 @@ const FetchQuiz = () => {
                         <td key={row?.original?.id}>
                           <Button
                             label="Edit"
+                            icon={Edit}
+                            iconPosition="left"
+                            style="secondary"
                             onClick={() => {
                               history.push({
                                 pathname: `/EditQuiz/${row?.original?.id}`,
@@ -135,6 +139,9 @@ const FetchQuiz = () => {
                         </td>
                         <td key={index}>
                           <Button
+                            icon={Delete}
+                            style="danger"
+                            iconPosition="left"
                             label="Delete"
                             onClick={() => {
                               setDeleteId(row?.original?.id);

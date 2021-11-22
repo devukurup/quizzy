@@ -53,7 +53,7 @@ const ShowQuiz = () => {
           <Button
             icon={Plus}
             iconPosition="left"
-            label=" Add questions"
+            label="Question"
             onClick={() => {
               history.push(`/Question/add/${id}`);
             }}
