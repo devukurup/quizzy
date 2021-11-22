@@ -3,7 +3,6 @@ import React from "react";
 import { Typography, Button, Label } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
-import Logger from "js-logger";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -27,7 +26,7 @@ const CreateNewQuiz = () => {
       await quizzesApi.create({ quiz: { quiz_name } });
       history.push("/");
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
     }
   };
 

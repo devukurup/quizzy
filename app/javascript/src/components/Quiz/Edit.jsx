@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { Typography, Button, Input, Label } from "@bigbinary/neetoui/v2";
-import Logger from "js-logger";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
 import quizzesApi from "../../apis/quizzes";
@@ -21,7 +20,7 @@ const EditQuiz = () => {
       });
       history.push("/");
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
     }
   };
   return (

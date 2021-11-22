@@ -2,7 +2,6 @@ import React from "react";
 
 import { Modal } from "@bigbinary/neetoui/v2";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import Logger from "js-logger";
 
 import quizzesApi from "../../apis/quizzes";
 import { useQuiz } from "../../contexts/quiz";
@@ -16,7 +15,7 @@ const DeleteQuiz = ({ quizName }) => {
       await quizzesApi.destroy(id);
       setDeleteQuiz(false);
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
     }
   };
   return (
