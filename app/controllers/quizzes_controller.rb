@@ -19,7 +19,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    quiz = Quiz.where(id: params[:id])
+    quiz = Quiz.where(id: params[:id], user_id: current_user.id)
     render status: :ok, json: { quiz: quiz }
   end
 
