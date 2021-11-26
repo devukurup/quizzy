@@ -5,7 +5,7 @@ import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 import quizzesApi from "apis/quizzes";
@@ -122,18 +122,14 @@ const FetchQuiz = () => {
                         className="space-x-5 flex justify-end "
                       >
                         <td key={row?.original?.id}>
-                          <Button
-                            label="Edit"
-                            icon={Edit}
-                            iconPosition="left"
-                            style="secondary"
-                            onClick={() => {
-                              history.push({
-                                pathname: `/quiz/${row?.original?.id}/edit`,
-                                state: row?.original,
-                              });
+                          <Link
+                            to={{
+                              pathname: `/quiz/${row?.original?.id}/edit`,
+                              state: row?.original,
                             }}
-                          />
+                          >
+                            <Edit color="#808080" />
+                          </Link>
                         </td>
                         <td key={index}>
                           <Button
