@@ -24,11 +24,10 @@ class ExportParticipantWorker
     xlsx_workbook.add_worksheet(name: "Report") do |worksheet|
       worksheet.add_row %w(Quiz\ Name User\ Name Email Correct\ Answers Incorrect\ Answers)
       report.each.with_index(1) do |attempt, idx|
-        # worksheet.add_row attempt
         worksheet.add_row [attempt.quiz_name, "#{attempt.first_name} #{attempt.last_name}", attempt.email,
 attempt.correct_answers_count, attempt.incorrect_answers_count]
         at idx
-        sleep 0.5
+        sleep 10
       end
     end
     xlsx_package.serialize Rails.root.join("tmp", "report_export_#{self.jid}.xlsx")
