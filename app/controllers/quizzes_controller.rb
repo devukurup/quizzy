@@ -11,6 +11,7 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = current_user.quizzes.new(quiz_params)
+    authorize @quiz
     if @quiz.save
       render status: :ok, json: { notice: t("quiz.successfully_created") }
     else

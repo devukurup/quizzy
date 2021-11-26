@@ -44,6 +44,19 @@ const Report = () => {
     []
   );
 
+  const fetchDetails = async () => {
+    try {
+      const response = await usersApi.list();
+      const data = response.data.Report.map(item => {
+        item.userName = `${item.first_name} ${item.last_name}`;
+        return item;
+      });
+      setReportList(data);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   useEffect(() => {
     setReport(false);
     setGenerateReport(false);
@@ -56,19 +69,6 @@ const Report = () => {
       setGenerateReport(false);
       setDownload(false);
     }, 2000);
-  };
-
-  const fetchDetails = async () => {
-    try {
-      const response = await usersApi.list();
-      const data = response.data.Report.map(item => {
-        item.userName = `${item.first_name} ${item.last_name}`;
-        return item;
-      });
-      setReportList(data);
-    } catch (error) {
-      logger.error(error);
-    }
   };
 
   const handleReport = async () => {

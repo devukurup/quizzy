@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Typography, Button } from "@bigbinary/neetoui/v2";
+import { Typography } from "@bigbinary/neetoui/v2";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { resetAuthTokens } from "apis/axios";
 import { useAuth } from "contexts/auth";
@@ -50,47 +50,31 @@ const Navbar = () => {
             isLoggedIn &&
             !host.includes("public") && (
               <div className="pr-2 flex justify-center space-x-5">
-                <Button
-                  label={
-                    <Typography
-                      style="body1"
-                      className="text-black"
-                      weight="bold"
-                    >
-                      {userName}
-                    </Typography>
-                  }
-                  style="link"
-                />
-                <Button
-                  label={
-                    <Typography
-                      className="hover:underline text-black"
-                      style="body1"
-                      weight="bold"
-                    >
-                      Reports
-                    </Typography>
-                  }
-                  onClick={() => {
-                    setReport(true);
-                    history.push("/reports");
-                  }}
-                  style="link"
-                />
-                <Button
-                  label={
-                    <Typography
-                      className="hover:underline text-black"
-                      style="body1"
-                      weight="bold"
-                    >
-                      Logout
-                    </Typography>
-                  }
-                  style="link"
-                  onClick={handleLogout}
-                />
+                <Typography
+                  style="body1"
+                  className="text-black cursor-pointer"
+                  weight="bold"
+                >
+                  {userName}
+                </Typography>
+                <Link to="/reports" onClick={() => setReport(true)}>
+                  <Typography
+                    className="hover:underline text-black"
+                    style="body1"
+                    weight="bold"
+                  >
+                    Reports
+                  </Typography>
+                </Link>
+                <Link onClick={handleLogout}>
+                  <Typography
+                    className="hover:underline text-black"
+                    style="body1"
+                    weight="bold"
+                  >
+                    Logout
+                  </Typography>
+                </Link>
               </div>
             )
           }

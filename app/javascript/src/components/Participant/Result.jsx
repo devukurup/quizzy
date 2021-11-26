@@ -16,10 +16,6 @@ const Result = () => {
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
 
-  useEffect(() => {
-    fetchAnswers();
-  }, [attemptId, isSubmitted]);
-
   const fetchAnswers = async () => {
     const id = attemptId;
     try {
@@ -32,6 +28,10 @@ const Result = () => {
       logger.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchAnswers();
+  }, [attemptId, isSubmitted]);
 
   if (loading) {
     return (

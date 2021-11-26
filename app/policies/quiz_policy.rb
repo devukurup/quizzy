@@ -19,4 +19,8 @@ class QuizPolicy
   def destroy?
     show?
   end
+
+  def create?
+    user.role == "administrator"
+  end
 end

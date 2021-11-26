@@ -79,7 +79,7 @@ const CreateQuestion = ({ props }) => {
             quiz_id: id,
           },
         });
-        history.push(`/showQuiz/${id}`);
+        history.push(`/quiz/${id}/show`);
       } else {
         await questionsApi.update({
           id,

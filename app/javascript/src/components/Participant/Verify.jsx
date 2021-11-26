@@ -12,10 +12,6 @@ const Verify = () => {
   const [data, setData] = useState([]);
   const history = useHistory();
 
-  useEffect(() => {
-    fetchQuiz();
-  }, [loading]);
-
   const fetchQuiz = async () => {
     try {
       const response = await publicQuizApi.show({ slug });
@@ -25,6 +21,11 @@ const Verify = () => {
       logger.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchQuiz();
+  }, [loading]);
+
   if (loading) {
     return (
       <div className="mx-auto pt-48">

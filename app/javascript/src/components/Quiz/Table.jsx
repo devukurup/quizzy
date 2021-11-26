@@ -42,10 +42,6 @@ const FetchQuiz = () => {
       data,
     });
 
-  useEffect(() => {
-    fetchQuizzes();
-  }, [deleteQuiz]);
-
   const fetchQuizzes = async () => {
     try {
       const response = await quizzesApi.list();
@@ -59,6 +55,10 @@ const FetchQuiz = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, [deleteQuiz]);
 
   if (loading) {
     return <PageLoader />;
@@ -108,7 +108,7 @@ const FetchQuiz = () => {
                         onClick={e => {
                           e.stopPropagation();
                           history.push({
-                            pathname: `/showQuiz/${row?.original?.id}`,
+                            pathname: `/quiz/${row?.original?.id}/show`,
                             state: row?.original,
                           });
                         }}
@@ -129,7 +129,7 @@ const FetchQuiz = () => {
                             style="secondary"
                             onClick={() => {
                               history.push({
-                                pathname: `/EditQuiz/${row?.original?.id}`,
+                                pathname: `/quiz/${row?.original?.id}/edit`,
                                 state: row?.original,
                               });
                             }}

@@ -32,10 +32,6 @@ const EditQuestion = () => {
     quiz_id,
   };
 
-  useEffect(() => {
-    initializing();
-  }, []);
-
   const initializing = () => {
     const availableOptions = options.filter(item => state[item] != "");
     options = [];
@@ -45,6 +41,10 @@ const EditQuestion = () => {
     setOptionsList(options);
     if (availableOptions.length == 4) setDisableAddOption(true);
   };
+
+  useEffect(() => {
+    initializing();
+  }, []);
 
   return <CreateQuestion props={props} />;
 };

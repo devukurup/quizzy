@@ -3,17 +3,13 @@ import React from "react";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
-import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import authApi from "apis/auth";
 import { setAuthHeaders } from "apis/axios";
-import { useAuth } from "contexts/auth";
 import { setToLocalStorage } from "helpers/storage";
 
 const Login = () => {
-  const history = useHistory();
-  const { isLoggedIn } = useAuth();
   const validationSchema = () => {
     return Yup.object().shape({
       email: Yup.string()
@@ -45,15 +41,6 @@ const Login = () => {
       logger.error(error);
     }
   };
-  if (isLoggedIn) {
-    setToLocalStorage({
-      authToken: null,
-      email: null,
-      userId: null,
-      user_name: null,
-    });
-    history.push("/");
-  }
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto my-48 space-y-3 w-6/12 p-12 rounded-md bg-gradient-to-r from-green-300 to-blue-400 shadow-lg">

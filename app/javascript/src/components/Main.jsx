@@ -47,31 +47,31 @@ const Main = () => {
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/createNewQuiz"
+            path="/quiz/new"
             component={CreateNewQuiz}
           />
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/editQuiz/:id"
+            path="/quiz/:id/edit"
             component={EditQuiz}
           />
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/showQuiz/Question/edit/:id"
+            path="/question/:id/edit"
             component={EditQuestion}
           />
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/showQuiz/:id"
+            path="/quiz/:id/show"
             component={ShowQuiz}
           />
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/Question/add/:id"
+            path="/question/:id/add"
             component={AddQuestion}
           />
 

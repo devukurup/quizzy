@@ -24,10 +24,6 @@ const FetchQuestions = ({ id }) => {
     setQuestionList,
   } = useQuestion();
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [deleteQuestion]);
-
   const fetchQuestions = async () => {
     try {
       const response = await questionsApi.list({ id });
@@ -39,6 +35,10 @@ const FetchQuestions = ({ id }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [deleteQuestion]);
 
   if (loading) {
     return <PageLoader />;
@@ -71,7 +71,7 @@ const FetchQuestions = ({ id }) => {
                 label="Edit"
                 onClick={() =>
                   history.push({
-                    pathname: `Question/edit/${item.id}`,
+                    pathname: `/question/${item.id}/edit`,
                     state: item,
                     quiz_id: id,
                   })

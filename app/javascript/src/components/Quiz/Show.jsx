@@ -17,10 +17,6 @@ const ShowQuiz = () => {
   var host =
     window.location.protocol + "//" + window.location.host + "/public/";
 
-  useEffect(() => {
-    fetchQuiz();
-  }, [id, publishButton]);
-
   const fetchQuiz = async () => {
     try {
       const response = await quizzesApi.show({ id });
@@ -30,6 +26,10 @@ const ShowQuiz = () => {
       logger.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchQuiz();
+  }, [id, publishButton]);
 
   const handlePublished = async () => {
     setpublishButton(false);
@@ -55,7 +55,7 @@ const ShowQuiz = () => {
             iconPosition="left"
             label="Question"
             onClick={() => {
-              history.push(`/Question/add/${id}`);
+              history.push(`/question/${id}/add`);
             }}
           />
           {publish && (
