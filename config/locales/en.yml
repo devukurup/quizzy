@@ -10,6 +10,7 @@ en:
     successfully_updated: "Successfully updated Quiz."
     successfully_deleted: "Successfully deleted Quiz."
   questions:
+    not_found: "Question not found."
     successfully_created: "Successfully created new Question."
     successfully_deleted: "Successfully deleted the question."
     successfully_updated: "Successfully updated the Question."
