@@ -2,7 +2,7 @@
 
 class Question < ApplicationRecord
   MAX_QUESTION_LENGTH = 255
-  MAX_OPTION_LENGTH = 50
+  MAX_OPTION_LENGTH = 255
 
   belongs_to :quiz
   has_many :attempt_answers, dependent: :destroy

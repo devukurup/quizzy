@@ -14,21 +14,25 @@ class QuestionTest < ActiveSupport::TestCase
   def test_question_should_be_invalid_without_questn
     @question.questn = ""
     assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Questn can't be blank"
   end
 
   def test_question_should_be_invalid_without_option1
     @question.option1 = ""
     assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Option1 can't be blank"
   end
 
   def test_question_should_be_invalid_without_answer
     @question.answer = nil
     assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Answer can't be blank"
   end
 
   def test_question_should_be_invalid_without_option2
     @question.option2 = ""
     assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Option2 can't be blank"
   end
 
   def test_question_should_be_valid_without_option3
@@ -50,5 +54,6 @@ class QuestionTest < ActiveSupport::TestCase
   def test_question_should_not_be_valid_wihtout_quiz
     @question.quiz = nil
     assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Quiz must exist"
   end
 end
