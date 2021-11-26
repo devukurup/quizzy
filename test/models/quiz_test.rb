@@ -5,7 +5,7 @@ require "test_helper"
 class QuizTest < ActiveSupport::TestCase
   def setup
     @user = create(:user)
-    @quiz = create(:quiz, quiz_creator: @user)
+    @quiz = create(:quiz, user: @user)
   end
 
   def test_quiz_should_be_valid

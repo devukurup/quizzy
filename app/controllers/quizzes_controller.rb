@@ -2,14 +2,15 @@
 
 class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token
+  before_action :load_quiz, only: %i[show update destroy]
 
   def index
-    quizzes = Quiz.where(user_id: current_user.id).order("created_at DESC")
+    quizzes = current_user.quizzes.order("created_at DESC")
     render status: :ok, json: { quizzes: quizzes }
   end
 
   def create
-    @quiz = Quiz.new(quiz_params.merge(user_id: current_user.id))
+    @quiz = current_user.quizzes.new(quiz_params)
     if @quiz.save
       render status: :ok, json: { notice: t("quiz.successfully_created") }
     else
@@ -19,12 +20,11 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    quiz = Quiz.where(id: params[:id], user_id: current_user.id)
-    render status: :ok, json: { quiz: quiz }
+    authorize @quiz
+    render status: :ok, json: { quiz: @quiz }
   end
 
   def update
-    @quiz = Quiz.find_by(id: params[:id])
     if @quiz && quiz_params["publish"] && @quiz.update(quiz_params.merge({ "slug" => set_slug }))
       render status: :ok, json: { notice: t("quiz.successfully_updated") }
     elsif @quiz && @quiz.update(quiz_params)
@@ -35,11 +35,10 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    quiz = Quiz.find_by(id: params[:id])
-    if quiz.destroy
+    if @quiz.destroy
       render status: :ok, json: { notice: t("quiz.successfully_deleted") }
     else
-      render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
+      render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
     end
   end
 
@@ -47,6 +46,13 @@ class QuizzesController < ApplicationController
 
     def quiz_params
       params.require(:quiz).permit(:quiz_name, :publish)
+    end
+
+    def load_quiz
+      @quiz = Quiz.find_by(id: params[:id])
+      unless @quiz
+        render status: :not_found, json: { error: t("quiz.not_found") }
+      end
     end
 
     def set_slug
