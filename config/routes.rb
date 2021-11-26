@@ -3,11 +3,11 @@
 Rails.application.routes.draw do
   defaults format: :json do
     resource :session, only: %i[create]
-    resources :quizzes, only: %i[index show create update destroy], param: :id
-    resources :questions, only: %i[create index update destroy], param: :id
+    resources :quizzes, only: %i[index show create update destroy]
+    resources :questions, only: %i[create index update destroy]
     resources :public_quizzes, only: %i[show], param: :slug
     resources :users, only: %i[create index export ]
-    resources :participants, only: %i[create show], param: :id
+    resources :participants, only: %i[create show]
     get "/export", to: "reports#export"
     get "/export_status/:job_id", to: "reports#export_status", param: :job_id
   end
