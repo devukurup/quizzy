@@ -95,7 +95,7 @@ const CreateQuestion = ({ props }) => {
             },
           },
         });
-        history.push(`/showQuiz/${quiz_id}`);
+        history.push(`/quiz/${quiz_id}/show`);
       }
     } catch (error) {
       logger.error(error);
