@@ -15,8 +15,8 @@ const Verify = () => {
   const fetchQuiz = async () => {
     try {
       const response = await publicQuizApi.show({ slug });
-      setData(() => response.data.quiz[0]);
-      setLoading(() => false);
+      setData(response.data.quiz[0]);
+      setLoading(false);
     } catch (error) {
       logger.error(error);
     }
@@ -24,7 +24,7 @@ const Verify = () => {
 
   useEffect(() => {
     fetchQuiz();
-  }, [loading]);
+  }, []);
 
   if (loading) {
     return (
