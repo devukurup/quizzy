@@ -25,6 +25,7 @@ class QuizzesController < ApplicationController
   end
 
   def update
+    authorize @quiz
     if @quiz && quiz_params["publish"] && @quiz.update(quiz_params.merge({ "slug" => set_slug }))
       render status: :ok, json: { notice: t("quiz.successfully_updated") }
     elsif @quiz && @quiz.update(quiz_params)
@@ -35,6 +36,7 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
+    authorize @quiz
     if @quiz.destroy
       render status: :ok, json: { notice: t("quiz.successfully_deleted") }
     else

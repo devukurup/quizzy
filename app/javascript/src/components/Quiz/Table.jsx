@@ -26,6 +26,7 @@ const FetchQuiz = () => {
     setQuizList,
   } = useQuiz();
   const data = useMemo(() => quizList, [quizList]);
+
   const columns = useMemo(
     () => [
       {
