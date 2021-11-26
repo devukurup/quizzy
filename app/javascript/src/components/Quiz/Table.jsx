@@ -6,7 +6,7 @@ import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 import { Tooltip } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 import quizzesApi from "apis/quizzes";
@@ -15,7 +15,6 @@ import { useQuiz } from "contexts/quiz";
 import DeleteQuiz from "./Delete";
 
 const FetchQuiz = () => {
-  const history = useHistory();
   const [quizName, setQuizName] = useState("");
   const [loading, setLoading] = useState(true);
   const {
@@ -105,19 +104,17 @@ const FetchQuiz = () => {
                 {row.cells.map((cell, index) => {
                   return (
                     <div key={index} className="grid grid-cols-2 px-8 py-4 ">
-                      <div
-                        onClick={e => {
-                          e.stopPropagation();
-                          history.push({
-                            pathname: `/quiz/${row?.original?.id}/show`,
-                            state: row?.original,
-                          });
+                      <Link
+                        onClick={e => e.stopPropagation()}
+                        to={{
+                          pathname: `/quiz/${row?.original?.id}/show`,
+                          state: row?.original,
                         }}
                       >
                         <td key={row?.original?.id} {...cell.getCellProps()}>
                           {cell.render("Cell")}
                         </td>
-                      </div>
+                      </Link>
                       <div
                         key={row?.original?.id}
                         className="space-x-5 flex justify-end "

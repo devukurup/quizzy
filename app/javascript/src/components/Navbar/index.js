@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typography } from "@bigbinary/neetoui/v2";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { resetAuthTokens } from "apis/axios";
 import { useAuth } from "contexts/auth";
@@ -10,7 +10,6 @@ import { useQuiz } from "contexts/quiz";
 import { setToLocalStorage, getFromLocalStorage } from "helpers/storage";
 
 const Navbar = () => {
-  const history = useHistory();
   const { isLoggedIn } = useAuth();
   const userName = getFromLocalStorage("authUserName");
   const { setReport } = useQuiz();
@@ -35,16 +34,15 @@ const Navbar = () => {
       <div className="shadow-lg p-1 px-5">
         <Header
           title={
-            <Typography
-              style="h1"
-              weight="extrabold"
-              className="cursor-pointer"
-              onClick={() => {
-                history.push("/");
-              }}
-            >
-              Quizzy
-            </Typography>
+            <Link to="/">
+              <Typography
+                style="h1"
+                weight="extrabold"
+                className="cursor-pointer"
+              >
+                Quizzy
+              </Typography>
+            </Link>
           }
           actionBlock={
             isLoggedIn &&
