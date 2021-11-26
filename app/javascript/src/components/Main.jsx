@@ -71,7 +71,7 @@ const Main = () => {
           <PrivateRoute
             condition={isLoggedIn}
             redirectRoute="/login"
-            path="/question/:id/add"
+            path="/quiz/:id/question/new"
             component={AddQuestion}
           />
 

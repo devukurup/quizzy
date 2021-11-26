@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quizzes";
 import { useQuestion } from "contexts/question";
 import FetchQuestions from "Questions/Display";
 
 const ShowQuiz = () => {
-  const history = useHistory();
   const { quizRecord, setQuizRecord, publish } = useQuestion();
   const quiz_id = useParams();
   const id = quiz_id?.id;
@@ -54,9 +53,7 @@ const ShowQuiz = () => {
             icon={Plus}
             iconPosition="left"
             label="Question"
-            onClick={() => {
-              history.push(`/question/${id}/add`);
-            }}
+            to={`/quiz/${id}/question/new`}
           />
           {publish && (
             <Button
