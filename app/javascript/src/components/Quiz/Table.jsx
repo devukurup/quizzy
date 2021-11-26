@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
+import { Tooltip } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
 import { useHistory, Link } from "react-router-dom";
 import { useTable } from "react-table";
@@ -122,25 +123,29 @@ const FetchQuiz = () => {
                         className="space-x-5 flex justify-end "
                       >
                         <td key={row?.original?.id}>
-                          <Link
-                            to={{
-                              pathname: `/quiz/${row?.original?.id}/edit`,
-                              state: row?.original,
-                            }}
-                          >
-                            <Edit color="#808080" />
-                          </Link>
+                          <Tooltip content="Edit" position="bottom">
+                            <Link
+                              to={{
+                                pathname: `/quiz/${row?.original?.id}/edit`,
+                                state: row?.original,
+                              }}
+                            >
+                              <Edit color="#808080" />
+                            </Link>
+                          </Tooltip>
                         </td>
                         <td key={index}>
-                          <Button
-                            icon={Delete}
-                            style="danger"
-                            onClick={() => {
-                              setDeleteId(row?.original?.id);
-                              setQuizName(row?.original?.quiz_name);
-                              setDeleteQuiz(true);
-                            }}
-                          />
+                          <Tooltip content="Delete" position="bottom">
+                            <Button
+                              icon={Delete}
+                              style="danger"
+                              onClick={() => {
+                                setDeleteId(row?.original?.id);
+                                setQuizName(row?.original?.quiz_name);
+                                setDeleteQuiz(true);
+                              }}
+                            />
+                          </Tooltip>
                         </td>
                       </div>
                     </div>

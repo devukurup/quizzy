@@ -6,7 +6,7 @@ import CreateQuestion from "./Create";
 
 const EditQuestion = () => {
   const { id } = useParams();
-  const { state, quiz_id } = useLocation();
+  const { state, quiz_id } = useLocation().state;
   const [defaultAnswer, setDefaultAnswer] = useState(state.answer);
   const [optionsList, setOptionsList] = useState([]);
   const [disableAddOption, setDisableAddOption] = useState(false);
