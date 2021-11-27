@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
@@ -12,7 +12,6 @@ const ShowQuiz = () => {
   const { quizRecord, setQuizRecord, publish } = useQuestion();
   const quiz_id = useParams();
   const id = quiz_id?.id;
-  const [publishButton, setpublishButton] = useState(publish);
   var host =
     window.location.protocol + "//" + window.location.host + "/public/";
 
@@ -20,7 +19,6 @@ const ShowQuiz = () => {
     try {
       const response = await quizzesApi.show({ id });
       setQuizRecord(response.data.quiz);
-      setpublishButton(!quizRecord.publish);
     } catch (error) {
       logger.error(error);
     }
@@ -28,15 +26,12 @@ const ShowQuiz = () => {
 
   useEffect(() => {
     fetchQuiz();
-  }, [id, publishButton]);
+  }, [id]);
 
   const handlePublished = async () => {
-    setpublishButton(false);
     try {
-      await quizzesApi.update({
-        id,
-        payload: { quiz: { publish: publishButton } },
-      });
+      await quizzesApi.publish({ id });
+      fetchQuiz();
     } catch (error) {
       logger.error(error);
     }
@@ -57,14 +52,14 @@ const ShowQuiz = () => {
           />
           {publish && (
             <Button
-              disabled={!publishButton}
-              label={publishButton ? "Publish" : "Published"}
+              disabled={quizRecord.slug ? true : false}
+              label={quizRecord.slug ? "Published" : "Publish"}
               onClick={handlePublished}
             />
           )}
         </div>
       </div>
-      {publish && !publishButton && quizRecord.slug && (
+      {publish && quizRecord.slug && (
         <div className="flex items-center  mx-16 space-x-5">
           <Typography>Public URL</Typography>
           <a

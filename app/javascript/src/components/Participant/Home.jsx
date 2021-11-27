@@ -17,7 +17,7 @@ const Home = () => {
   const fetchQuiz = async () => {
     try {
       const response = await publicQuizApi.show({ slug });
-      setQuizRecord(response.data.quiz[0]);
+      setQuizRecord(response.data.quiz);
     } catch (error) {
       logger.error(error);
     }

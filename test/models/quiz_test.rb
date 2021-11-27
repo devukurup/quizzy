@@ -34,9 +34,4 @@ class QuizTest < ActiveSupport::TestCase
     @quiz.save!
     assert_nil @quiz.slug
   end
-
-  def test_default_publish_value_false
-    @quiz.save!
-    assert_equal @quiz.publish, false
-  end
 end

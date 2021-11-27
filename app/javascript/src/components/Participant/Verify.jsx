@@ -15,7 +15,7 @@ const Verify = () => {
   const fetchQuiz = async () => {
     try {
       const response = await publicQuizApi.show({ slug });
-      setData(response.data.quiz[0]);
+      setData(response.data.quiz);
       setLoading(false);
     } catch (error) {
       logger.error(error);

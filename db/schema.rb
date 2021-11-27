@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_182654) do
+ActiveRecord::Schema.define(version: 2021_11_27_172600) do
 
   create_table "attempt_answers", force: :cascade do |t|
     t.string "answer"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_182654) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.string "slug"
-    t.boolean "publish", default: false
   end
 
   create_table "users", force: :cascade do |t|

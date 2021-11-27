@@ -2,7 +2,7 @@
 
 class QuizzesController < ApplicationController
   before_action :authenticate_user_using_x_auth_token
-  before_action :load_quiz, only: %i[show update destroy]
+  before_action :load_quiz, only: %i[show update destroy publish]
 
   def index
     quizzes = current_user.quizzes.order("created_at DESC")
@@ -25,11 +25,18 @@ class QuizzesController < ApplicationController
     render status: :ok, json: { quiz: @quiz }
   end
 
+  def publish
+    authorize @quiz
+    if @quiz.update({ "slug" => set_slug })
+      render status: :ok, json: { notice: t("quiz.successfully_updated") }
+    else
+      render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
+    end
+  end
+
   def update
     authorize @quiz
-    if @quiz && quiz_params["publish"] && @quiz.update(quiz_params.merge({ "slug" => set_slug }))
-      render status: :ok, json: { notice: t("quiz.successfully_updated") }
-    elsif @quiz && @quiz.update(quiz_params)
+    if @quiz.update(quiz_params)
       render status: :ok, json: { notice: t("quiz.successfully_updated") }
     else
       render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
@@ -48,7 +55,7 @@ class QuizzesController < ApplicationController
   private
 
     def quiz_params
-      params.require(:quiz).permit(:quiz_name, :publish)
+      params.require(:quiz).permit(:quiz_name)
     end
 
     def load_quiz
