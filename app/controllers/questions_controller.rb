@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :authenticate_user_using_x_auth_token
+  before_action :authenticate_user_using_x_auth_token, only: :create
   before_action :load_question, only: %i[update destroy]
   before_action :load_quiz, only: %i[create]
 
