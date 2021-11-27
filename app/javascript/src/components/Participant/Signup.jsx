@@ -3,14 +3,17 @@ import React from "react";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Input } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
+import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 
+import questionsApi from "apis/questions";
 import usersApi from "apis/user";
 import { useParticipant } from "contexts/participant";
 import { useQuestion } from "contexts/question";
 
 const Signup = () => {
-  const { quizRecord } = useQuestion();
+  const { quizRecord, setQuestionList } = useQuestion();
+  const { id } = useParams();
   const { setSignUp, setQuiz, setSubmitted, setAttemptId } = useParticipant();
 
   const validationSchema = () => {
@@ -25,6 +28,14 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     email: "",
+  };
+  const fetchQuestions = async () => {
+    try {
+      const response = await questionsApi.list({ id });
+      setQuestionList(response.data.question);
+    } catch (error) {
+      logger.error(error);
+    }
   };
   const handleSubmit = async data => {
     const email = data.email;
@@ -42,6 +53,7 @@ const Signup = () => {
           quiz_id,
         },
       });
+      fetchQuestions();
       setSubmitted(res.data.attempt.submitted);
       setAttemptId(res.data.attempt.id);
 

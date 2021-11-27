@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   before_action :load_quiz, only: %i[create]
 
   def index
-    questions = Question.where(quiz_id: params[:id]).order("created_at DESC")
+    questions = Question.where(quiz_id: params[:id])
     render status: :ok, json: { question: questions }
   end
 
@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question && @question.update(question_params)
+    if @question.update(question_params)
       render status: :ok, json: { notice: t("questions.successfully_updated") }
     else
       render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
