@@ -10,8 +10,7 @@ import FetchQuestions from "Questions/Display";
 
 const ShowQuiz = () => {
   const { quizRecord, setQuizRecord, publish } = useQuestion();
-  const quiz_id = useParams();
-  const id = quiz_id?.id;
+  const { id } = useParams();
   var host =
     window.location.protocol + "//" + window.location.host + "/public/";
 
