@@ -21,6 +21,6 @@ class QuizPolicy
   end
 
   def create?
-    user.role == "administrator"
+    show? and user.role == "administrator"
   end
 end

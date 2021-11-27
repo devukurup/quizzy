@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  before_action :authenticate_user_using_x_auth_token
   before_action :load_question, only: %i[update destroy]
+  before_action :load_quiz, only: %i[create]
+
   def index
     questions = Question.where(quiz_id: params[:id]).order("created_at DESC")
     render status: :ok, json: { question: questions }
   end
 
   def create
-    question = Question.new(question_params)
+    question = @quiz.questions.new(question_params)
+    authorize @quiz
     if question.save
       render status: :ok, json: { notice: t("questions.successfully_created") }
     else
@@ -36,7 +40,14 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:questn, :quiz_id, :option1, :option2, :option3, :option4, :answer)
+      params.require(:question).permit(:questn, :option1, :option2, :option3, :option4, :answer)
+    end
+
+    def load_quiz
+      @quiz = Quiz.find_by(id: params[:question][:quiz_id])
+      unless @quiz
+        render status: :not_found, json: { error: t("quiz.not_found") }
+      end
     end
 
     def load_question
