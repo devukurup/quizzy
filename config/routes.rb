@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     resources :public_quizzes, only: %i[show], param: :slug
     resources :users, only: %i[create index export ]
     resources :participants, only: %i[update show]
+    resources :reports, only: :generate_report do
+      collection do
+        get "generate_report"
+      end
+
+    end
     get "/export", to: "reports#export"
     get "/export_status/:job_id", to: "reports#export_status", param: :job_id
   end

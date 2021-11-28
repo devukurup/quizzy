@@ -8,7 +8,6 @@ import Loader from "react-loader-spinner";
 import { useTable } from "react-table";
 
 import reportsApi from "apis/report";
-import usersApi from "apis/user";
 import { useQuiz } from "contexts/quiz";
 
 const Report = () => {
@@ -46,7 +45,7 @@ const Report = () => {
 
   const fetchDetails = async () => {
     try {
-      const response = await usersApi.list();
+      const response = await reportsApi.generateReport();
       const data = response.data.Report.map(item => {
         item.userName = `${item.first_name} ${item.last_name}`;
         return item;
