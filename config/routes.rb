@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :quizzes, except: %i[new edit] do
       put "publish", on: :member, param: :id
     end
-    resources :questions, only: %i[create index update destroy]
+    resources :questions, only: %i[create show update destroy]
     resources :public_quizzes, only: %i[show], param: :slug
     resources :users, only: %i[create index export ]
     resources :participants, only: %i[update show]

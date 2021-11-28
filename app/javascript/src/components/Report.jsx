@@ -12,7 +12,7 @@ import { useQuiz } from "contexts/quiz";
 
 const Report = () => {
   const [reportList, setReportList] = useState([]);
-  const { report, setReport } = useQuiz();
+  const { report } = useQuiz();
   const [generateReport, setGenerateReport] = useState(false);
   const data = useMemo(() => reportList, [reportList]);
   const [jobId, setJobId] = useState(0);
@@ -57,9 +57,6 @@ const Report = () => {
   };
 
   useEffect(() => {
-    setReport(false);
-    setGenerateReport(false);
-    setDownload(false);
     fetchDetails();
   }, [report]);
 

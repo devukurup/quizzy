@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   before_action :load_question, only: %i[update destroy]
   before_action :load_quiz, only: %i[create]
 
-  def index
+  def show
     questions = Question.where(quiz_id: params[:id])
     render status: :ok, json: { question: questions }
   end

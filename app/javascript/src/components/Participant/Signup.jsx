@@ -31,7 +31,7 @@ const Signup = () => {
   };
   const fetchQuestions = async () => {
     try {
-      const response = await questionsApi.list({ id });
+      const response = await questionsApi.show({ id });
       setQuestionList(response.data.question);
     } catch (error) {
       logger.error(error);
