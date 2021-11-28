@@ -9,15 +9,10 @@ class ExportParticipantWorker
     report_export_files.each do |file|
       FileUtils.rm file
     end
-    quiz = Quiz.where(user_id: id).select("quizzes.slug")
+    current_user = User.find_by(id: id)
     report =
-    Attempt.joins("INNER JOIN users ON users.id = attempts.user_id INNER JOIN quizzes ON quizzes.id = attempts.quiz_id")
-      .where("attempts.submitted = true").select("users.first_name, users.last_name, users.email,
-    attempts.correct_answers_count, attempts.incorrect_answers_count, quizzes.quiz_name, quizzes.slug")
-    quizList = quiz.map { |item| item.slug }
-    report = report.select do |item|
-      item.slug.in?(quizList)
-    end
+    Attempt.where(submitted: true, quiz: current_user.quizzes).joins(:user, :quiz)
+      .select("attempts.*, quizzes.quiz_name, users.first_name, users.last_name, users.email")
     total report.size
     xlsx_package = Axlsx::Package.new
     xlsx_workbook = xlsx_package.workbook

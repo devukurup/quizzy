@@ -194,7 +194,7 @@ const Report = () => {
           <a
             onClick={handleRedirect}
             className="bg-blue-700 text-white px-5 py-2"
-            href={`/export_download/${jobId}`}
+            href={`/reports/${jobId}/export_download`}
             download
           >
             Download Report
