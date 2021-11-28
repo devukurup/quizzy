@@ -12,9 +12,9 @@ class UsersController < ApplicationController
         render status: :unprocessable_entity, json: { error: errors }
       end
     end
-    attempt = Attempt.find_by(user_id: user.id, quiz_id: quiz_params[:quiz_id])
+    attempt = user.attempts.find_by(quiz_id: quiz_params[:quiz_id])
     if !attempt
-      attempt = Attempt.new(user_id: user.id, quiz_id: quiz_params[:quiz_id])
+      attempt = user.attempts.new(quiz_id: quiz_params[:quiz_id])
       unless attempt.save
         errors = attempt.errors.full_messages.to_sentence
         render status: :unprocessable_entity, json: { error: errors }

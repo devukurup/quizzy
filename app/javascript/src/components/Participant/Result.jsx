@@ -21,8 +21,8 @@ const Result = () => {
     try {
       const response = await participantsApi.show({ id });
       setAnswerList(() => response.data.attempt_answers);
-      setCorrectCount(response.data.count[0].correct_answers_count);
-      setWrongCount(response.data.count[0].incorrect_answers_count);
+      setCorrectCount(response.data.count.correct_answers_count);
+      setWrongCount(response.data.count.incorrect_answers_count);
       setLoading(false);
     } catch (error) {
       logger.error(error);
@@ -30,7 +30,7 @@ const Result = () => {
   };
 
   useEffect(() => {
-    fetchAnswers();
+    if (attemptId) fetchAnswers();
   }, [attemptId, isSubmitted]);
 
   if (loading) {
@@ -74,7 +74,7 @@ const Result = () => {
                 }
                 value={item.option1}
                 checked={answerList?.[index]?.answer == "1"}
-                disabled="true"
+                disabled={true}
               />
               {item.answer == "1" && <CheckCircle color="#00ba88" size={24} />}
             </div>
@@ -87,7 +87,7 @@ const Result = () => {
                 }
                 value={item.option2}
                 checked={answerList?.[index]?.answer == "2"}
-                disabled="true"
+                disabled={true}
               />
               {item.answer == "2" && <CheckCircle color="#00ba88" size={24} />}
             </div>
@@ -101,7 +101,7 @@ const Result = () => {
                   }
                   value={item.option3}
                   checked={answerList?.[index]?.answer == "3"}
-                  disabled="true"
+                  disabled={true}
                 />
               )}
               {item.answer == "3" && <CheckCircle color="#00ba88" size={24} />}
@@ -116,7 +116,7 @@ const Result = () => {
                   }
                   value={item.option4}
                   checked={answerList?.[index]?.answer == "4"}
-                  disabled="true"
+                  disabled={true}
                 />
               )}
               {item.answer == "4" && <CheckCircle color="#00ba88" size={24} />}

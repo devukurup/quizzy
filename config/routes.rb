@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :questions, only: %i[create index update destroy]
     resources :public_quizzes, only: %i[show], param: :slug
     resources :users, only: %i[create index export ]
-    resources :participants, only: %i[create show]
+    resources :participants, only: %i[update show]
     get "/export", to: "reports#export"
     get "/export_status/:job_id", to: "reports#export_status", param: :job_id
   end

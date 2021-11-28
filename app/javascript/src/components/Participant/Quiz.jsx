@@ -27,12 +27,15 @@ const Quiz = () => {
 
   const handleSubmit = async () => {
     try {
-      await participantsApi.create({
-        attempt: {
-          id: attemptId,
-          correct_answers_count: correctAnswerCount,
-          incorrect_answers_count: wrongAnswerCount,
-          attempt_answers_attributes: answers,
+      await participantsApi.update({
+        id: attemptId,
+        payload: {
+          attempt: {
+            id: attemptId,
+            correct_answers_count: correctAnswerCount,
+            incorrect_answers_count: wrongAnswerCount,
+            attempt_answers_attributes: answers,
+          },
         },
       });
       setQuiz(false);
