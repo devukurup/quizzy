@@ -4,7 +4,7 @@ require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = create(:user)
+    @user = create(:user, role: "administrator")
   end
 
   def test_should_login_user_with_valid_credentials

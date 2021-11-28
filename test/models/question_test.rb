@@ -56,4 +56,10 @@ class QuestionTest < ActiveSupport::TestCase
     assert @question.invalid?
     assert_includes @question.errors.full_messages, "Quiz must exist"
   end
+
+  def test_answer_should_not_be_valid_with_invalid_options
+    @question.answer = 5
+    assert @question.invalid?
+    assert_includes @question.errors.full_messages, "Answer is not included in the list"
+  end
 end
