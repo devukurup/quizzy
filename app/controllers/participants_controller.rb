@@ -9,7 +9,7 @@ class ParticipantsController < ApplicationController
 
   def show
     attempt_answers = @attempt.attempt_answers
-    render status: :ok, json: { attempt_answers: attempt_answers, count: @attempt }
+    render status: :ok, json: { attempt_answers: attempt_answers, attempt: @attempt }
   end
 
   private

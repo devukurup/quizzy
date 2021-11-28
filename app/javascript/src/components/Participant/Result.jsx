@@ -21,8 +21,8 @@ const Result = () => {
     try {
       const response = await participantsApi.show({ id });
       setAnswerList(() => response.data.attempt_answers);
-      setCorrectCount(response.data.count.correct_answers_count);
-      setWrongCount(response.data.count.incorrect_answers_count);
+      setCorrectCount(response.data.attempt.correct_answers_count);
+      setWrongCount(response.data.attempt.incorrect_answers_count);
       setLoading(false);
     } catch (error) {
       logger.error(error);
