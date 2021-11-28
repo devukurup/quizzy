@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     resource :session, only: %i[create]
     resources :quizzes, except: %i[new edit] do
-      put "publish", on: :member, param: :id
+      put "publish", on: :member
     end
     resources :questions, only: %i[create show update destroy]
     resources :public_quizzes, only: %i[show], param: :slug
