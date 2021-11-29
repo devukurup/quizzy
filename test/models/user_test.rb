@@ -92,7 +92,7 @@ fishy+#.com]
 
   def test_role_should_be_saved_with_default_value
     @user.save!
-    assert @user.valid?
+    assert_equal @user.role, "standard"
   end
 
   def test_password_should_not_be_blank

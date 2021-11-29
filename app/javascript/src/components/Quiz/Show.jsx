@@ -1,43 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quizzes";
 import { useQuestion } from "contexts/question";
 import FetchQuestions from "Questions/Display";
 
 const ShowQuiz = () => {
-  const history = useHistory();
   const { quizRecord, setQuizRecord, publish } = useQuestion();
-  const quiz_id = useParams();
-  const id = quiz_id?.id;
-  const [publishButton, setpublishButton] = useState(publish);
+  const { id } = useParams();
   var host =
     window.location.protocol + "//" + window.location.host + "/public/";
-
-  useEffect(() => {
-    fetchQuiz();
-  }, [id, publishButton]);
 
   const fetchQuiz = async () => {
     try {
       const response = await quizzesApi.show({ id });
-      setQuizRecord(response.data.quiz[0]);
-      setpublishButton(!quizRecord.publish);
+      setQuizRecord(response.data.quiz);
     } catch (error) {
       logger.error(error);
     }
   };
 
+  useEffect(() => {
+    fetchQuiz();
+  }, [id]);
+
   const handlePublished = async () => {
-    setpublishButton(false);
     try {
-      await quizzesApi.update({
-        id,
-        payload: { quiz: { publish: publishButton } },
-      });
+      await quizzesApi.publish({ id });
+      fetchQuiz();
     } catch (error) {
       logger.error(error);
     }
@@ -54,20 +47,18 @@ const ShowQuiz = () => {
             icon={Plus}
             iconPosition="left"
             label="Question"
-            onClick={() => {
-              history.push(`/Question/add/${id}`);
-            }}
+            to={`/quiz/${id}/question/new`}
           />
           {publish && (
             <Button
-              disabled={!publishButton}
-              label={publishButton ? "Publish" : "Published"}
+              disabled={quizRecord.slug ? true : false}
+              label={quizRecord.slug ? "Published" : "Publish"}
               onClick={handlePublished}
             />
           )}
         </div>
       </div>
-      {publish && !publishButton && quizRecord.slug && (
+      {publish && quizRecord.slug && (
         <div className="flex items-center  mx-16 space-x-5">
           <Typography>Public URL</Typography>
           <a

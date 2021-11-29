@@ -79,7 +79,7 @@ const CreateQuestion = ({ props }) => {
             quiz_id: id,
           },
         });
-        history.push(`/showQuiz/${id}`);
+        history.push(`/quiz/${id}/show`);
       } else {
         await questionsApi.update({
           id,
@@ -95,7 +95,7 @@ const CreateQuestion = ({ props }) => {
             },
           },
         });
-        history.push(`/showQuiz/${quiz_id}`);
+        history.push(`/quiz/${quiz_id}/show`);
       }
     } catch (error) {
       logger.error(error);

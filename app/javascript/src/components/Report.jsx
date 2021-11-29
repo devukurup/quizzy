@@ -8,12 +8,11 @@ import Loader from "react-loader-spinner";
 import { useTable } from "react-table";
 
 import reportsApi from "apis/report";
-import usersApi from "apis/user";
 import { useQuiz } from "contexts/quiz";
 
 const Report = () => {
   const [reportList, setReportList] = useState([]);
-  const { report, setReport } = useQuiz();
+  const { report } = useQuiz();
   const [generateReport, setGenerateReport] = useState(false);
   const data = useMemo(() => reportList, [reportList]);
   const [jobId, setJobId] = useState(0);
@@ -44,23 +43,9 @@ const Report = () => {
     []
   );
 
-  useEffect(() => {
-    setReport(false);
-    setGenerateReport(false);
-    setDownload(false);
-    fetchDetails();
-  }, [report]);
-
-  const handleRedirect = () => {
-    setTimeout(() => {
-      setGenerateReport(false);
-      setDownload(false);
-    }, 2000);
-  };
-
   const fetchDetails = async () => {
     try {
-      const response = await usersApi.list();
+      const response = await reportsApi.generateReport();
       const data = response.data.Report.map(item => {
         item.userName = `${item.first_name} ${item.last_name}`;
         return item;
@@ -69,6 +54,17 @@ const Report = () => {
     } catch (error) {
       logger.error(error);
     }
+  };
+
+  useEffect(() => {
+    fetchDetails();
+  }, [report]);
+
+  const handleRedirect = () => {
+    setTimeout(() => {
+      setGenerateReport(false);
+      setDownload(false);
+    }, 2000);
   };
 
   const handleReport = async () => {
@@ -195,7 +191,7 @@ const Report = () => {
           <a
             onClick={handleRedirect}
             className="bg-blue-700 text-white px-5 py-2"
-            href={`/export_download/${jobId}`}
+            href={`/reports/${jobId}/export_download`}
             download
           >
             Download Report

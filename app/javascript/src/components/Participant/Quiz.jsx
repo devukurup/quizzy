@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 
@@ -10,8 +10,8 @@ const Quiz = () => {
   const { quizRecord, questionList } = useQuestion();
   const [answers, setAnswers] = useState([]);
   const { setQuiz, attemptId, setSubmitted } = useParticipant();
-  let correctAnswerCount = 0;
-  let wrongAnswerCount = 0;
+  const correctAnswerCount = useRef(0);
+  const wrongAnswerCount = useRef(0);
 
   const handleChange = (e, item) => {
     const index = answers.findIndex(element => element.id == item.id);
@@ -27,12 +27,15 @@ const Quiz = () => {
 
   const handleSubmit = async () => {
     try {
-      await participantsApi.create({
-        attempt: {
-          id: attemptId,
-          correct_answers_count: correctAnswerCount,
-          incorrect_answers_count: wrongAnswerCount,
-          attempt_answers_attributes: answers,
+      await participantsApi.update({
+        id: attemptId,
+        payload: {
+          attempt: {
+            id: attemptId,
+            correct_answers_count: correctAnswerCount.current,
+            incorrect_answers_count: wrongAnswerCount.current,
+            attempt_answers_attributes: answers,
+          },
         },
       });
       setQuiz(false);
@@ -45,9 +48,9 @@ const Quiz = () => {
   const scoreCount = async () => {
     await questionList.map((item, index) => {
       if (item.answer == answers?.[index]?.answer) {
-        correctAnswerCount += 1;
+        correctAnswerCount.current++;
       } else {
-        wrongAnswerCount += 1;
+        wrongAnswerCount.current++;
       }
     });
   };

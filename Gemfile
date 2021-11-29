@@ -61,6 +61,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "caxlsx"
+gem "pundit"
 gem "react-rails"
 gem "sidekiq"
 gem "sidekiq-status"

@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const exportData = () => axios.get("/export");
+const exportData = () => axios.get("/reports/export");
 
-const exportStatus = ({ job_id }) => axios.get(`/export_status/${job_id}`);
+const generateReport = () => axios.get(`/reports/generate_report/`);
 
-const exportDownload = ({ job_id }) => axios.get(`/export_download/${job_id}`);
+const exportStatus = ({ job_id }) =>
+  axios.get(`/reports/${job_id}/export_status`);
 
 const reportsApi = {
   exportData,
   exportStatus,
-  exportDownload,
+  generateReport,
 };
 
 export default reportsApi;

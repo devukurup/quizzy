@@ -6,7 +6,7 @@ import CreateQuestion from "./Create";
 
 const EditQuestion = () => {
   const { id } = useParams();
-  const { state, quiz_id } = useLocation();
+  const { state, quiz_id } = useLocation().state;
   const [defaultAnswer, setDefaultAnswer] = useState(state.answer);
   const [optionsList, setOptionsList] = useState([]);
   const [disableAddOption, setDisableAddOption] = useState(false);
@@ -32,10 +32,6 @@ const EditQuestion = () => {
     quiz_id,
   };
 
-  useEffect(() => {
-    initializing();
-  }, []);
-
   const initializing = () => {
     const availableOptions = options.filter(item => state[item] != "");
     options = [];
@@ -45,6 +41,10 @@ const EditQuestion = () => {
     setOptionsList(options);
     if (availableOptions.length == 4) setDisableAddOption(true);
   };
+
+  useEffect(() => {
+    initializing();
+  }, []);
 
   return <CreateQuestion props={props} />;
 };

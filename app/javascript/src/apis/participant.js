@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const create = payload => axios.post("/participants/", payload);
+const update = ({ id, payload }) => axios.put(`/participants/${id}`, payload);
 
 const show = ({ id }) => axios.get(`/participants/${id}`);
 
 const participantsApi = {
-  create,
+  update,
   show,
 };
 

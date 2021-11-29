@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import { CheckCircle } from "@bigbinary/neeto-icons";
+import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
+import { Tooltip } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import questionsApi from "apis/questions";
 import { useQuestion } from "contexts/question";
@@ -12,7 +14,6 @@ import { useQuestion } from "contexts/question";
 import DeleteQuestion from "./Delete";
 
 const FetchQuestions = ({ id }) => {
-  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const {
     setDeleteId,
@@ -24,13 +25,9 @@ const FetchQuestions = ({ id }) => {
     setQuestionList,
   } = useQuestion();
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [deleteQuestion]);
-
   const fetchQuestions = async () => {
     try {
-      const response = await questionsApi.list({ id });
+      const response = await questionsApi.show({ id });
       setQuestionList(response.data.question);
       response.data.question.length > 0 ? setPublish(true) : setPublish(false);
       setLoading(false);
@@ -39,6 +36,10 @@ const FetchQuestions = ({ id }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [deleteQuestion]);
 
   if (loading) {
     return <PageLoader />;
@@ -67,24 +68,27 @@ const FetchQuestions = ({ id }) => {
               {item.questn}
             </Typography>
             <div className="flex space-x-3">
-              <Button
-                label="Edit"
-                onClick={() =>
-                  history.push({
-                    pathname: `Question/edit/${item.id}`,
-                    state: item,
-                    quiz_id: id,
-                  })
-                }
-              />
-              <Button
-                label="Delete"
-                onClick={() => {
-                  setDeleteQuestion(true);
-                  setDeleteId(item.id);
-                  setQuestionName(item.questn);
-                }}
-              />
+              <Tooltip content="Edit" position="bottom">
+                <Link
+                  to={{
+                    pathname: `/question/${item.id}/edit`,
+                    state: { state: item, quiz_id: id },
+                  }}
+                >
+                  <Edit color="#808080" />
+                </Link>
+              </Tooltip>
+              <Tooltip content="Delete" position="bottom">
+                <Button
+                  icon={Delete}
+                  style="danger"
+                  onClick={() => {
+                    setDeleteQuestion(true);
+                    setDeleteId(item.id);
+                    setQuestionName(item.questn);
+                  }}
+                />
+              </Tooltip>
             </div>
           </div>
           <div className="flex space-x-10">

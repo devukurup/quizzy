@@ -4,8 +4,9 @@ import { useMemo } from "react";
 import { Edit, Delete } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { PageLoader } from "@bigbinary/neetoui/v2";
+import { Tooltip } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 import quizzesApi from "apis/quizzes";
@@ -14,7 +15,6 @@ import { useQuiz } from "contexts/quiz";
 import DeleteQuiz from "./Delete";
 
 const FetchQuiz = () => {
-  const history = useHistory();
   const [quizName, setQuizName] = useState("");
   const [loading, setLoading] = useState(true);
   const {
@@ -25,26 +25,6 @@ const FetchQuiz = () => {
     quizList,
     setQuizList,
   } = useQuiz();
-  const data = useMemo(() => quizList, [quizList]);
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Quiz Name",
-        accessor: "quiz_name",
-      },
-    ],
-    []
-  );
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data,
-    });
-
-  useEffect(() => {
-    fetchQuizzes();
-  }, [deleteQuiz]);
-
   const fetchQuizzes = async () => {
     try {
       const response = await quizzesApi.list();
@@ -58,6 +38,77 @@ const FetchQuiz = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, [deleteQuiz]);
+
+  const rowData = quizList.map(item => {
+    let row = {};
+
+    row.quiz_name = (
+      <Link
+        to={{
+          pathname: `/quiz/${item.id}/show`,
+          state: item,
+        }}
+      >
+        {" "}
+        <Typography textTransform="capitalize" style="body1">
+          {item.quiz_name}
+        </Typography>
+      </Link>
+    );
+
+    row.edit_delete = (
+      <div className="flex space-x-5 justify-end">
+        <Tooltip content="Edit" position="bottom">
+          <Link
+            to={{
+              pathname: `/quiz/${item.id}/edit`,
+              state: item,
+            }}
+          >
+            <Edit color="#808080" />
+          </Link>
+        </Tooltip>
+        <Tooltip content="Delete" position="bottom">
+          <Button
+            icon={Delete}
+            style="danger"
+            onClick={() => {
+              setDeleteId(item.id);
+              setQuizName(item.quiz_name);
+              setDeleteQuiz(true);
+            }}
+          />
+        </Tooltip>
+      </div>
+    );
+
+    return row;
+  });
+
+  const data = useMemo(() => rowData, [quizList]);
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Quiz Name",
+        accessor: "quiz_name",
+      },
+      {
+        Header: "",
+        accessor: "edit_delete",
+      },
+    ],
+    []
+  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns,
+      data,
+    });
 
   if (loading) {
     return <PageLoader />;
@@ -75,14 +126,14 @@ const FetchQuiz = () => {
 
   return (
     <div className="w-full">
-      <table className="border-2 bg-white w-9/12 mx-auto" {...getTableProps()}>
-        <thead>
+      <table className="border-2 bg-white w-8/12 mx-auto" {...getTableProps()}>
+        <thead className="bg-gradient-to-r from-green-300 to-blue-400  border font-semibold text-lg text-left px-8 py-4">
           {headerGroups.map((headerGroup, index) => (
             <tr key={index + 1} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, index) => (
                 <th
                   key={index}
-                  className="bg-gradient-to-r from-green-300 to-blue-400  border font-semibold text-lg text-left px-8 py-4"
+                  className="px-2 py-5"
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
@@ -97,56 +148,18 @@ const FetchQuiz = () => {
             return (
               <tr
                 key={i}
-                className="cursor-pointer border px-8 py-4 "
+                className=" cursor-pointer border "
                 {...row.getRowProps()}
               >
                 {row.cells.map((cell, index) => {
                   return (
-                    <div key={index} className="grid grid-cols-2 px-8 py-4 ">
-                      <div
-                        onClick={e => {
-                          e.stopPropagation();
-                          history.push({
-                            pathname: `/showQuiz/${row?.original?.id}`,
-                            state: row?.original,
-                          });
-                        }}
-                      >
-                        <td key={row?.original?.id} {...cell.getCellProps()}>
-                          {cell.render("Cell")}
-                        </td>
-                      </div>
-                      <div
-                        key={row?.original?.id}
-                        className="space-x-5 flex justify-end "
-                      >
-                        <td key={row?.original?.id}>
-                          <Button
-                            label="Edit"
-                            icon={Edit}
-                            iconPosition="left"
-                            style="secondary"
-                            onClick={() => {
-                              history.push({
-                                pathname: `/EditQuiz/${row?.original?.id}`,
-                                state: row?.original,
-                              });
-                            }}
-                          />
-                        </td>
-                        <td key={index}>
-                          <Button
-                            icon={Delete}
-                            style="danger"
-                            onClick={() => {
-                              setDeleteId(row?.original?.id);
-                              setQuizName(row?.original?.quiz_name);
-                              setDeleteQuiz(true);
-                            }}
-                          />
-                        </td>
-                      </div>
-                    </div>
+                    <td
+                      key={index}
+                      {...cell.getCellProps()}
+                      className="px-2 py-3"
+                    >
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
               </tr>

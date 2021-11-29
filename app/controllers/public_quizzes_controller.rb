@@ -2,7 +2,7 @@
 
 class PublicQuizzesController < ApplicationController
   def show
-    quiz = Quiz.where(slug: params[:slug])
+    quiz = Quiz.find_by(slug: params[:slug])
     render status: :ok, json: { quiz: quiz }
   end
 

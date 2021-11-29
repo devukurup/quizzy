@@ -34,7 +34,7 @@ const EditQuiz = () => {
           </div>
           <div className="flex space-x-5 ">
             <Button label="Update" type="submit" onClick={handleSubmit} />
-            <Button label="Cancel" onClick={() => history.push("/")} />
+            <Button label="Cancel" to="/" />
           </div>
         </div>
       </div>

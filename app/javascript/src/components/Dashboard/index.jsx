@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Plus } from "@bigbinary/neeto-icons";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import { useHistory } from "react-router-dom";
 
-import { setAuthHeaders } from "apis/axios";
 import { useQuiz } from "contexts/quiz";
 import FetchQuiz from "Quiz/Table";
 
 const Dashboard = () => {
   const { dashboardHeader } = useQuiz();
-  const history = useHistory();
-  useEffect(() => {
-    setAuthHeaders();
-  }, []);
 
   return (
     <div>
@@ -28,9 +22,7 @@ const Dashboard = () => {
         <Button
           icon={Plus}
           style="secondary"
-          onClick={() => {
-            history.push("/createNewQuiz");
-          }}
+          to="/quiz/new"
           iconPosition="left"
           label=" Add a new quiz"
         />
