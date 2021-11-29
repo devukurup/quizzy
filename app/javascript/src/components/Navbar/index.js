@@ -51,6 +51,7 @@ const Navbar = () => {
                 <Typography
                   style="body1"
                   className="text-black cursor-pointer"
+                  textTransform="captitalize"
                   weight="bold"
                 >
                   {userName}
