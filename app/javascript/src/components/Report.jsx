@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMemo } from "react";
 
 import { Download } from "@bigbinary/neeto-icons";
+import { PageLoader } from "@bigbinary/neetoui/v2";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { either, isNil, isEmpty } from "ramda";
 import Loader from "react-loader-spinner";
@@ -17,6 +18,7 @@ const Report = () => {
   const data = useMemo(() => reportList, [reportList]);
   const [jobId, setJobId] = useState(0);
   const [download, setDownload] = useState(false);
+  const [loading, setLoading] = useState(true);
   const columns = useMemo(
     () => [
       {
@@ -50,6 +52,7 @@ const Report = () => {
         item.userName = `${item.first_name} ${item.last_name}`;
         return item;
       });
+      setLoading(false);
       setReportList(data);
     } catch (error) {
       logger.error(error);
@@ -101,6 +104,15 @@ const Report = () => {
       columns,
       data,
     });
+
+  if (loading) {
+    return (
+      <div className="mx-auto pt-48">
+        <PageLoader />
+      </div>
+    );
+  }
+
   if (either(isNil, isEmpty)(reportList)) {
     return (
       <div className="align-middle text-center pt-40">
