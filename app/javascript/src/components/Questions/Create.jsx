@@ -49,6 +49,8 @@ const CreateQuestion = ({ props }) => {
   const handleOptionsDelete = index => {
     if (defaultAnswer === index + 1) {
       setDefaultAnswer(1);
+    } else if (defaultAnswer === index + 2) {
+      setDefaultAnswer(index + 1);
     }
     const newOptionsList = [...optionsList];
     newOptionsList.splice(index, 1);
