@@ -28,7 +28,7 @@ class QuizzesController < ApplicationController
   def publish
     authorize @quiz
     if @quiz.update({ "slug" => set_slug })
-      render status: :ok, json: { notice: t("quiz.successfully_updated") }
+      render status: :ok, json: { notice: t("quiz.successfully_updated"), json: { quiz: @quiz } }
     else
       render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
     end
