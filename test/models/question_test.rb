@@ -51,15 +51,16 @@ class QuestionTest < ActiveSupport::TestCase
     end
   end
 
-  def test_question_should_not_be_valid_wihtout_quiz
+  def test_question_should_not_be_valid_without_quiz
     @question.quiz = nil
     assert @question.invalid?
     assert_includes @question.errors.full_messages, "Quiz must exist"
   end
 
   def test_answer_should_not_be_valid_with_invalid_options
-    @question.answer = 5
+    @question.option4 = ""
+    @question.answer = 4
     assert @question.invalid?
-    assert_includes @question.errors.full_messages, "Answer is not included in the list"
+    assert_includes @question.errors.full_messages, "Answer is invalid"
   end
 end

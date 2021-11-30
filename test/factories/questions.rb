@@ -7,7 +7,7 @@ FactoryBot.define do
     option2 { Faker::Lorem.sentence[0..5] }
     option3 { Faker::Lorem.sentence[0..5] }
     option4 { Faker::Lorem.sentence[0..5] }
-    answer { rand(1..4) }
+    answer { rand(1..2) }
     quiz
   end
 end

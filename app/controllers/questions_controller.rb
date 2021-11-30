@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
-  before_action :authenticate_user_using_x_auth_token, only: :create
+  before_action :authenticate_user_using_x_auth_token, only: %i[create update destroy]
   before_action :load_question, only: %i[update destroy]
   before_action :load_quiz, only: %i[create]
 
@@ -22,6 +22,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    quiz = Quiz.find_by(id: @question.quiz_id)
+    authorize quiz
     if @question.update(question_params)
       render status: :ok, json: { notice: t("questions.successfully_updated") }
     else
@@ -30,6 +32,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    quiz = Quiz.find_by(id: @question.quiz_id)
+    authorize quiz
     if @question.destroy
       render status: :ok, json: { notice: t("questions.successfully_deleted") }
     else

@@ -42,3 +42,6 @@ yarn-debug.log*
 # ignore test/fixtures, test/reports
 /test/fixtures
 /test/reports
+
+# igonre DS_store files
+.DS_Store

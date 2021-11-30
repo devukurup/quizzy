@@ -3,6 +3,9 @@
 class PublicQuizzesController < ApplicationController
   def show
     quiz = Quiz.find_by(slug: params[:slug])
+    unless quiz
+      render status: :not_found, json: { error: t("quiz.not_found") }
+    end
     render status: :ok, json: { quiz: quiz }
   end
 

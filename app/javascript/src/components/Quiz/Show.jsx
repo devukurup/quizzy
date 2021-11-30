@@ -29,8 +29,8 @@ const ShowQuiz = () => {
 
   const handlePublished = async () => {
     try {
-      await quizzesApi.publish({ id });
-      fetchQuiz();
+      const response = await quizzesApi.publish({ id });
+      setQuizRecord(response.data.json.quiz);
     } catch (error) {
       logger.error(error);
     }
