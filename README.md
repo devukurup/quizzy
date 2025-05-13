@@ -1,6 +1,18 @@
 # quizzy
 
-A quiz management platform built with React and Ruby on Rails. Allows quizzers to create, manage, and publish quizzes. Users can log in to attempt published quizzes, and results can be viewed or exported by the quizzer.
+A quiz management platform built with React and Ruby on Rails. Administrators can create, edit, and publish quizzes, add questions with multiple options, and generate public URLs for participants. Participants can attempt quizzes once, and the results including correct/incorrect counts are recorded and viewable in a dashboard. Reports can be downloaded as spreadsheets.
+
+---
+
+## ✨ Core Features
+
+- Admin login and quiz management dashboard  
+- Create and manage quizzes, questions, and options  
+- Publish quizzes with unique, shareable public URLs  
+- Support for participants to attempt quizzes (one-time)  
+- Track and display results (correct/incorrect answers)  
+- Filterable reports and Excel export with background processing  
+- Authentication, role-based access, and secure routing  
 
 ---
 
@@ -10,4 +22,5 @@ A quiz management platform built with React and Ruby on Rails. Allows quizzers t
 - React JS  
 - Tailwind CSS  
 - PostgreSQL  
-- JavaScript
+- Sidekiq (for background jobs)  
+- CircleCI (for CI/CD)
